@@ -9,8 +9,8 @@ import { LoaderService } from './services/loader';
   standalone: true,
   imports: [RouterOutlet, CommonModule, LoaderComponent],
   template: `
-    <app-loader *ngIf="showLoader" (loaderDone)="onLoaderDone()"></app-loader>
-    <router-outlet *ngIf="!showLoader"></router-outlet>
+    <!-- <app-loader *ngIf="showLoader" (loaderDone)="onLoaderDone()"></app-loader> -->
+    <router-outlet ></router-outlet>
   `,
   styles: [`
     :host { display: block; }
@@ -26,6 +26,7 @@ export class App implements OnInit {
   }
 
   onLoaderDone() {
+    alert()
     this.showLoader = false;
     this.loaderService.hide();
   }
