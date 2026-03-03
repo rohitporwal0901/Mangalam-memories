@@ -1,0 +1,35 @@
+<div class="loader-wrap" [class.hide]="hiding">
+
+    <!-- Background gradient -->
+    <div class="bg-layer"></div>
+
+    <!-- Mandala rings -->
+    <div class="mandala">
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-3"></div>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo-block" [class.visible]="showLogo">
+        <img src="/logo.png" alt="Mangalam Memories" class="logo-img" />
+    </div>
+
+    <!-- Brand text -->
+    <div class="brand-text" [class.visible]="showText">
+        <h1 class="brand-name">
+            <span class="white-part">Mangalam</span>
+            <span class="gold-part">Memories</span>
+        </h1>
+        <p class="tagline">Indian Wedding Photography</p>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-wrap">
+        <div class="progress-bar" [style.width.%]="progress"></div>
+    </div>
+
+    <!-- Progress number -->
+    <div class="progress-num">{{ progress | number:'1.0-0' }}%</div>
+
+</div>

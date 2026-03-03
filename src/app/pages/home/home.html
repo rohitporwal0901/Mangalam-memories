@@ -1,0 +1,11 @@
+<app-navbar></app-navbar>
+<app-hero></app-hero>
+<app-featured-archives (openGallery)="openGallery($event)"></app-featured-archives>
+<app-films></app-films>
+<app-inquiry></app-inquiry>
+<app-footer></app-footer>
+
+@if (selectedArchive) {
+<app-gallery-modal [archive]="selectedArchive" (close)="closeGallery()">
+</app-gallery-modal>
+}

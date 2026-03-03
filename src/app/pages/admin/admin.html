@@ -1,0 +1,238 @@
+<div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sb-logo">
+            <img src="/logo.png" alt="MM" />
+            <div>
+                <span class="sb-brand">Mangalam<span class="gold">Memories</span></span>
+                <p class="sb-role">Admin Panel</p>
+            </div>
+        </div>
+
+        <nav class="sb-nav">
+            <button [class.active]="activeTab==='hero'" (click)="setTab('hero')">&#9670; Hero Slides</button>
+            <button [class.active]="activeTab==='archives'" (click)="setTab('archives')">&#9670; Archives</button>
+            <button [class.active]="activeTab==='films'" (click)="setTab('films')">&#9670; Films</button>
+            <button [class.active]="activeTab==='inquiries'" (click)="setTab('inquiries')">
+                &#9670; Inquiries
+                @if (newInquiries > 0) {
+                <span class="badge">{{ newInquiries }}</span>
+                }
+            </button>
+        </nav>
+
+        <div class="sb-bottom">
+            <a routerLink="/" class="sb-link">&#8592; View Site</a>
+            <button class="sb-logout" (click)="logout()">Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+
+        <!-- Topbar -->
+        <div class="admin-topbar">
+            <h1 class="page-heading">
+                @if (activeTab==='hero') { Hero Slides }
+                @if (activeTab==='archives') { Wedding Archives }
+                @if (activeTab==='films') { Films }
+                @if (activeTab==='inquiries') { Inquiries }
+            </h1>
+
+            @if (message) {
+            <div class="toast">{{ message }}</div>
+            }
+
+            <div class="topbar-actions">
+                @if (activeTab==='hero') { <button class="btn-add" (click)="showHeroForm=!showHeroForm">+ Add
+                    Slide</button> }
+                @if (activeTab==='archives') { <button class="btn-add" (click)="showArchiveForm=!showArchiveForm">+ Add
+                    Archive</button> }
+                @if (activeTab==='films') { <button class="btn-add" (click)="showFilmForm=!showFilmForm">+ Add
+                    Film</button> }
+            </div>
+        </div>
+
+        <!-- ── HERO SLIDES ── -->
+        @if (activeTab === 'hero') {
+        @if (showHeroForm) {
+        <div class="admin-card form-card">
+            <h3 class="card-title">Add Hero Slide</h3>
+            <form [formGroup]="heroForm" (ngSubmit)="saveHero()" class="admin-form">
+                <div class="form-row">
+                    <div class="fg"><label>Image URL *</label><input formControlName="imageUrl"
+                            placeholder="https://..." /></div>
+                    <div class="fg"><label>Title</label><input formControlName="title"
+                            placeholder="eg. Eternal Moments" /></div>
+                </div>
+                <div class="fg"><label>Subtitle</label><input formControlName="subtitle" placeholder="Caption text" />
+                </div>
+                <div class="form-row">
+                    <div class="fg"><label>Order</label><input type="number" formControlName="order" /></div>
+                    <div class="fg check-group">
+                        <label class="check-label">
+                            <input type="checkbox" formControlName="active" /> Active
+                        </label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save" [disabled]="saving">{{ saving ? 'Saving...' : 'Save Slide'
+                        }}</button>
+                    <button type="button" class="btn-cancel" (click)="showHeroForm=false">Cancel</button>
+                </div>
+            </form>
+        </div>
+        }
+        <div class="items-grid">
+            @for (slide of heroSlides; track slide.id) {
+            <div class="item-card">
+                <img [src]="slide.imageUrl" [alt]="slide.title" class="item-thumb" onerror="this.src=''" />
+                <div class="item-info">
+                    <span class="item-name">{{ slide.title || '(No Title)' }}</span>
+                    <span class="item-sub">Order: {{ slide.order }}</span>
+                </div>
+                <div class="item-actions">
+                    <button class="toggle-btn" [class.on]="slide.active" (click)="toggleHero(slide)">{{ slide.active ?
+                        'Active' : 'Hidden' }}</button>
+                    <button class="delete-btn" (click)="deleteHero(slide.id!)">&#10005;</button>
+                </div>
+            </div>
+            }
+            @if (!heroSlides.length) { <p class="empty">No slides yet. Add your first slide!</p> }
+        </div>
+        }
+
+        <!-- ── ARCHIVES ── -->
+        @if (activeTab === 'archives') {
+        @if (showArchiveForm) {
+        <div class="admin-card form-card">
+            <h3 class="card-title">Add Wedding Archive</h3>
+            <form [formGroup]="archiveForm" (ngSubmit)="saveArchive()" class="admin-form">
+                <div class="form-row">
+                    <div class="fg"><label>Couple Names *</label><input formControlName="coupleNames"
+                            placeholder="eg. Priya &amp; Arjun" /></div>
+                    <div class="fg"><label>Location *</label><input formControlName="location"
+                            placeholder="eg. Udaipur, Rajasthan" /></div>
+                </div>
+                <div class="fg"><label>Description</label><input formControlName="description"
+                        placeholder="Short description" /></div>
+                <div class="fg"><label>Cover Image URL *</label><input formControlName="coverImage"
+                        placeholder="https://..." /></div>
+                <div class="fg"><label>Photo URLs (comma separated)</label><textarea formControlName="photos" rows="3"
+                        placeholder="url1, url2, url3..."></textarea></div>
+                <div class="form-row">
+                    <div class="fg"><label>Order</label><input type="number" formControlName="order" /></div>
+                    <div class="fg check-group">
+                        <label class="check-label"><input type="checkbox" formControlName="active" /> Active</label>
+                        <label class="check-label"><input type="checkbox" formControlName="featured" /> Featured</label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save" [disabled]="saving">{{ saving ? 'Saving...' : 'Save Archive'
+                        }}</button>
+                    <button type="button" class="btn-cancel" (click)="showArchiveForm=false">Cancel</button>
+                </div>
+            </form>
+        </div>
+        }
+        <div class="items-grid">
+            @for (a of archives; track a.id) {
+            <div class="item-card">
+                <img [src]="a.coverImage" [alt]="a.coupleNames" class="item-thumb" />
+                <div class="item-info">
+                    <span class="item-name">{{ a.coupleNames }}</span>
+                    <span class="item-sub">{{ a.location }} &bull; {{ a.photos?.length || 0 }} photos</span>
+                </div>
+                <div class="item-actions">
+                    <button class="toggle-btn" [class.on]="a.featured" (click)="toggleArchive(a)">{{ a.featured ?
+                        'Featured' : 'Hidden' }}</button>
+                    <button class="delete-btn" (click)="deleteArchive(a.id!)">&#10005;</button>
+                </div>
+            </div>
+            }
+            @if (!archives.length) { <p class="empty">No archives yet.</p> }
+        </div>
+        }
+
+        <!-- ── FILMS ── -->
+        @if (activeTab === 'films') {
+        @if (showFilmForm) {
+        <div class="admin-card form-card">
+            <h3 class="card-title">Add Wedding Film</h3>
+            <form [formGroup]="filmForm" (ngSubmit)="saveFilm()" class="admin-form">
+                <div class="form-row">
+                    <div class="fg"><label>Title *</label><input formControlName="title" placeholder="Film title" />
+                    </div>
+                    <div class="fg"><label>Couple Names *</label><input formControlName="coupleNames"
+                            placeholder="eg. Priya &amp; Arjun" /></div>
+                </div>
+                <div class="form-row">
+                    <div class="fg"><label>Location</label><input formControlName="location"
+                            placeholder="eg. Udaipur" /></div>
+                    <div class="fg"><label>Order</label><input type="number" formControlName="order" /></div>
+                </div>
+                <div class="fg"><label>YouTube URL *</label><input formControlName="youtubeUrl"
+                        placeholder="https://www.youtube.com/watch?v=..." /></div>
+                <div class="fg check-group">
+                    <label class="check-label"><input type="checkbox" formControlName="active" /> Active (show on
+                        website)</label>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save" [disabled]="saving">{{ saving ? 'Saving...' : 'Save Film'
+                        }}</button>
+                    <button type="button" class="btn-cancel" (click)="showFilmForm=false">Cancel</button>
+                </div>
+            </form>
+        </div>
+        }
+        <div class="items-grid">
+            @for (film of films; track film.id) {
+            <div class="item-card">
+                <div class="item-thumb yt-thumb">&#9654;</div>
+                <div class="item-info">
+                    <span class="item-name">{{ film.coupleNames }}</span>
+                    <span class="item-sub">{{ film.location }} &bull; {{ film.title }}</span>
+                    <span class="item-url">{{ film.youtubeUrl }}</span>
+                </div>
+                <div class="item-actions">
+                    <button class="toggle-btn" [class.on]="film.active">{{ film.active ? 'Active' : 'Hidden' }}</button>
+                    <button class="delete-btn" (click)="deleteFilm(film.id!)">&#10005;</button>
+                </div>
+            </div>
+            }
+            @if (!films.length) { <p class="empty">No films yet.</p> }
+        </div>
+        }
+
+        <!-- ── INQUIRIES ── -->
+        @if (activeTab === 'inquiries') {
+        <div class="inquiries-list">
+            @for (inq of inquiries; track inq.id) {
+            <div class="inq-card" [class.new]="inq.status==='new'">
+                <div class="inq-header">
+                    <div>
+                        <span class="inq-name">{{ inq.name }}</span>
+                        <span class="inq-status" [class]="inq.status">{{ inq.status }}</span>
+                    </div>
+                    <span class="inq-date">{{ inq.createdAt?.toDate ? (inq.createdAt.toDate() | date:'d MMM y') : ''
+                        }}</span>
+                </div>
+                <div class="inq-details">
+                    <span>✉ {{ inq.email }}</span>
+                    <span>✆ {{ inq.phone }}</span>
+                    <span>&#9656; {{ inq.weddingDate }}</span>
+                    @if (inq.venue) { <span>&#9670; {{ inq.venue }}</span> }
+                </div>
+                <p class="inq-msg">{{ inq.message }}</p>
+                @if (inq.status === 'new') {
+                <button class="btn-read" (click)="markRead(inq)">Mark as Read</button>
+                }
+            </div>
+            }
+            @if (!inquiries.length) { <p class="empty">No inquiries yet.</p> }
+        </div>
+        }
+
+    </main>
+</div>

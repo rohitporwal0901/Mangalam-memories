@@ -1,0 +1,63 @@
+<section id="films" class="films-section">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="section-header">
+            <p class="section-label">CINEMATIC STORIES</p>
+            <h2 class="section-title">Our <em>Films</em></h2>
+            <p class="section-desc">Every love story deserves its own film — crafted with emotion, artistry, and heart.
+            </p>
+            <div class="gold-divider"></div>
+        </div>
+
+        @if (loading) {
+        <div class="films-grid">
+            @for (n of [1,2,3]; track n) {
+            <div class="film-skeleton"></div>
+            }
+        </div>
+        }
+
+        @if (!loading) {
+        <div class="films-grid">
+            @for (film of films; track film.coupleNames) {
+            <div class="film-card">
+
+                <!-- Thumbnail or Player -->
+                <div class="film-video-wrap">
+                    @if (!isPlaying(film)) {
+                    <!-- Thumbnail + play button -->
+                    <div class="thumbnail-wrap" (click)="playFilm(film)">
+                        <img [src]="getThumbnail(film.youtubeUrl)" [alt]="film.coupleNames" class="film-thumb"
+                            onerror="this.src='https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=600&q=80'" />
+                        <div class="play-overlay">
+                            <div class="play-btn">
+                                <span class="play-icon">&#9654;</span>
+                            </div>
+                        </div>
+                    </div>
+                    } @else {
+                    <!-- Embedded YouTube -->
+                    <iframe [src]="getEmbedUrl(film.youtubeUrl)" class="film-iframe" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                    }
+                </div>
+
+                <!-- Info -->
+                <div class="film-info">
+                    <h3 class="film-couple">{{ film.coupleNames }}</h3>
+                    <p class="film-location">
+                        <span class="loc-dot">&#9632;</span>
+                        {{ film.location }}
+                    </p>
+                    <p class="film-title-text">{{ film.title }}</p>
+                </div>
+            </div>
+            }
+        </div>
+        }
+
+    </div>
+</section>

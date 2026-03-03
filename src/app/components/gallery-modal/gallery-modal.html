@@ -1,0 +1,64 @@
+<div class="modal-backdrop" [class.visible]="visible" (click)="onClose()">
+    <div class="modal-panel" (click)="$event.stopPropagation()">
+
+        <!-- Header -->
+        <div class="modal-header">
+            <div class="logo-small">
+                <img src="/logo.png" alt="MM" />
+            </div>
+            <div class="couple-info">
+                <h2 class="couple-name">{{ archive.coupleNames }}</h2>
+                <p class="couple-loc">{{ archive.location }}</p>
+            </div>
+            <button class="close-btn" (click)="onClose()">&#10005;</button>
+        </div>
+
+        <!-- Masonry Grid -->
+        <div class="masonry-wrap">
+            <div class="masonry-col">
+                @for (photo of archive.photos; track photo; let i = $index) {
+                @if (i % 3 === 0) {
+                <div class="m-img-wrap" (click)="openLightbox(i)">
+                    <img [src]="photo" [alt]="archive.coupleNames + ' ' + (i+1)" loading="lazy" />
+                    <div class="img-hover"><span>&#9654;</span></div>
+                </div>
+                }
+                }
+            </div>
+            <div class="masonry-col">
+                @for (photo of archive.photos; track photo; let i = $index) {
+                @if (i % 3 === 1) {
+                <div class="m-img-wrap" (click)="openLightbox(i)">
+                    <img [src]="photo" [alt]="archive.coupleNames + ' ' + (i+1)" loading="lazy" />
+                    <div class="img-hover"><span>&#9654;</span></div>
+                </div>
+                }
+                }
+            </div>
+            <div class="masonry-col">
+                @for (photo of archive.photos; track photo; let i = $index) {
+                @if (i % 3 === 2) {
+                <div class="m-img-wrap" (click)="openLightbox(i)">
+                    <img [src]="photo" [alt]="archive.coupleNames + ' ' + (i+1)" loading="lazy" />
+                    <div class="img-hover"><span>&#9654;</span></div>
+                </div>
+                }
+                }
+            </div>
+        </div>
+
+        <!-- Photo count -->
+        <div class="photo-total">{{ archive.photos.length }} / {{ archive.photos.length }} Photos</div>
+    </div>
+</div>
+
+<!-- Lightbox -->
+@if (lightboxIndex !== null) {
+<div class="lightbox" (click)="closeLightbox()">
+    <button class="lb-close" (click)="closeLightbox()">&#10005;</button>
+    <button class="lb-arrow lb-prev" (click)="$event.stopPropagation(); prevPhoto()">&#8592;</button>
+    <img [src]="archive.photos[lightboxIndex]" alt="Photo" class="lb-img" (click)="$event.stopPropagation()" />
+    <button class="lb-arrow lb-next" (click)="$event.stopPropagation(); nextPhoto()">&#8594;</button>
+    <div class="lb-counter">{{ lightboxIndex + 1 }} / {{ archive.photos.length }}</div>
+</div>
+}

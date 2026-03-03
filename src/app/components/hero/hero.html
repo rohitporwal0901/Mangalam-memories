@@ -1,0 +1,63 @@
+<section id="home" class="hero-section">
+
+    <!-- Slides -->
+    @for (slide of slides; track slide.imageUrl; let i = $index) {
+    <div class="slide" [class.active]="i === currentIndex">
+        <img [src]="slide.imageUrl" [alt]="slide.title" class="slide-img" loading="eager" />
+        <div class="slide-overlay"></div>
+    </div>
+    }
+
+    <!-- Static top gradient -->
+    <div class="top-fade"></div>
+
+    <!-- Center Content -->
+    <div class="hero-content">
+        <div class="slide-content" [class.visible]="isLoaded">
+            <!-- Logo -->
+            <div class="hero-logo-wrap">
+                <img src="/logo.png" alt="Mangalam Memories" class="hero-logo" />
+            </div>
+
+            <!-- Brand Name -->
+            <h1 class="hero-title">
+                <span class="title-white">Mangalam</span>
+                <span class="title-gold">Memories</span>
+            </h1>
+
+            <!-- Subtitle under logo (like the reference) -->
+            <p class="hero-tagline">PREMIUM INDIAN WEDDING PHOTOGRAPHY</p>
+
+            <div class="gold-line"></div>
+
+            <!-- Dynamic slide text -->
+            @if (slides[currentIndex]) {
+            <p class="slide-subtitle">{{ slides[currentIndex].subtitle }}</p>
+            }
+
+            <!-- CTA Buttons -->
+            <div class="hero-ctas">
+                <button class="cta-primary" (click)="scrollToSection('archives')">View Our Work</button>
+                <button class="cta-outline" (click)="scrollToSection('contact')">Book A Session</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dot indicators -->
+    <div class="dots">
+        @for (slide of slides; track slide.imageUrl; let i = $index) {
+        <button class="dot" [class.active]="i === currentIndex" (click)="go(i)"></button>
+        }
+    </div>
+
+    <!-- Arrows -->
+    <button class="arrow arrow-left" (click)="prev()">&#8592;</button>
+    <button class="arrow arrow-right" (click)="next()">&#8594;</button>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-hint" (click)="scrollToSection('archives')">
+        <span class="scroll-text">SCROLL</span>
+        <div class="scroll-line"></div>
+    </div>
+
+</section>

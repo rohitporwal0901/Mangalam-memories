@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap');
+
+/* ── CSS Variables ───────────────────────────── */
+:root {
+    --gold: #c8941a;
+    --gold-light: #e6ac2e;
+    --gold-dark: #a87615;
+    --dark: #0a0a0a;
+    --dark-100: #141414;
+    --dark-200: #1a1a1a;
+    --dark-300: #242424;
+    --cream: #f5f0e8;
+    --maroon: #6b0f1a;
+}
+
+/* ── Base Reset ──────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--dark);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+}
+
+/* ── Custom Scrollbar ────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-100);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold-dark);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+}
+
+/* ── Typography Helpers ──────────────────────── */
+.font-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+.font-sans {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-script {
+    font-family: 'Great Vibes', cursive;
+}
+
+.text-gold {
+    color: var(--gold);
+}
+
+.text-cream {
+    color: var(--cream);
+}
+
+/* ── Gold gradient text ──────────────────────── */
+.gold-text {
+    background: linear-gradient(135deg, #f4d03f 0%, #c8941a 50%, #f4d03f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Section Label ───────────────────────────── */
+.section-label {
+    @apply text-xs tracking-[0.3em] uppercase font-sans font-medium;
+    color: var(--gold);
+}
+
+/* ── Gold Divider ────────────────────────────── */
+.gold-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 1rem auto;
+}
+
+/* ── Buttons ─────────────────────────────────── */
+.btn-gold {
+    @apply inline-flex items-center gap-2 px-6 py-3 text-sm tracking-widest uppercase font-medium;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+    color: var(--dark);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(200, 148, 26, 0.4);
+    }
+}
+
+.btn-outline-gold {
+    @apply inline-flex items-center gap-2 px-6 py-3 text-sm tracking-widest uppercase font-medium;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: var(--gold);
+        color: var(--dark);
+        box-shadow: 0 10px 30px rgba(200, 148, 26, 0.3);
+    }
+}
+
+/* ── Image overlay ───────────────────────────── */
+.img-overlay {
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.8) 100%);
+        pointer-events: none;
+    }
+}
+
+/* ── Animate on scroll ───────────────────────── */
+.aos-hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.aos-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Custom cursor ───────────────────────────── */
+.custom-cursor {
+    width: 12px;
+    height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.2s ease;
+    mix-blend-mode: difference;
+}
+
+/* ── Loader overlay ──────────────────────────── */
+.loader-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+
+    &.hide {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* ── Swiper custom dots ──────────────────────── */
+.hero-swiper .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.4) !important;
+    width: 8px;
+    height: 8px;
+    transition: all 0.3s;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+    background: var(--gold) !important;
+    width: 24px !important;
+    border-radius: 4px !important;
+}
+
+/* ── Gallery Masonry ──────────────────────────── */
+.masonry-grid {
+    columns: 3;
+    column-gap: 8px;
+
+    @screen md {
+        columns: 3;
+    }
+
+    @screen sm {
+        columns: 2;
+    }
+
+    >* {
+        break-inside: avoid;
+        margin-bottom: 8px;
+    }
+}
+
+/* ── Smooth page transitions ─────────────────── */
+router-outlet+* {
+    animation: pageFadeIn 0.5s ease forwards;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

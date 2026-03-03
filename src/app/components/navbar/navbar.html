@@ -1,0 +1,43 @@
+<nav class="nav-bar" [class.scrolled]="scrolled">
+    <div class="nav-inner">
+
+        <!-- Logo -->
+        <button class="logo-btn" (click)="scrollTo('home')">
+            <img src="/logo.png" alt="Mangalam Memories" class="nav-logo" />
+            <span class="nav-brand">
+                <span class="brand-white">Mangalam</span><span class="brand-gold">Memories</span>
+            </span>
+        </button>
+
+        <!-- Desktop Links -->
+        <ul class="nav-links">
+            @for (link of navLinks; track link.fragment) {
+            <li>
+                <button class="nav-link" (click)="scrollTo(link.fragment)">
+                    {{ link.label }}
+                </button>
+            </li>
+            }
+        </ul>
+
+        <!-- Book CTA -->
+        <button class="btn-book" (click)="scrollTo('contact')">Book Us</button>
+
+        <!-- Hamburger -->
+        <button class="hamburger" (click)="toggleMenu()" [class.open]="menuOpen" aria-label="menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" [class.open]="menuOpen">
+        <ul>
+            @for (link of navLinks; track link.fragment) {
+            <li>
+                <button class="mobile-link" (click)="scrollTo(link.fragment)">{{ link.label }}</button>
+            </li>
+            }
+        </ul>
+        <button class="btn-book mt-6 w-full" (click)="scrollTo('contact')">Book Us</button>
+    </div>
+</nav>

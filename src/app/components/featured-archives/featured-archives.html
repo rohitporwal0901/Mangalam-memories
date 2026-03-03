@@ -1,0 +1,60 @@
+<section id="archives" class="archives-section">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="section-header">
+            <p class="section-label">OUR WORK</p>
+            <h2 class="section-title">
+                Featured <em>Archives</em>
+            </h2>
+            <p class="section-desc">
+                A curated collection of our most treasured moments, capturing the essence of love and celebration.
+            </p>
+            <div class="gold-divider"></div>
+        </div>
+
+        <!-- Loading -->
+        @if (loading) {
+        <div class="skeleton-grid">
+            @for (n of [1,2,3,4]; track n) {
+            <div class="skeleton-card"></div>
+            }
+        </div>
+        }
+
+        <!-- Archives Grid -->
+        @if (!loading) {
+        <div class="archives-grid">
+            @for (archive of archives; track archive.coupleNames; let i = $index) {
+            <div class="archive-card" [class.visible]="isVisible(i)" (mouseenter)="checkVisibility()">
+                <!-- Image -->
+                <div class="card-img-wrap">
+                    <img [src]="archive.coverImage" [alt]="archive.coupleNames" class="card-img" loading="lazy" />
+                    <!-- Hover overlay -->
+                    <div class="card-overlay">
+                        <button class="view-btn" (click)="viewGallery(archive, $event)">
+                            <span class="btn-icon">&#9674;</span>
+                            View Gallery
+                        </button>
+                    </div>
+                    <!-- Photo count badge -->
+                    <div class="photo-count">{{ archive.photos.length }} Photos</div>
+                </div>
+                <!-- Info -->
+                <div class="card-info">
+                    <h3 class="card-names">{{ archive.coupleNames }}</h3>
+                    <p class="card-location">
+                        <span class="loc-dot">&#9632;</span>
+                        {{ archive.location }}
+                    </p>
+                    @if (archive.description) {
+                    <p class="card-desc">{{ archive.description }}</p>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+        }
+
+    </div>
+</section>

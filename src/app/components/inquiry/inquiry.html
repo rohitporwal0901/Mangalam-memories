@@ -1,0 +1,122 @@
+<section id="contact" class="inquiry-section">
+    <div class="inquiry-inner">
+
+        <!-- Left: Info -->
+        <div class="info-col">
+            <div class="info-logo">
+                <img src="/logo.png" alt="Mangalam Memories" />
+            </div>
+            <p class="info-label">LET'S CREATE MAGIC TOGETHER</p>
+            <h2 class="info-title">Book Your <em>Wedding Session</em></h2>
+            <div class="gold-divider"></div>
+            <p class="info-desc">
+                Every love story is unique. Share your vision with us and we'll craft memories that last a lifetime.
+            </p>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <span class="c-icon">✆</span>
+                    <span>+91 98765 43210</span>
+                </div>
+                <div class="contact-item">
+                    <span class="c-icon">✉</span>
+                    <span>hello&#64;mangalammemories.in</span>
+                </div>
+                <div class="contact-item">
+                    <span class="c-icon">◈</span>
+                    <span>Pan India | Destination Weddings</span>
+                </div>
+            </div>
+            <!-- Social -->
+            <div class="socials">
+                <a href="#" class="social-btn" aria-label="Instagram">&#9632; Instagram</a>
+                <a href="#" class="social-btn" aria-label="Facebook">&#9632; Facebook</a>
+            </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="form-col">
+            @if (!submitted) {
+            <form [formGroup]="form" (ngSubmit)="submit()" class="inquiry-form" novalidate>
+                <h3 class="form-title">Inquiry Form</h3>
+
+                <!-- Name + Email -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="inq-name">Full Name *</label>
+                        <input id="inq-name" type="text" formControlName="name" placeholder="Your name"
+                            [class.invalid]="f('name').invalid && f('name').touched" />
+                        @if (f('name').invalid && f('name').touched) {
+                        <span class="err">Please enter your name</span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="inq-email">Email Address *</label>
+                        <input id="inq-email" type="email" formControlName="email" placeholder="your@email.com"
+                            [class.invalid]="f('email').invalid && f('email').touched" />
+                        @if (f('email').invalid && f('email').touched) {
+                        <span class="err">Valid email required</span>
+                        }
+                    </div>
+                </div>
+
+                <!-- Phone + Date -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="inq-phone">Phone Number *</label>
+                        <input id="inq-phone" type="tel" formControlName="phone" placeholder="10-digit mobile"
+                            [class.invalid]="f('phone').invalid && f('phone').touched" />
+                        @if (f('phone').invalid && f('phone').touched) {
+                        <span class="err">Enter valid 10-digit number</span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="inq-date">Wedding Date *</label>
+                        <input id="inq-date" type="date" formControlName="weddingDate"
+                            [class.invalid]="f('weddingDate').invalid && f('weddingDate').touched" />
+                        @if (f('weddingDate').invalid && f('weddingDate').touched) {
+                        <span class="err">Please select a date</span>
+                        }
+                    </div>
+                </div>
+
+                <!-- Venue -->
+                <div class="form-group">
+                    <label for="inq-venue">Venue / City</label>
+                    <input id="inq-venue" type="text" formControlName="venue" placeholder="eg. Udaipur, Rajasthan" />
+                </div>
+
+                <!-- Message -->
+                <div class="form-group">
+                    <label for="inq-msg">Tell Us About Your Wedding *</label>
+                    <textarea id="inq-msg" formControlName="message" rows="4"
+                        placeholder="Share details about your big day..."
+                        [class.invalid]="f('message').invalid && f('message').touched"></textarea>
+                    @if (f('message').invalid && f('message').touched) {
+                    <span class="err">Please write a message</span>
+                    }
+                </div>
+
+                @if (error) {
+                <div class="form-error">{{ error }}</div>
+                }
+
+                <button type="submit" class="submit-btn" [disabled]="submitting">
+                    @if (submitting) {
+                    <span class="spinner"></span> Sending...
+                    } @else {
+                    Send Inquiry &#10148;
+                    }
+                </button>
+            </form>
+            } @else {
+            <!-- Success State -->
+            <div class="success-state">
+                <div class="success-icon">&#10003;</div>
+                <h3>Thank You!</h3>
+                <p>Your inquiry has been received. We will get back to you within 24 hours.</p>
+                <button class="submit-btn" (click)="reset()">Send Another Inquiry</button>
+            </div>
+            }
+        </div>
+    </div>
+</section>
