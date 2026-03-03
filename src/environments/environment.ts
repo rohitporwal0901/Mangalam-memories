@@ -1,12 +1,12 @@
 export const environment = {
     production: false,
     firebase: {
-        apiKey: "AIzaSyDLW_hLCmk15slBBKLU_bCC5YIYjihz8k0",
-        authDomain: "shoppingapp-28320.firebaseapp.com",
-        projectId: "shoppingapp-28320",
-        storageBucket: "shoppingapp-28320.appspot.com",
-        messagingSenderId: "196313674106",
-        appId: "1:196313674106:web:79fb61bb2397ccee9766c3",
-        measurementId: "G-XF7V5HM495"
+       apiKey: "AIzaSyBGUaxjlRNkfZlQcosSTh5IoQppuMMAdgg",
+  authDomain: "mangalam-memories.firebaseapp.com",
+  projectId: "mangalam-memories",
+  storageBucket: "mangalam-memories.firebasestorage.app",
+  messagingSenderId: "505213844623",
+  appId: "1:505213844623:web:1f310b137321bbbfc2c4fa",
+  measurementId: "G-77FJ9FWFJR"
     }
 };

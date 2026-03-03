@@ -9,7 +9,7 @@ import { LoaderService } from './services/loader';
   standalone: true,
   imports: [RouterOutlet, CommonModule, LoaderComponent],
   template: `
-    <!-- <app-loader *ngIf="showLoader" (loaderDone)="onLoaderDone()"></app-loader> -->
+    <app-loader *ngIf="showLoader" (loaderDone)="onLoaderDone()"></app-loader>
     <router-outlet ></router-outlet>
   `,
   styles: [`
