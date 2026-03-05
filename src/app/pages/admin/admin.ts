@@ -318,6 +318,10 @@ export class Admin implements OnInit {
     setTimeout(() => this.message = '', 3000);
   }
 
+  getYouTubeThumb(url: string) {
+    return this.fire.getYouTubeThumbnail(url);
+  }
+
   logout() { this.auth.logout(); }
 
   get newInquiries() { return this.inquiries.filter(i => i.status === 'new').length; }

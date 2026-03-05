@@ -29,8 +29,7 @@
             @if (!isPlaying(activeIndex)) {
             <!-- Thumbnail + play button overlay -->
             <div class="thumb-wrap" (click)="playFilm(activeIndex)">
-                <img [src]="getThumbnail(activeFilm)" [alt]="activeFilm.coupleNames + ' wedding film'"
-                    class="thumb-img" />
+                <img [src]="activeFilm.thumbImg" [alt]="activeFilm.coupleNames + ' wedding film'" class="thumb-img" />
 
                 <!-- Dark cinematic overlay -->
                 <div class="slide-overlay">
@@ -51,7 +50,7 @@
             <!-- YouTube Player -->
             <div class="player-wrap">
                 <button class="close-player" (click)="stopFilm()" aria-label="Close video">✕</button>
-                <iframe [src]="getEmbedUrl(activeFilm.youtubeUrl)" class="film-iframe" frameborder="0"
+                <iframe [src]="activeFilm.safeUrl" class="film-iframe" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen>
                 </iframe>
@@ -77,7 +76,7 @@
     <div class="film-strip">
         @for (f of films; track f.title; let i = $index) {
         <div class="film-thumb" [class.active-thumb]="i === activeIndex" (click)="goTo(i)">
-            <img [src]="getThumbnail(f)" [alt]="f.coupleNames" />
+            <img [src]="f.thumbImg" [alt]="f.coupleNames" />
             <span class="thumb-label">{{ f.coupleNames }}</span>
         </div>
         }

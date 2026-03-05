@@ -313,7 +313,7 @@
         <div class="items-grid">
             @for (film of films; track film.id) {
             <div class="item-card">
-                <div class="item-thumb yt-thumb">&#9654;</div>
+                <img [src]="getYouTubeThumb(film.youtubeUrl)" alt="Thumb" class="item-thumb" />
                 <div class="item-info">
                     <span class="item-name">{{ film.coupleNames }}</span>
                     <span class="item-sub">{{ film.location }} &bull; {{ film.title }}</span>

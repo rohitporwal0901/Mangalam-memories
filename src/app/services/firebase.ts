@@ -135,7 +135,6 @@ export class FirebaseService {
     const q = query(
       collection(this.firestore, 'films'),
       where('active', '==', true),
-      orderBy('order')
     );
     return collectionData(q, { idField: 'id' }) as Observable<Film[]>;
   }
