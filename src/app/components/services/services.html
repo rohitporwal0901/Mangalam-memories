@@ -1,0 +1,50 @@
+<section id="services" class="services-section">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="section-header" [class.visible]="headerVisible">
+            <p class="section-label">What We Offer</p>
+            <h2 class="section-title">Premium <em>Services</em></h2>
+            <p class="section-desc">
+                Tailored packages designed to capture every precious moment
+                of your celebration with elegance and artistry.
+            </p>
+        </div>
+
+        <!-- Service Cards -->
+        <div class="services-grid">
+            @for (svc of services; track svc.title; let i = $index) {
+            <div class="service-card" [class.visible]="isVisible(i)" [style.transition-delay]="(i * 0.12) + 's'">
+
+                <!-- Photo -->
+                <div class="card-photo">
+                    <img [src]="svc.imageUrl" [alt]="svc.title" class="card-img" loading="lazy" />
+                    <div class="photo-overlay"></div>
+                </div>
+
+                <!-- Content -->
+                <div class="card-body">
+                    <span class="service-badge">{{ svc.badge }}</span>
+                    <h3 class="service-title">{{ svc.title }}</h3>
+                    <p class="service-desc">{{ svc.desc }}</p>
+
+                    <ul class="feature-list">
+                        @for (f of svc.features; track f) {
+                        <li>
+                            <span class="check">✓</span>
+                            {{ f }}
+                        </li>
+                        }
+                    </ul>
+
+                    <button class="inquire-btn" (click)="scrollToContact()">
+                        Inquire Now&nbsp;→
+                    </button>
+                </div>
+
+            </div>
+            }
+        </div>
+
+    </div>
+</section>

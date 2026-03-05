@@ -56,6 +56,17 @@ export interface InquiryForm {
   createdAt?: any;
 }
 
+export interface Testimonial {
+  id?: string;
+  coupleNames: string;
+  location: string;
+  quote: string;
+  rating: number;          /* 1–5 */
+  order: number;
+  active: boolean;
+  createdAt?: any;
+}
+
 export interface SiteSettings {
   heroTitle: string;
   heroSubtitle: string;
@@ -161,6 +172,35 @@ export class FirebaseService {
 
   updateInquiryStatus(id: string, status: InquiryForm['status']) {
     return from(updateDoc(doc(this.firestore, 'inquiries', id), { status }));
+  }
+
+  /* ── Testimonials ─────────────────────────── */
+  getTestimonials(): Observable<Testimonial[]> {
+    const q = query(
+      collection(this.firestore, 'testimonials'),
+      where('active', '==', true),
+      orderBy('order')
+    );
+    return collectionData(q, { idField: 'id' }) as Observable<Testimonial[]>;
+  }
+
+  getAllTestimonials(): Observable<Testimonial[]> {
+    const q = query(collection(this.firestore, 'testimonials'), orderBy('order'));
+    return collectionData(q, { idField: 'id' }) as Observable<Testimonial[]>;
+  }
+
+  addTestimonial(t: Omit<Testimonial, 'id' | 'createdAt'>) {
+    return from(addDoc(collection(this.firestore, 'testimonials'), {
+      ...t, createdAt: new Date()
+    }));
+  }
+
+  updateTestimonial(id: string, data: Partial<Testimonial>) {
+    return from(updateDoc(doc(this.firestore, 'testimonials', id), data));
+  }
+
+  deleteTestimonial(id: string) {
+    return from(deleteDoc(doc(this.firestore, 'testimonials', id)));
   }
 
   /* ── Site Settings ────────────────────────── */

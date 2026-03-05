@@ -14,6 +14,8 @@
             <button [class.active]="activeTab==='hero'" (click)="setTab('hero')">&#9670; Hero Slides</button>
             <button [class.active]="activeTab==='archives'" (click)="setTab('archives')">&#9670; Archives</button>
             <button [class.active]="activeTab==='films'" (click)="setTab('films')">&#9670; Films</button>
+            <button [class.active]="activeTab==='testimonials'" (click)="setTab('testimonials')">&#9670;
+                Testimonials</button>
             <button [class.active]="activeTab==='inquiries'" (click)="setTab('inquiries')">
                 &#9670; Inquiries
                 @if (newInquiries > 0) {
@@ -37,6 +39,7 @@
                 @if (activeTab==='hero') { Hero Slides }
                 @if (activeTab==='archives') { Wedding Archives }
                 @if (activeTab==='films') { Films }
+                @if (activeTab==='testimonials') { Client Testimonials }
                 @if (activeTab==='inquiries') { Inquiries }
             </h1>
 
@@ -51,6 +54,8 @@
                     Archive</button> }
                 @if (activeTab==='films') { <button class="btn-add" (click)="showFilmForm=!showFilmForm">+ Add
                     Film</button> }
+                @if (activeTab==='testimonials') { <button class="btn-add"
+                    (click)="showTestimonialForm=!showTestimonialForm">+ Add Testimonial</button> }
             </div>
         </div>
 
@@ -231,6 +236,59 @@
             </div>
             }
             @if (!inquiries.length) { <p class="empty">No inquiries yet.</p> }
+        </div>
+        }
+
+        <!-- ── TESTIMONIALS ── -->
+        @if (activeTab === 'testimonials') {
+        @if (showTestimonialForm) {
+        <div class="admin-card form-card">
+            <h3 class="card-title">Add Client Testimonial</h3>
+            <form [formGroup]="testimonialForm" (ngSubmit)="saveTestimonial()" class="admin-form">
+                <div class="form-row">
+                    <div class="fg"><label>Couple Names *</label><input formControlName="coupleNames"
+                            placeholder="eg. Priya &amp; Arjun" /></div>
+                    <div class="fg"><label>Location *</label><input formControlName="location"
+                            placeholder="eg. Destination Wedding, Udaipur" /></div>
+                </div>
+                <div class="fg"><label>Testimonial Quote *</label><textarea formControlName="quote" rows="4"
+                        placeholder="Their testimonial in their own words..."></textarea></div>
+                <div class="form-row">
+                    <div class="fg"><label>Rating (1-5)</label><input type="number" formControlName="rating" min="1"
+                            max="5" /></div>
+                    <div class="fg"><label>Order</label><input type="number" formControlName="order" /></div>
+                    <div class="fg check-group">
+                        <label class="check-label"><input type="checkbox" formControlName="active" /> Active</label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save" [disabled]="saving">{{ saving ? 'Saving...' : 'Save
+                        Testimonial' }}</button>
+                    <button type="button" class="btn-cancel" (click)="showTestimonialForm=false">Cancel</button>
+                </div>
+            </form>
+        </div>
+        }
+        <div class="items-grid">
+            @for (t of testimonials; track t.id) {
+            <div class="item-card">
+                <div class="item-thumb"
+                    style="display:flex;align-items:center;justify-content:center;font-size:2rem;color:#c9a84c;background:#2a2820">
+                    ★</div>
+                <div class="item-info">
+                    <span class="item-name">{{ t.coupleNames }}</span>
+                    <span class="item-sub">{{ t.location }}</span>
+                    <span class="item-url" style="font-style:italic;color:#aaa">&ldquo;{{ t.quote | slice:0:80
+                        }}...&rdquo;</span>
+                </div>
+                <div class="item-actions">
+                    <button class="toggle-btn" [class.on]="t.active" (click)="toggleTestimonial(t)">{{ t.active ?
+                        'Active' : 'Hidden' }}</button>
+                    <button class="delete-btn" (click)="deleteTestimonial(t.id!)">&#10005;</button>
+                </div>
+            </div>
+            }
+            @if (!testimonials.length) { <p class="empty">No testimonials yet. Add your first review!</p> }
         </div>
         }
 

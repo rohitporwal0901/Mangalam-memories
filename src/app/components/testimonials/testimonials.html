@@ -1,0 +1,47 @@
+<section id="testimonials" class="testimonials-section">
+
+    <!-- Big decorative quotes -->
+    <div class="deco-quote">&ldquo;</div>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="section-header">
+            <p class="section-label">Client Love</p>
+            <h2 class="section-title">Words From <em>Happy Couples</em></h2>
+        </div>
+
+        @if (!loading && active) {
+        <div class="testimonial-slide">
+
+            <!-- Stars -->
+            <div class="stars">
+                @for (s of stars(active.rating); track $index) {
+                <span class="star">★</span>
+                }
+            </div>
+
+            <!-- Quote -->
+            <blockquote class="quote-text">
+                &ldquo;{{ active.quote }}&rdquo;
+            </blockquote>
+
+            <!-- Couple -->
+            <p class="couple-name">{{ active.coupleNames }}</p>
+            <p class="couple-loc">{{ active.location }}</p>
+
+        </div>
+
+        <!-- Prev / Next arrows -->
+        <div class="nav-arrows">
+            <button class="arrow" (click)="prev()" aria-label="Previous">
+                <span>&#8592;</span>
+            </button>
+            <button class="arrow" (click)="next()" aria-label="Next">
+                <span>&#8594;</span>
+            </button>
+        </div>
+        }
+
+    </div>
+</section>

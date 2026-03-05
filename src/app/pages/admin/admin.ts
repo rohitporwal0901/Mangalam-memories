@@ -2,10 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { FirebaseService, Archive, Film, HeroSlide, InquiryForm } from '../../services/firebase';
+import { FirebaseService, Archive, Film, HeroSlide, InquiryForm, Testimonial } from '../../services/firebase';
 import { AuthService } from '../../services/auth';
 
-type Tab = 'hero' | 'archives' | 'films' | 'inquiries';
+type Tab = 'hero' | 'archives' | 'films' | 'inquiries' | 'testimonials';
 
 @Component({
   selector: 'app-admin',
@@ -25,10 +25,12 @@ export class Admin implements OnInit {
   archives: Archive[] = [];
   films: Film[] = [];
   inquiries: InquiryForm[] = [];
+  testimonials: Testimonial[] = [];
 
   showHeroForm = false;
   showArchiveForm = false;
   showFilmForm = false;
+  showTestimonialForm = false;
 
   saving = false;
   message = '';
@@ -61,6 +63,15 @@ export class Admin implements OnInit {
     active: [true],
   });
 
+  testimonialForm = this.fbg.group({
+    coupleNames: ['', Validators.required],
+    location: ['', Validators.required],
+    quote: ['', Validators.required],
+    rating: [5],
+    order: [1],
+    active: [true],
+  });
+
   ngOnInit() { this.loadAll(); }
 
   loadAll() {
@@ -68,6 +79,7 @@ export class Admin implements OnInit {
     this.fire.getArchives().subscribe(d => this.archives = d);
     this.fire.getAllFilms().subscribe(d => this.films = d);
     this.fire.getInquiries().subscribe(d => this.inquiries = d);
+    this.fire.getAllTestimonials().subscribe(d => this.testimonials = d);
   }
 
   /* ── Hero ──────────────────────── */
@@ -135,6 +147,35 @@ export class Admin implements OnInit {
   markRead(inq: InquiryForm) {
     if (!inq.id) return;
     this.fire.updateInquiryStatus(inq.id, 'read').subscribe();
+  }
+
+  /* ── Testimonials ──────────────── */
+  saveTestimonial() {
+    if (this.testimonialForm.invalid) return;
+    this.saving = true;
+    const val = this.testimonialForm.value;
+    this.fire.addTestimonial({
+      coupleNames: val.coupleNames!,
+      location: val.location!,
+      quote: val.quote!,
+      rating: val.rating ?? 5,
+      order: val.order ?? 1,
+      active: val.active ?? true,
+    }).subscribe(() => {
+      this.saving = false; this.showTestimonialForm = false;
+      this.testimonialForm.reset({ rating: 5, order: 1, active: true });
+      this.notify('Testimonial added!');
+    });
+  }
+
+  deleteTestimonial(id: string) {
+    if (!confirm('Delete this testimonial?')) return;
+    this.fire.deleteTestimonial(id).subscribe(() => this.notify('Deleted'));
+  }
+
+  toggleTestimonial(t: Testimonial) {
+    if (!t.id) return;
+    this.fire.updateTestimonial(t.id, { active: !t.active }).subscribe();
   }
 
   setTab(tab: Tab) { this.activeTab = tab; }
