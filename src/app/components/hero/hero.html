@@ -1,63 +1,57 @@
-<section id="home" class="hero-section">
+<section id="home" class="hero-section" [class.loaded]="isLoaded">
 
-    <!-- Slides -->
-    @for (slide of slides; track slide.imageUrl; let i = $index) {
-    <div class="slide" [class.active]="i === currentIndex">
-        <img [src]="slide.imageUrl" [alt]="slide.title" class="slide-img" loading="eager" />
-        <div class="slide-overlay"></div>
+    <!-- Dark ambient background -->
+    <div class="hero-bg">
+        <div class="hero-bg-glow glow-a"></div>
+        <div class="hero-bg-glow glow-b"></div>
     </div>
-    }
 
-    <!-- Static top gradient -->
-    <div class="top-fade"></div>
+    <!-- ══════════════════════════════════════
+         TOP BRAND BLOCK
+    ══════════════════════════════════════ -->
+    <div class="top-brand" [class.visible]="isLoaded">
 
-    <!-- Center Content -->
-    <div class="hero-content">
-        <div class="slide-content" [class.visible]="isLoaded">
-            <!-- Logo -->
-            <div class="hero-logo-wrap">
-                <img src="/logo.png" alt="Mangalam Memories" class="hero-logo" />
-            </div>
-
-            <!-- Brand Name -->
-            <h1 class="hero-title">
-                <span class="title-white">Mangalam</span>
-                <span class="title-gold">Memories</span>
-            </h1>
-
-            <!-- Subtitle under logo (like the reference) -->
-            <p class="hero-tagline">PREMIUM INDIAN WEDDING PHOTOGRAPHY</p>
-
-            <div class="gold-line"></div>
-
-            <!-- Dynamic slide text -->
-            @if (slides[currentIndex]) {
-            <p class="slide-subtitle">{{ slides[currentIndex].subtitle }}</p>
-            }
-
-            <!-- CTA Buttons -->
-            <div class="hero-ctas">
-                <button class="cta-primary" (click)="scrollToSection('archives')">View Our Work</button>
-                <button class="cta-outline" (click)="scrollToSection('contact')">Book A Session</button>
-            </div>
+        <!-- Logo badge circle (like WeddingClickz emblem) -->
+        <div class="logo-badge">
+            <img src="/logo.png" alt="Mangalam Memories" class="logo-img" />
         </div>
+
+        <!-- Title -->
+        <h1 class="hero-title">
+            <span class="title-white">Mangalam</span><span class="title-gold">Memories</span>
+        </h1>
+
+        <!-- Tagline -->
+        <p class="hero-tagline">Premium Indian Wedding Photography</p>
+
     </div>
 
-    <!-- Dot indicators -->
-    <div class="dots">
-        @for (slide of slides; track slide.imageUrl; let i = $index) {
-        <button class="dot" [class.active]="i === currentIndex" (click)="go(i)"></button>
-        }
-    </div>
+    <!-- ══════════════════════════════════════
+         PHOTO STRIP — CSS MARQUEE
+         Renders cards twice for seamless loop
+    ══════════════════════════════════════ -->
+    <div class="photo-strip-wrap" [class.visible]="isLoaded">
 
-    <!-- Arrows -->
-    <button class="arrow arrow-left" (click)="prev()">&#8592;</button>
-    <button class="arrow arrow-right" (click)="next()">&#8594;</button>
+        <div class="photo-strip">
+            <!-- First set -->
+            @for (photo of photoStrip; track photo.url + 'a'; let i = $index) {
+            <div class="photo-card" [class.center]="i === activeCardIndex" (click)="setActive(i)">
+                <img [src]="photo.url" [alt]="photo.alt" class="photo-img" loading="lazy" />
+                <div class="photo-overlay"></div>
+            </div>
+            }
+            <!-- Duplicate set for seamless marquee loop (hidden on mobile via CSS) -->
+            @for (photo of photoStrip; track photo.url + 'b') {
+            <div class="photo-card duplicate" aria-hidden="true">
+                <img [src]="photo.url" [alt]="photo.alt" class="photo-img" loading="lazy" />
+                <div class="photo-overlay"></div>
+            </div>
+            }
+        </div>
 
-    <!-- Scroll indicator -->
-    <div class="scroll-hint" (click)="scrollToSection('archives')">
-        <span class="scroll-text">SCROLL</span>
-        <div class="scroll-line"></div>
+        <!-- Fade edges -->
+        <div class="strip-fade strip-fade-left"></div>
+        <div class="strip-fade strip-fade-right"></div>
     </div>
 
 </section>

@@ -26,7 +26,6 @@ export class App implements OnInit {
   }
 
   onLoaderDone() {
-    alert()
     this.showLoader = false;
     this.loaderService.hide();
   }
