@@ -17,6 +17,7 @@ export class FeaturedArchivesComponent implements OnInit {
 
   archives: Archive[] = [];
   loading = true;
+  headerVisible = false;
   visibleItems: Set<number> = new Set();
 
   private fallback: Archive[] = [
@@ -73,20 +74,29 @@ export class FeaturedArchivesComponent implements OnInit {
       next: data => {
         this.archives = data.length ? data : this.fallback;
         this.loading = false;
+        setTimeout(() => this.checkVisibility(), 100);
       },
       error: () => {
         this.archives = this.fallback;
         this.loading = false;
+        setTimeout(() => this.checkVisibility(), 100);
       }
     });
   }
 
   @HostListener('window:scroll')
   checkVisibility() {
+    // Header reveal
+    const header = this.el.nativeElement.querySelector('.section-header');
+    if (header) {
+      const hRect = header.getBoundingClientRect();
+      if (hRect.top < window.innerHeight - 60) this.headerVisible = true;
+    }
+    // Card reveals
     const items = this.el.nativeElement.querySelectorAll('.archive-card');
     items.forEach((item: Element, i: number) => {
       const rect = item.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 80) this.visibleItems.add(i);
+      if (rect.top < window.innerHeight - 60) this.visibleItems.add(i);
     });
   }
 

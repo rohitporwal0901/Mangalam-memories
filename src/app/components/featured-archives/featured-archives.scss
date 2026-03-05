@@ -1,65 +1,73 @@
 .archives-section {
-    padding: 7rem 0;
-    background: #fff;
+    padding: 6rem 0 5rem;
+    background: #ffffff;
     color: #1a1a1a;
 }
 
 .container {
-    max-width: 1300px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: 0 1.5rem;
 }
 
-/* ── Header ────────────────────────── */
+/* ── Header ─────────────────────────── */
 .section-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .section-label {
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
+    font-size: 0.68rem;
+    letter-spacing: 0.42em;
     text-transform: uppercase;
-    color: #c8941a;
-    margin-bottom: 1rem;
+    color: #c9a84c;
+    margin-bottom: 0.9rem;
 }
 
 .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 500;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 400;
     color: #1a1a1a;
     line-height: 1.15;
 
     em {
         font-style: italic;
-        color: #c8941a;
+        color: #c9a84c;
     }
 }
 
 .section-desc {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
     font-style: italic;
-    font-size: 1rem;
-    color: #666;
-    max-width: 480px;
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: #999;
+    max-width: 520px;
     margin: 1rem auto 0;
-    line-height: 1.7;
+    line-height: 1.75;
 }
 
 .gold-divider {
-    width: 60px;
+    width: 52px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #c8941a, transparent);
-    margin: 1.8rem auto 0;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    margin: 1.6rem auto 0;
 }
 
 /* ── Skeleton ──────────────────────── */
 .skeleton-grid {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 1rem;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 6px;
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
@@ -67,15 +75,14 @@
 }
 
 .skeleton-card {
-    height: 360px;
-    background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+    height: 420px;
+    background: linear-gradient(90deg, #efefef 25%, #f8f8f8 50%, #efefef 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
-    border-radius: 4px;
 
     &:nth-child(2),
     &:nth-child(3) {
-        height: 280px;
+        height: 207px;
     }
 }
 
@@ -89,36 +96,70 @@
     }
 }
 
-/* ── Grid (like reference - big left, smaller right) ── */
-.archives-grid {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 1rem;
+/* ══════════════════════════════════════════
+   ARCHIVES GRID — WeddingClickz layout
 
+   Desktop row 1: big left (1.6fr) + 2 stacked right (1fr)
+   Desktop row 2+: 3-column equal grid
+   Mobile: full-width cards, single column
+══════════════════════════════════════════ */
+.archives-grid {
+    /* Row 1: asymmetric, rows 2+: 3-col via auto-flow */
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    grid-auto-columns: 1fr;
+    gap: 6px;
+
+    /* Big card spans 2 rows */
     >.archive-card:nth-child(1) {
         grid-row: span 2;
+    }
+
+    /* From 3rd card onwards — 3-column rows */
+    >.archive-card:nth-child(n+3) {
+        grid-column: auto;
+    }
+
+    @media (min-width: 901px) {
+
+        /* After first 3 items, switch to 3 cols */
+        >.archive-card:nth-child(n+4) {
+            grid-column: span 1;
+        }
+
+        /* Restructure: items 4+ go in a new 3-col row */
+        grid-template-columns: 1.6fr 1fr;
     }
 
     @media (max-width: 900px) {
         grid-template-columns: 1fr 1fr;
 
         >.archive-card:nth-child(1) {
+            grid-column: span 2;
+            /* full width on tablet */
             grid-row: span 1;
         }
     }
 
     @media (max-width: 600px) {
         grid-template-columns: 1fr;
+
+        >.archive-card:nth-child(1) {
+            grid-column: span 1;
+        }
     }
 }
 
 /* ── Card ──────────────────────────── */
 .archive-card {
     position: relative;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
     cursor: pointer;
+    background: #fff;
+
+    /* Scroll reveal */
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
 
     &.visible {
         opacity: 1;
@@ -126,30 +167,50 @@
     }
 
     &:nth-child(2) {
-        transition-delay: 0.15s;
+        transition-delay: 0.10s;
     }
 
     &:nth-child(3) {
-        transition-delay: 0.3s;
+        transition-delay: 0.22s;
     }
 
     &:nth-child(4) {
-        transition-delay: 0.45s;
+        transition-delay: 0.34s;
+    }
+
+    &:nth-child(5) {
+        transition-delay: 0.46s;
+    }
+
+    &:nth-child(6) {
+        transition-delay: 0.58s;
     }
 }
 
+/* Image wrapper — no border-radius like WeddingClickz */
 .card-img-wrap {
     position: relative;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 0;
     aspect-ratio: 4/3;
 
+    /* First card: tall portrait */
     .archive-card:nth-child(1) & {
         aspect-ratio: 3/4;
+        height: 100%;
+        aspect-ratio: unset;
+    }
+
+    @media (max-width: 900px) {
+        .archive-card:nth-child(1) & {
+            aspect-ratio: 16/9;
+            height: auto;
+        }
     }
 
     @media (max-width: 600px) {
         aspect-ratio: 4/3 !important;
+        height: auto !important;
     }
 }
 
@@ -157,111 +218,169 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    object-position: center 20%;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .archive-card:hover .card-img {
     transform: scale(1.06);
 }
 
-/* Hover overlay */
+/* ── Hover overlay with couple info ── */
 .card-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.65);
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.80) 0%,
+            rgba(0, 0, 0, 0.28) 45%,
+            rgba(0, 0, 0, 0.0) 72%);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    padding: 1.2rem 1.2rem;
     opacity: 0;
     transition: opacity 0.4s ease;
+    cursor: pointer;
 }
 
 .archive-card:hover .card-overlay {
     opacity: 1;
 }
 
-/* View Gallery button */
-.view-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: transparent;
-    border: 1px solid #c8941a;
-    color: #f4d03f;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    padding: 0.75rem 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    transform: translateY(10px);
-    transition: all 0.4s ease;
+/* Info in overlay */
+.overlay-info {
+    width: 100%;
+    transform: translateY(6px);
+    transition: transform 0.4s ease;
 
     .archive-card:hover & {
         transform: translateY(0);
-        background: rgba(200, 148, 26, 0.15);
-    }
-
-    &:hover {
-        background: #c8941a !important;
-        color: #0a0a0a;
-    }
-
-    .btn-icon {
-        font-size: 0.8rem;
     }
 }
 
-/* Photo count */
-.photo-count {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    background: rgba(0, 0, 0, 0.7);
-    color: #c8941a;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.6rem;
+.overlay-names {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
     font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.6rem;
-    border: 1px solid rgba(200, 148, 26, 0.4);
+    color: #fff;
+    margin-bottom: 0.15rem;
 }
 
-/* Info */
+.overlay-loc {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.65rem;
+}
+
+.loc-pin {
+    color: #c9a84c;
+    font-size: 0.4rem;
+}
+
+.overlay-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.58);
+    margin-bottom: 0.7rem;
+}
+
+/* ── PERMANENT bottom info — always visible ── */
+/* WeddingClickz shows names below each photo always */
 .card-info {
-    padding: 0.9rem 0 0.5rem;
+    padding: 0.65rem 0.1rem 0.5rem;
 }
 
 .card-names {
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
     color: #1a1a1a;
+    margin-bottom: 0.15rem;
 }
 
 .card-location {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.3rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    color: #888;
-    letter-spacing: 0.05em;
-    margin-top: 0.3rem;
+    font-size: 0.66rem;
+    color: #aaa;
+    letter-spacing: 0.04em;
 }
 
 .loc-dot {
-    color: #c8941a;
-    font-size: 0.5rem;
+    color: #c9a84c;
+    font-size: 0.4rem;
 }
 
 .card-desc {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 0.85rem;
-    color: #999;
-    margin-top: 0.3rem;
+    color: #bbb;
+    margin-top: 0.2rem;
+}
+
+/* Photo count badge */
+.photo-count {
+    position: absolute;
+    top: 0.65rem;
+    right: 0.65rem;
+    background: rgba(0, 0, 0, 0.70);
+    color: #c9a84c;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.56rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.5rem;
+    z-index: 2;
+}
+
+/* View Gallery button */
+.view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: transparent;
+    border: 1px solid rgba(200, 167, 76, 0.75);
+    color: #f0dda0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: rgba(200, 148, 26, 0.22);
+        border-color: #c9a84c;
+        color: #fff;
+    }
+}
+
+/* ── Mobile ────────────────────────── */
+@media (max-width: 768px) {
+    .archives-section {
+        padding: 4rem 0 3rem;
+    }
+
+    .container {
+        padding: 0 0.85rem;
+    }
+
+    .section-header {
+        margin-bottom: 2rem;
+    }
+
+    .archives-grid {
+        gap: 5px;
+    }
 }
