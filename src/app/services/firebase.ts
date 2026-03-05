@@ -47,10 +47,12 @@ export interface Film {
 export interface InquiryForm {
   id?: string;
   name: string;
+  partnerName?: string;
   email: string;
   phone: string;
   weddingDate: string;
   venue: string;
+  services?: string;
   message: string;
   status: 'new' | 'read' | 'responded';
   createdAt?: any;
@@ -229,6 +231,7 @@ export class FirebaseService {
   getYouTubeThumbnail(url: string): string {
     const match = url.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*[a-z]\/))([\w\-]{11})/);
     const id = match ? match[1] : '';
-    return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+    // mqdefault (320×180) is always available; maxresdefault often returns 404
+    return `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
   }
 }

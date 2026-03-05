@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FirebaseService, Film } from '../../services/firebase';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-films',
@@ -14,7 +14,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
 
   films: Film[] = [];
   loading = true;
-  activeIndex = 0;          /* current slide index */
+  activeIndex = 0;
   playingIndex: number | null = null;
 
   private autoTimer: any;
@@ -24,28 +24,32 @@ export class FilmsComponent implements OnInit, OnDestroy {
       title: 'A Royal Rajasthani Affair',
       coupleNames: 'Priya & Arjun',
       location: 'Udaipur, Rajasthan',
-      youtubeUrl: 'https://www.youtube.com/watch?v=LXb3EKWsInQ',
+      youtubeUrl: 'https://www.youtube.com/watch?v=2Vv-BfVoq4g',
+      thumbnailUrl: 'https://i.ytimg.com/vi/2Vv-BfVoq4g/mqdefault.jpg',
       order: 1, active: true
     },
     {
       title: 'Love in the Pink City',
       coupleNames: 'Meera & Rohit',
       location: 'Jaipur, Rajasthan',
-      youtubeUrl: 'https://www.youtube.com/watch?v=LXb3EKWsInQ',
+      youtubeUrl: 'https://www.youtube.com/watch?v=IJq0yyWug-Q',
+      thumbnailUrl: 'https://i.ytimg.com/vi/IJq0yyWug-Q/mqdefault.jpg',
       order: 2, active: true
     },
     {
-      title: 'Southern Splendour',
+      title: 'A Grand Bangalore Wedding',
       coupleNames: 'Ananya & Karthik',
-      location: 'Mysore, Karnataka',
-      youtubeUrl: 'https://www.youtube.com/watch?v=LXb3EKWsInQ',
+      location: 'Bengaluru, Karnataka',
+      youtubeUrl: 'https://www.youtube.com/watch?v=XEbGRSWWDfI',
+      thumbnailUrl: 'https://i.ytimg.com/vi/XEbGRSWWDfI/mqdefault.jpg',
       order: 3, active: true
     },
     {
       title: 'Waves & Vows',
       coupleNames: 'Shreya & Vikram',
       location: 'Goa',
-      youtubeUrl: 'https://www.youtube.com/watch?v=LXb3EKWsInQ',
+      youtubeUrl: 'https://www.youtube.com/watch?v=yb6dABvHcU4',
+      thumbnailUrl: 'https://i.ytimg.com/vi/yb6dABvHcU4/mqdefault.jpg',
       order: 4, active: true
     },
   ];
@@ -70,7 +74,6 @@ export class FilmsComponent implements OnInit, OnDestroy {
     });
   }
 
-  /* ── Slider navigation ── */
   prev() {
     this.stopAutoPlay();
     this.playingIndex = null;
@@ -86,6 +89,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
   }
 
   goTo(i: number) {
+    if (i === this.activeIndex && this.playingIndex === null) return;
     this.stopAutoPlay();
     this.playingIndex = null;
     this.activeIndex = i;
@@ -93,33 +97,42 @@ export class FilmsComponent implements OnInit, OnDestroy {
   }
 
   private startAutoPlay() {
+    this.stopAutoPlay();
     this.autoTimer = setInterval(() => {
       if (this.playingIndex === null) {
         this.activeIndex = (this.activeIndex + 1) % this.films.length;
       }
-    }, 5000);
+    }, 6000);
   }
 
   private stopAutoPlay() {
-    if (this.autoTimer) clearInterval(this.autoTimer);
+    if (this.autoTimer) {
+      clearInterval(this.autoTimer);
+      this.autoTimer = null;
+    }
   }
 
-  /* ── Video helpers ── */
   playFilm(i: number) {
     this.stopAutoPlay();
     this.playingIndex = i;
   }
 
+  stopFilm() {
+    this.playingIndex = null;
+    this.startAutoPlay();
+  }
+
   isPlaying(i: number) { return this.playingIndex === i; }
 
   getEmbedUrl(url: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.fb.getYouTubeEmbedUrl(url) + '&autoplay=1'
-    );
+    const base = this.fb.getYouTubeEmbedUrl(url);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(base + '&autoplay=1&rel=0&modestbranding=1');
   }
 
-  getThumbnail(url: string): string {
-    return this.fb.getYouTubeThumbnail(url);
+  /** Use pre-embedded thumbnail URL if available, else compute from URL */
+  getThumbnail(film: Film): string {
+    if (film.thumbnailUrl) return film.thumbnailUrl;
+    return this.fb.getYouTubeThumbnail(film.youtubeUrl);
   }
 
   get activeFilm(): Film { return this.films[this.activeIndex] ?? this.films[0]; }

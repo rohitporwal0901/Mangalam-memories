@@ -1,152 +1,217 @@
+/* =============================================
+   INQUIRY SECTION — Light cream, premium luxury
+   Matching WeddingClickz contact layout
+   ============================================= */
+
 .inquiry-section {
-    background: #0f0f0f;
-    border-top: 1px solid rgba(200, 148, 26, 0.15);
+    background: #faf8f4;
+    color: #1a1a1a;
+    padding: 0;
 }
 
+/* ── Section Header ─────────────────── */
+.section-header {
+    text-align: center;
+    padding: 6rem 1.5rem 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.44em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: #1a1a1a;
+    line-height: 1.15;
+
+    em {
+        font-style: italic;
+        color: #c9a84c;
+    }
+}
+
+.section-desc {
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: #999;
+    max-width: 520px;
+    margin: 1rem auto 0;
+    line-height: 1.75;
+}
+
+/* ── Inner Two Column ───────────────── */
 .inquiry-inner {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    max-width: 1300px;
+    grid-template-columns: 1fr 1.35fr;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 1.5rem 6rem;
+    gap: 5rem;
+    align-items: start;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease 0.15s, transform 0.9s ease 0.15s;
 
-    @media (max-width: 900px) {
-        grid-template-columns: 1fr;
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
 /* ── Info Column ───────────────────── */
 .info-col {
-    padding: 5rem 3rem 5rem 1.5rem;
-    border-right: 1px solid rgba(200, 148, 26, 0.1);
-
-    @media (max-width: 900px) {
-        border-right: none;
-        border-bottom: 1px solid rgba(200, 148, 26, 0.1);
-        padding: 4rem 1.5rem 3rem;
-    }
+    padding-top: 1rem;
 }
 
-.info-logo {
-    img {
-        width: 80px;
-        height: 80px;
-        object-fit: contain;
-        margin-bottom: 1.5rem;
-        filter: drop-shadow(0 0 15px rgba(200, 148, 26, 0.4));
-    }
-}
-
-.info-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: #c8941a;
+.info-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    color: #1a1a1a;
     margin-bottom: 1rem;
 }
 
-.info-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 500;
-    color: #f5f0e8;
-    line-height: 1.2;
-
-    em {
-        font-style: italic;
-        color: #c8941a;
-    }
-}
-
-.gold-divider {
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #c8941a, transparent);
-    margin: 1.5rem 0;
-}
-
-.info-desc {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 0.95rem;
-    color: rgba(245, 240, 232, 0.5);
-    line-height: 1.8;
-    max-width: 340px;
+.info-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    color: #666;
+    line-height: 1.85;
+    margin-bottom: 2rem;
+    max-width: 360px;
 }
 
 .contact-details {
-    margin-top: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 1.4rem;
+    margin-bottom: 2.2rem;
 }
 
 .contact-item {
     display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    background: rgba(201, 168, 76, 0.06);
+    display: flex;
     align-items: center;
-    gap: 0.8rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.82rem;
-    color: rgba(245, 240, 232, 0.65);
+    justify-content: center;
+    color: #c9a84c;
+    margin-top: 2px;
 }
 
-.c-icon {
-    color: #c8941a;
-    font-size: 0.9rem;
-    width: 20px;
-    text-align: center;
+.c-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    strong {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #444;
+    }
+
+    span {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.82rem;
+        color: #666;
+        line-height: 1.65;
+    }
+
+    .has-lowercase {
+        text-transform: lowercase;
+    }
 }
 
+/* Social icons */
 .socials {
     display: flex;
-    gap: 0.8rem;
-    margin-top: 2rem;
+    gap: 0.65rem;
+    margin-top: 1rem;
 }
 
-.social-btn {
-    display: inline-flex;
+.social-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    background: transparent;
+    display: flex;
     align-items: center;
-    gap: 0.4rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(200, 148, 26, 0.7);
+    justify-content: center;
+    color: #c9a84c;
     text-decoration: none;
-    border: 1px solid rgba(200, 148, 26, 0.2);
-    padding: 0.4rem 0.8rem;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 
     &:hover {
-        color: #c8941a;
-        border-color: #c8941a;
-        background: rgba(200, 148, 26, 0.05);
+        background: #c9a84c;
+        color: #fff;
+        border-color: #c9a84c;
     }
 }
 
-/* ── Form Column ───────────────────── */
-.form-col {
-    padding: 5rem 1.5rem 5rem 3rem;
+/* ── Form Card ─────────────────────── */
+.form-col {}
 
-    @media (max-width: 900px) {
-        padding: 3rem 1.5rem;
-    }
+.form-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+}
+
+.form-card-header {
+    padding: 2rem 2rem 0;
 }
 
 .form-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    color: #f5f0e8;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(200, 148, 26, 0.2);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin-bottom: 0.4rem;
+}
+
+.form-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    color: #888;
+    margin-bottom: 1.5rem;
 }
 
 /* ── Form Styles ───────────────────── */
 .inquiry-form {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1rem;
+    padding: 0 2rem 2rem;
 }
 
 .form-row {
@@ -162,92 +227,111 @@
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.35rem;
 }
 
 label {
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.76rem;
     font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(200, 148, 26, 0.8);
+    color: #3a3a3a;
+}
+
+.req {
+    color: #c0392b;
+    margin-left: 2px;
 }
 
 input,
-textarea {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #f5f0e8;
+textarea,
+select {
+    background: #faf8f4;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    color: #1a1a1a;
     padding: 0.75rem 1rem;
     font-family: 'Inter', sans-serif;
     font-size: 0.88rem;
     outline: none;
-    border-radius: 2px;
-    transition: border-color 0.3s, background 0.3s;
+    border-radius: 8px;
+    transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
     width: 100%;
 
     &::placeholder {
-        color: rgba(245, 240, 232, 0.25);
+        color: rgba(26, 26, 26, 0.3);
     }
 
     &:focus {
-        border-color: rgba(200, 148, 26, 0.5);
-        background: rgba(255, 255, 255, 0.06);
+        border-color: #c9a84c;
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12);
     }
 
     &.invalid {
         border-color: #c0392b;
+        box-shadow: 0 0 0 2px rgba(192, 57, 43, 0.1);
     }
 
     &[type="date"]::-webkit-calendar-picker-indicator {
-        filter: invert(0.5);
+        opacity: 0.5;
+        cursor: pointer;
     }
+}
+
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
 }
 
 textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 110px;
 }
 
 .err {
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     color: #e74c3c;
 }
 
 .form-error {
-    background: rgba(192, 57, 43, 0.1);
-    border: 1px solid rgba(192, 57, 43, 0.3);
+    background: rgba(192, 57, 43, 0.06);
+    border: 1px solid rgba(192, 57, 43, 0.25);
     color: #e74c3c;
     font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
     padding: 0.6rem 1rem;
-    border-radius: 2px;
+    border-radius: 6px;
 }
 
 /* ── Submit Button ─────────────────── */
 .submit-btn {
+    width: 100%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    background: linear-gradient(135deg, #e6ac2e, #a87615);
-    color: #0a0a0a;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #c9a84c, #a07820);
+    color: #fff;
     border: none;
-    padding: 1rem 2.5rem;
+    padding: 1.05rem 2.5rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.25em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     cursor: pointer;
-    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    border-radius: 8px;
     transition: all 0.3s;
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
 
     &:hover:not(:disabled) {
-        box-shadow: 0 10px 30px rgba(200, 148, 26, 0.4);
-        transform: translateY(-2px);
+        background: linear-gradient(135deg, #d4b55e, #b08930);
+        box-shadow: 0 8px 32px rgba(201, 168, 76, 0.35);
+        transform: translateY(-1px);
     }
 
     &:disabled {
@@ -260,8 +344,8 @@ textarea {
 .spinner {
     width: 16px;
     height: 16px;
-    border: 2px solid rgba(10, 10, 10, 0.3);
-    border-top-color: #0a0a0a;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
 }
@@ -278,21 +362,21 @@ textarea {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
     gap: 1rem;
 
     h3 {
         font-family: 'Playfair Display', serif;
         font-size: 2rem;
-        color: #f5f0e8;
+        color: #1a1a1a;
     }
 
     p {
         font-family: 'Inter', sans-serif;
-        font-size: 0.9rem;
-        color: rgba(245, 240, 232, 0.5);
+        font-size: 0.88rem;
+        color: #888;
         max-width: 320px;
-        line-height: 1.7;
+        line-height: 1.75;
     }
 }
 
@@ -300,13 +384,13 @@ textarea {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background: rgba(200, 148, 26, 0.15);
-    border: 2px solid #c8941a;
+    background: rgba(201, 168, 76, 0.12);
+    border: 2px solid #c9a84c;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.8rem;
-    color: #c8941a;
+    color: #c9a84c;
     margin-bottom: 0.5rem;
     animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -320,5 +404,40 @@ textarea {
     to {
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+/* ── Tablet ─────────────────────────── */
+@media (max-width: 900px) {
+    .inquiry-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding-bottom: 4rem;
+    }
+
+    .info-text {
+        max-width: 100%;
+    }
+
+    .section-header {
+        padding-top: 4rem;
+    }
+}
+
+/* ── Mobile ─────────────────────────── */
+@media (max-width: 600px) {
+    .section-header {
+        padding: 3rem 1rem 2rem;
+    }
+
+    .inquiry-inner {
+        padding: 0 1rem 3rem;
+        gap: 2rem;
+    }
+
+    .form-card-header,
+    .inquiry-form {
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
     }
 }

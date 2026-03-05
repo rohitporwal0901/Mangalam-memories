@@ -15,7 +15,7 @@
     <div class="slider-skeleton"></div>
     }
 
-    <!-- Slider — WeddingClickz style -->
+    <!-- Slider -->
     @if (!loading && films.length) {
     <div class="slider-wrap">
 
@@ -24,17 +24,16 @@
             <span>&#8249;</span>
         </button>
 
-        <!-- Film slide -->
+        <!-- Main film slide -->
         <div class="slide">
             @if (!isPlaying(activeIndex)) {
-            <!-- Thumbnail + play -->
+            <!-- Thumbnail + play button overlay -->
             <div class="thumb-wrap" (click)="playFilm(activeIndex)">
-                <img [src]="getThumbnail(activeFilm.youtubeUrl)" [alt]="activeFilm.coupleNames" class="thumb-img"
-                    onerror="this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80'" />
+                <img [src]="getThumbnail(activeFilm)" [alt]="activeFilm.coupleNames + ' wedding film'"
+                    class="thumb-img" />
 
-                <!-- Dark overlay -->
+                <!-- Dark cinematic overlay -->
                 <div class="slide-overlay">
-                    <!-- Play button -->
                     <div class="play-outer">
                         <div class="play-btn">
                             <span class="play-icon">&#9654;</span>
@@ -42,7 +41,6 @@
                         <p class="watch-label">Watch Film</p>
                     </div>
 
-                    <!-- Film info at bottom -->
                     <div class="slide-info">
                         <h3 class="slide-title">{{ activeFilm.title }}</h3>
                         <p class="slide-couple">{{ activeFilm.coupleNames }}</p>
@@ -50,11 +48,14 @@
                 </div>
             </div>
             } @else {
-            <!-- Embedded YouTube player -->
-            <iframe [src]="getEmbedUrl(activeFilm.youtubeUrl)" class="film-iframe" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
+            <!-- YouTube Player -->
+            <div class="player-wrap">
+                <button class="close-player" (click)="stopFilm()" aria-label="Close video">✕</button>
+                <iframe [src]="getEmbedUrl(activeFilm.youtubeUrl)" class="film-iframe" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
             }
         </div>
 
@@ -63,13 +64,23 @@
             <span>&#8250;</span>
         </button>
 
-        <!-- Dot navigation -->
+        <!-- Dot indicators -->
         <div class="dot-nav">
-            @for (f of films; track f.coupleNames; let i = $index) {
+            @for (f of films; track f.title; let i = $index) {
             <button class="dot" [class.active]="i === activeIndex" (click)="goTo(i)"></button>
             }
         </div>
 
+    </div>
+
+    <!-- Film thumbnail strip -->
+    <div class="film-strip">
+        @for (f of films; track f.title; let i = $index) {
+        <div class="film-thumb" [class.active-thumb]="i === activeIndex" (click)="goTo(i)">
+            <img [src]="getThumbnail(f)" [alt]="f.coupleNames" />
+            <span class="thumb-label">{{ f.coupleNames }}</span>
+        </div>
+        }
     </div>
     }
 

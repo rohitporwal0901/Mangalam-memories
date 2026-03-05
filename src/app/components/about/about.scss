@@ -1,0 +1,251 @@
+/* =============================================
+   ABOUT / OUR STORY — WeddingClickz style
+   Light cream background with photo collage left
+   ============================================= */
+
+.about-section {
+    background: #faf8f4;
+    /* Light cream — exactly as WeddingClickz screenshot */
+    padding: 7rem 2rem 6rem;
+    color: #1a1a1a;
+}
+
+.about-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+/* ── LEFT: Photo Grid ─────────────────── */
+.grid-side {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+
+    &.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 3-column 4-row photo collage with badge cell */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 120px);
+    gap: 6px;
+}
+
+.photo-cell {
+    position: relative;
+    overflow: hidden;
+    background: #e8e3da;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    &:hover img {
+        transform: scale(1.07);
+    }
+}
+
+/* Badge cell — bottom-right, dark with gold number */
+.badge-cell {
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: 3;
+    grid-row: 4;
+}
+
+.weddings-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.badge-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: #c9a84c;
+    line-height: 1.1;
+}
+
+.badge-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    margin-top: 0.3rem;
+}
+
+/* ── RIGHT: Story Content ─────────────── */
+.story-side {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
+
+    &.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.44em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 1.2rem;
+    display: block;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 400;
+    color: #1a1a1a;
+    line-height: 1.25;
+    margin-bottom: 1.8rem;
+
+    em {
+        font-style: italic;
+        color: #c9a84c;
+    }
+}
+
+.story-para {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    color: #666;
+    line-height: 1.85;
+    margin-bottom: 1.1rem;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+.divider-line {
+    width: 100%;
+    height: 1px;
+    background: rgba(201, 168, 76, 0.2);
+    margin: 2.2rem 0;
+}
+
+/* ── Stats Grid ───────────────────────── */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem 1rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 400;
+    color: #1a1a1a;
+    line-height: 1;
+}
+
+.stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+}
+
+/* Special large stat (1M+) */
+.stat-large {
+    grid-column: 1 / span 3;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    margin-top: 0.5rem;
+}
+
+.stat-large .stat-number {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    color: #c9a84c;
+}
+
+/* ── Tablet ────────────────────────────── */
+@media (max-width: 1000px) {
+    .about-section {
+        padding: 5rem 1.5rem 4rem;
+    }
+
+    .about-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .grid-side {
+        transform: translateY(-20px);
+
+        &.visible {
+            transform: translateY(0);
+        }
+    }
+
+    .story-side {
+        transform: translateY(20px);
+
+        &.visible {
+            transform: translateY(0);
+        }
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .photo-grid {
+        grid-template-rows: repeat(4, 110px);
+    }
+}
+
+/* ── Mobile ────────────────────────────── */
+@media (max-width: 600px) {
+    .about-section {
+        padding: 4rem 1rem 3rem;
+    }
+
+    .photo-grid {
+        grid-template-rows: repeat(4, 90px);
+        gap: 4px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat-large {
+        grid-column: 1 / span 2;
+    }
+
+    .badge-number {
+        font-size: 1.3rem;
+    }
+}

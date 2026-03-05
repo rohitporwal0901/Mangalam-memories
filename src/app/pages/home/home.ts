@@ -6,6 +6,7 @@ import { FeaturedArchivesComponent } from '../../components/featured-archives/fe
 import { WhyChooseUsComponent } from '../../components/why-choose-us/why-choose-us';
 import { ServicesComponent } from '../../components/services/services';
 import { TestimonialsComponent } from '../../components/testimonials/testimonials';
+import { AboutComponent } from '../../components/about/about';
 import { GalleryModalComponent } from '../../components/gallery-modal/gallery-modal';
 import { FilmsComponent } from '../../components/films/films';
 import { InquiryComponent } from '../../components/inquiry/inquiry';
@@ -23,6 +24,7 @@ import { Archive } from '../../services/firebase';
     WhyChooseUsComponent,
     ServicesComponent,
     TestimonialsComponent,
+    AboutComponent,
     GalleryModalComponent,
     FilmsComponent,
     InquiryComponent,

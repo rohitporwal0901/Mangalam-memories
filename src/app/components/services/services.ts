@@ -32,7 +32,7 @@ export class ServicesComponent implements OnInit {
                 'Private luxury online gallery',
                 'Dual-photographer for seamless storytelling',
             ],
-            imageUrl: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80'
+            imageUrl: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80'
         },
         {
             badge: 'CINEMATIC',
@@ -44,7 +44,7 @@ export class ServicesComponent implements OnInit {
                 'Drone aerials for grand perspectives',
                 'Licensed score & refined audio design',
             ],
-            imageUrl: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&q=80'
+            imageUrl: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=800&q=80'
         },
         {
             badge: 'EXCLUSIVE',
@@ -56,7 +56,7 @@ export class ServicesComponent implements OnInit {
                 'Edited signature image collection',
                 'Same-day curated previews',
             ],
-            imageUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80'
+            imageUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80'
         },
     ];
 

@@ -7,42 +7,25 @@
             Why Couples Choose <em>Us</em>
         </h2>
         <p class="section-desc">
-            Trusted by families across India for destination weddings,<br>
+            Trusted by families across India for destination weddings,
             grand celebrations, and intimate ceremonies.
         </p>
     </div>
 
-    <!-- Feature Cards Grid -->
+    <!-- 3×2 Cards Grid -->
     <div class="features-grid">
-
-        <!-- Card 1 — LARGE, highlight card (like WeddingClickz left) -->
-        <div class="feature-card card-large" [class.visible]="isVisible(0)">
-            <div class="card-icon">{{ features[0].icon }}</div>
-            <h3 class="card-title">{{ features[0].title }}</h3>
-            <p class="card-desc">{{ features[0].desc }}</p>
-            <!-- Location tags -->
-            <div class="location-tags">
-                @for (loc of features[0].locations!; track loc) {
-                <span class="loc-tag">
-                    <span class="loc-dot">◎</span> {{ loc }}
-                </span>
-                }
+        @for (f of features; track f.title; let i = $index) {
+        <div class="feature-card" [class.visible]="isVisible(i)" [style.transition-delay]="(i * 0.10) + 's'">
+            <div class="card-icon-wrap">
+                <span class="card-icon">{{ f.icon }}</span>
             </div>
-            <p class="card-cta">PAN-INDIA COVERAGE</p>
-        </div>
-
-        <!-- Cards 2–5 — smaller cards in 2×2 grid -->
-        @for (f of features.slice(1); track f.title; let i = $index) {
-        <div class="feature-card" [class.visible]="isVisible(i + 1)" [style.transition-delay]="((i + 1) * 0.12) + 's'">
-            <div class="card-icon-sm">{{ f.icon }}</div>
             <h3 class="card-title">{{ f.title }}</h3>
             <p class="card-desc">{{ f.desc }}</p>
             @if (f.tag) {
-            <p class="card-cta">{{ f.tag }} →</p>
+            <span class="card-tag">{{ f.tag }}</span>
             }
         </div>
         }
-
     </div>
 
 </section>

@@ -6,8 +6,6 @@ interface Feature {
     title: string;
     desc: string;
     tag?: string;
-    locations?: string[];
-    highlight?: boolean;
 }
 
 @Component({
@@ -25,16 +23,15 @@ export class WhyChooseUsComponent implements OnInit {
     features: Feature[] = [
         {
             icon: '🗺️',
-            title: 'Pan-India Specialists',
-            desc: 'From the palaces of Rajasthan and beaches of Goa to the hills of Himachal, we\'ve captured love stories across every corner of India. Our team travels to your destination.',
-            locations: ['Rajasthan', 'Goa', 'Kerala', 'Himachal', 'Delhi NCR'],
-            highlight: true
+            title: 'Pan-India Coverage',
+            desc: 'From Rajasthan\'s palaces to Goa\'s beaches and Kerala\'s backwaters — we travel wherever your love story takes us.',
+            tag: 'DESTINATION READY'
         },
         {
             icon: '🎬',
             title: 'Cinematic Excellence',
             desc: 'Professional cinema cameras, drone aerials, and precision lighting — every frame worthy of a magazine cover.',
-            tag: '4K CINEMA QUALITY'
+            tag: '4K CINEMA'
         },
         {
             icon: '👥',
@@ -45,8 +42,14 @@ export class WhyChooseUsComponent implements OnInit {
         {
             icon: '💎',
             title: 'Luxury Deliverables',
-            desc: 'Premium photo albums, cinematic wedding films, and private online galleries. Your memories presented with the elegance they deserve.',
+            desc: 'Premium photo albums, cinematic highlight films, and private online galleries — presented with the elegance they deserve.',
             tag: 'PREMIUM FINISH'
+        },
+        {
+            icon: '⌚',
+            title: 'Timeline Guaranteed',
+            desc: 'We respect your timeline. Final photos and films delivered on schedule, every time, without compromising quality.',
+            tag: 'ON-TIME DELIVERY'
         },
         {
             icon: '⭐',

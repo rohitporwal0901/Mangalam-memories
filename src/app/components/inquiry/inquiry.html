@@ -1,122 +1,204 @@
 <section id="contact" class="inquiry-section">
-    <div class="inquiry-inner">
+    <!-- Top Header -->
+    <div class="section-header" [class.visible]="headerVisible">
+        <p class="section-label">GET IN TOUCH</p>
+        <h2 class="section-title">Start Your <em>Journey</em></h2>
+        <p class="section-desc">
+            We'd love to hear about your wedding plans and discuss how we can capture your special day.
+        </p>
+    </div>
 
+    <div class="inquiry-inner" [class.visible]="contentVisible">
         <!-- Left: Info -->
         <div class="info-col">
-            <div class="info-logo">
-                <img src="/logo.png" alt="Mangalam Memories" />
-            </div>
-            <p class="info-label">LET'S CREATE MAGIC TOGETHER</p>
-            <h2 class="info-title">Book Your <em>Wedding Session</em></h2>
-            <div class="gold-divider"></div>
-            <p class="info-desc">
-                Every love story is unique. Share your vision with us and we'll craft memories that last a lifetime.
+            <h3 class="info-subtitle">Let's Connect</h3>
+            <p class="info-text">
+                At Mangalam Memories, we believe that every wedding is a story waiting to be
+                told&mdash;authentically, artistically, and with heart.
             </p>
+
             <div class="contact-details">
                 <div class="contact-item">
-                    <span class="c-icon">✆</span>
-                    <span>+91 98765 43210</span>
+                    <span class="c-icon icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.896-1.596-5.539-4.242-7.14-7.14l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                        </svg>
+                    </span>
+                    <div class="c-text">
+                        <strong>CALL US</strong>
+                        <span>+91 97402 22927 &nbsp; +91 81052 44999</span>
+                    </div>
                 </div>
+
                 <div class="contact-item">
-                    <span class="c-icon">✉</span>
-                    <span>hello&#64;mangalammemories.in</span>
+                    <span class="c-icon icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                        </svg>
+                    </span>
+                    <div class="c-text">
+                        <strong>EMAIL US</strong>
+                        <span class="has-lowercase">hello&#64;mangalammemories.in</span>
+                    </div>
                 </div>
+
                 <div class="contact-item">
-                    <span class="c-icon">◈</span>
-                    <span>Pan India | Destination Weddings</span>
+                    <span class="c-icon icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                        </svg>
+                    </span>
+                    <div class="c-text">
+                        <strong>STUDIO LOCATION</strong>
+                        <span>2nd floor, 47th Cross Rd, 5th Block,<br>TMC Layout, 1st Phase, Jayanagar,<br>Bengaluru,
+                            Karnataka 560041</span>
+                    </div>
                 </div>
             </div>
+
             <!-- Social -->
             <div class="socials">
-                <a href="#" class="social-btn" aria-label="Instagram">&#9632; Instagram</a>
-                <a href="#" class="social-btn" aria-label="Facebook">&#9632; Facebook</a>
+                <a href="#" class="social-circle" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" width="14" height="14" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="#" class="social-circle" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" width="14" height="14" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="social-circle" aria-label="Youtube">
+                    <svg viewBox="0 0 24 24" fill="none" width="14" height="14" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                        </path>
+                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                    </svg>
+                </a>
+                <a href="#" class="social-circle" aria-label="Pinterest">
+                    <svg viewBox="0 0 24 24" fill="none" width="14" height="14" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12c0 4.3 2.66 8.01 6.54 9.47-.09-.81-.17-2.07.03-2.95.19-.82 1.22-5.18 1.22-5.18s-.31-.63-.31-1.55c0-1.46.85-2.55 1.9-2.55.89 0 1.32.67 1.32 1.47 0 .9-.57 2.24-.87 3.48-.25 1.04.52 1.88 1.55 1.88 1.86 0 3.28-1.96 3.28-4.79 0-2.22-1.6-3.78-3.89-3.78-2.65 0-4.21 1.99-4.21 4.04 0 .9.35 1.87.78 2.4.08.1.1.18.07.28-.09.38-.29 1.2-.33 1.36-.05.18-.17.22-.36.13-1.34-.63-2.18-2.6-2.18-4.2 0-3.42 2.49-6.55 7.15-6.55 3.75 0 6.66 2.67 6.66 6.23 0 3.73-2.35 6.73-5.61 6.73-1.1 0-2.13-.57-2.48-1.24l-.68 2.58c-.24.93-.9 2.08-1.34 2.78C10.15 21.84 11.05 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z">
+                        </path>
+                    </svg>
+                </a>
             </div>
         </div>
 
         <!-- Right: Form -->
         <div class="form-col">
-            @if (!submitted) {
-            <form [formGroup]="form" (ngSubmit)="submit()" class="inquiry-form" novalidate>
-                <h3 class="form-title">Inquiry Form</h3>
-
-                <!-- Name + Email -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="inq-name">Full Name *</label>
-                        <input id="inq-name" type="text" formControlName="name" placeholder="Your name"
-                            [class.invalid]="f('name').invalid && f('name').touched" />
-                        @if (f('name').invalid && f('name').touched) {
-                        <span class="err">Please enter your name</span>
-                        }
-                    </div>
-                    <div class="form-group">
-                        <label for="inq-email">Email Address *</label>
-                        <input id="inq-email" type="email" formControlName="email" placeholder="your@email.com"
-                            [class.invalid]="f('email').invalid && f('email').touched" />
-                        @if (f('email').invalid && f('email').touched) {
-                        <span class="err">Valid email required</span>
-                        }
-                    </div>
+            <div class="form-card">
+                @if (!submitted) {
+                <div class="form-card-header">
+                    <h3 class="form-title">Request Availability</h3>
+                    <p class="form-desc">Fill out the form below and we'll get back to you within 24 hours.</p>
                 </div>
 
-                <!-- Phone + Date -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="inq-phone">Phone Number *</label>
-                        <input id="inq-phone" type="tel" formControlName="phone" placeholder="10-digit mobile"
-                            [class.invalid]="f('phone').invalid && f('phone').touched" />
-                        @if (f('phone').invalid && f('phone').touched) {
-                        <span class="err">Enter valid 10-digit number</span>
-                        }
-                    </div>
-                    <div class="form-group">
-                        <label for="inq-date">Wedding Date *</label>
-                        <input id="inq-date" type="date" formControlName="weddingDate"
-                            [class.invalid]="f('weddingDate').invalid && f('weddingDate').touched" />
-                        @if (f('weddingDate').invalid && f('weddingDate').touched) {
-                        <span class="err">Please select a date</span>
-                        }
-                    </div>
-                </div>
+                <form [formGroup]="form" (ngSubmit)="submit()" class="inquiry-form" novalidate>
 
-                <!-- Venue -->
-                <div class="form-group">
-                    <label for="inq-venue">Venue / City</label>
-                    <input id="inq-venue" type="text" formControlName="venue" placeholder="eg. Udaipur, Rajasthan" />
-                </div>
+                    <!-- Name row -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="inq-name">Your Name <span class="req">*</span></label>
+                            <input id="inq-name" type="text" formControlName="name" placeholder="Full name"
+                                [class.invalid]="f('name').invalid && f('name').touched" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inq-partner">Partner's Name</label>
+                            <input id="inq-partner" type="text" formControlName="partnerName"
+                                placeholder="Partner's name" />
+                        </div>
+                    </div>
 
-                <!-- Message -->
-                <div class="form-group">
-                    <label for="inq-msg">Tell Us About Your Wedding *</label>
-                    <textarea id="inq-msg" formControlName="message" rows="4"
-                        placeholder="Share details about your big day..."
-                        [class.invalid]="f('message').invalid && f('message').touched"></textarea>
-                    @if (f('message').invalid && f('message').touched) {
-                    <span class="err">Please write a message</span>
+                    <!-- Email & Phone -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="inq-email">Email <span class="req">*</span></label>
+                            <input id="inq-email" type="email" formControlName="email" placeholder="your&#64;email.com"
+                                [class.invalid]="f('email').invalid && f('email').touched" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inq-phone">Phone <span class="req">*</span></label>
+                            <input id="inq-phone" type="tel" formControlName="phone" placeholder="+91 98765 43210"
+                                [class.invalid]="f('phone').invalid && f('phone').touched" />
+                        </div>
+                    </div>
+
+                    <!-- Date & Venue -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="inq-date">Wedding Date <span class="req">*</span></label>
+                            <input id="inq-date" type="date" formControlName="weddingDate"
+                                [class.invalid]="f('weddingDate').invalid && f('weddingDate').touched" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inq-venue">Wedding Location</label>
+                            <input id="inq-venue" type="text" formControlName="venue" placeholder="City, Venue" />
+                        </div>
+                    </div>
+
+                    <!-- Services Interested In -->
+                    <div class="form-group">
+                        <label for="inq-services">Services Interested In</label>
+                        <select id="inq-services" formControlName="services">
+                            <option value="">Select a service</option>
+                            <option value="Wedding Photography">Wedding Photography</option>
+                            <option value="Wedding Videography">Wedding Videography</option>
+                            <option value="Pre-Wedding Shoot">Pre-Wedding Shoot</option>
+                            <option value="Complete Package">Complete Package (Photo + Video)</option>
+                        </select>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="form-group">
+                        <label for="inq-msg">Tell Us About Your Wedding <span class="req">*</span></label>
+                        <textarea id="inq-msg" formControlName="message" rows="4"
+                            placeholder="Share your vision, style preferences, and any special requirements..."
+                            [class.invalid]="f('message').invalid && f('message').touched"></textarea>
+                    </div>
+
+                    @if (error) {
+                    <div class="form-error">{{ error }}</div>
                     }
-                </div>
 
-                @if (error) {
-                <div class="form-error">{{ error }}</div>
+                    <button type="submit" class="submit-btn" [disabled]="submitting">
+                        @if (submitting) {
+                        <span class="spinner"></span>
+                        } @else {
+                        SEND INQUIRY <svg style="margin-left: 6px; position:relative; top:1px" viewBox="0 0 24 24"
+                            width="14" height="14" stroke="currentColor" stroke-width="2" fill="none">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                        }
+                    </button>
+                </form>
+                } @else {
+                <!-- Success State -->
+                <div class="success-state">
+                    <div class="success-icon">&#10003;</div>
+                    <h3>Thank You!</h3>
+                    <p>Your inquiry has been received. We will get back to you within 24 hours.</p>
+                    <button class="submit-btn" style="width: auto; padding: 1rem 2rem;" (click)="reset()">Send Another
+                        Inquiry</button>
+                </div>
                 }
-
-                <button type="submit" class="submit-btn" [disabled]="submitting">
-                    @if (submitting) {
-                    <span class="spinner"></span> Sending...
-                    } @else {
-                    Send Inquiry &#10148;
-                    }
-                </button>
-            </form>
-            } @else {
-            <!-- Success State -->
-            <div class="success-state">
-                <div class="success-icon">&#10003;</div>
-                <h3>Thank You!</h3>
-                <p>Your inquiry has been received. We will get back to you within 24 hours.</p>
-                <button class="submit-btn" (click)="reset()">Send Another Inquiry</button>
             </div>
-            }
         </div>
     </div>
 </section>

@@ -23,47 +23,73 @@ export class FeaturedArchivesComponent implements OnInit {
   private fallback: Archive[] = [
     {
       coupleNames: 'Priya & Arjun', location: 'Udaipur, Rajasthan',
-      description: 'A royal celebration at the lake palace',
-      coverImage: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&q=80',
+      description: 'A royal celebration at Lake Pichola palace',
+      coverImage: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80',
       photos: [
-        'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&q=80',
-        'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80',
-        'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
-        'https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=800&q=80',
-        'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80',
+        'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1529543544282-ea669407fca3?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1509927083803-4bd519298ac4?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80',
       ],
       order: 1, active: true, featured: true
     },
     {
       coupleNames: 'Meera & Rohit', location: 'Jaipur, Rajasthan',
-      description: 'A vibrant Rajasthani celebration',
-      coverImage: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80',
+      description: 'A vibrant Rajasthani palace celebration',
+      coverImage: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=800&q=80',
       photos: [
-        'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80',
-        'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&q=80',
-        'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
+        'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1529636444745-588f0a0d0d34?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=800&q=80',
       ],
       order: 2, active: true, featured: true
     },
     {
       coupleNames: 'Ananya & Karthik', location: 'Mysore, Karnataka',
-      description: 'A traditional South Indian ceremony',
-      coverImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
+      description: 'A traditional South Indian ceremony at the palace',
+      coverImage: 'https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=800&q=80',
       photos: [
-        'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
-        'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80',
+        'https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1578923931302-cbb86a2bd8ae?auto=format&fit=crop&w=800&q=80',
       ],
       order: 3, active: true, featured: true
     },
     {
-      coupleNames: 'Shreya & Vikram', location: 'Mumbai, Maharashtra',
-      description: 'An urban love story by the sea',
-      coverImage: 'https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=800&q=80',
+      coupleNames: 'Shreya & Vikram', location: 'Goa',
+      description: 'An intimate beachside ceremony at sunset',
+      coverImage: 'https://images.unsplash.com/photo-1529543544282-ea669407fca3?auto=format&fit=crop&w=800&q=80',
       photos: [
-        'https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=800&q=80',
-        'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80',
+        'https://images.unsplash.com/photo-1529543544282-ea669407fca3?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1578923931302-cbb86a2bd8ae?auto=format&fit=crop&w=800&q=80',
       ],
       order: 4, active: true, featured: true
+    },
+    {
+      coupleNames: 'Naina & Dev', location: 'Delhi',
+      description: 'A grand Mughal-inspired celebration in Old Delhi',
+      coverImage: 'https://images.unsplash.com/photo-1509927083803-4bd519298ac4?auto=format&fit=crop&w=800&q=80',
+      photos: [
+        'https://images.unsplash.com/photo-1509927083803-4bd519298ac4?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=800&q=80',
+      ],
+      order: 5, active: true, featured: true
+    },
+    {
+      coupleNames: 'Kavya & Rahul', location: 'Kerala',
+      description: 'A serene backwater wedding ceremony',
+      coverImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
+      photos: [
+        'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1529543544282-ea669407fca3?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80',
+      ],
+      order: 6, active: true, featured: true
     },
   ];
 

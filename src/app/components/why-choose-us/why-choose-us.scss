@@ -1,19 +1,18 @@
 /* =============================================
-   WHY CHOOSE US — WeddingClickz style
-   Dark bg, large left card + 2×2 right grid
+   WHY CHOOSE US — 6-card 3×2 luxury glass grid
+   Dark warm charcoal, gold accent
    ============================================= */
 
 .why-section {
-    background: #1e1c18;
-    /* very dark warm charcoal, like WeddingClickz */
-    padding: 6rem 2rem 5rem;
+    background: #191714;
+    padding: 7rem 2rem 6rem;
     color: #f0ece4;
 }
 
 /* ── Header ─────────────────────────── */
 .section-header {
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 4rem;
     opacity: 0;
     transform: translateY(22px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -27,10 +26,11 @@
 .section-label {
     font-family: 'Inter', sans-serif;
     font-size: 0.62rem;
-    letter-spacing: 0.42em;
+    letter-spacing: 0.44em;
     text-transform: uppercase;
     color: #c9a84c;
     margin-bottom: 1.1rem;
+    display: block;
 }
 
 .section-title {
@@ -49,175 +49,155 @@
 .section-desc {
     font-family: 'Cormorant Garamond', 'Playfair Display', serif;
     font-style: italic;
-    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
-    color: rgba(240, 236, 228, 0.58);
+    font-size: clamp(0.95rem, 1.8vw, 1.08rem);
+    color: rgba(240, 236, 228, 0.52);
     margin: 1.1rem auto 0;
     line-height: 1.75;
-    max-width: 560px;
+    max-width: 540px;
 }
 
 /* ══════════════════════════════════════════
-   FEATURES GRID — WeddingClickz layout
-
-   Desktop:
-   ┌──────────────┬───────┬───────┐
-   │              │ Cd 2  │ Cd 3  │
-   │   Card 1     ├───────┼───────┤
-   │   (BIG)      │ Cd 4  │ Cd 5  │
-   └──────────────┴───────┴───────┘
-
-   Mobile: single column
+   FEATURES GRID — 3 columns × 2 rows
+   Equal luxury glass cards
 ══════════════════════════════════════════ */
 .features-grid {
     display: grid;
-    grid-template-columns: 1.1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 12px;
-    max-width: 1200px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 1160px;
     margin: 0 auto;
-
-    /* Large card: spans 2 rows */
-    .card-large {
-        grid-column: 1;
-        grid-row: 1 / span 2;
-    }
 }
 
-/* ── Feature card base ─────────────── */
+/* ── Feature card ──────────────────── */
 .feature-card {
-    background: #29271f;
-    /* WeddingClickz card bg */
-    border: 1px solid rgba(200, 167, 76, 0.10);
-    border-radius: 10px;
-    padding: 2rem 1.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(201, 168, 76, 0.10);
+    border-radius: 14px;
+    padding: 2.2rem 1.8rem 2rem;
+    backdrop-filter: blur(6px);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease,
-        border-color 0.3s ease, background 0.3s ease;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease,
+        border-color 0.3s ease, background 0.3s ease,
+        box-shadow 0.3s ease;
 
     &.visible {
         opacity: 1;
         transform: translateY(0);
     }
 
+    /* Subtle left gold border stripe on hover */
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 20%;
+        bottom: 20%;
+        width: 2px;
+        background: #c9a84c;
+        border-radius: 2px;
+        opacity: 0;
+        transition: opacity 0.3s, top 0.3s, bottom 0.3s;
+    }
+
     &:hover {
-        border-color: rgba(200, 167, 76, 0.28);
-        background: #2f2d24;
+        border-color: rgba(201, 168, 76, 0.30);
+        background: rgba(201, 168, 76, 0.05);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+        transform: translateY(-4px);
+
+        &.visible {
+            transform: translateY(-4px);
+        }
+
+        &::before {
+            opacity: 1;
+            top: 10%;
+            bottom: 10%;
+        }
     }
 }
 
-/* Large card extras */
-.card-large {
-    padding: 2.4rem 2rem;
+/* Icon container */
+.card-icon-wrap {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.18);
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: background 0.3s, border-color 0.3s;
+
+    .feature-card:hover & {
+        background: rgba(201, 168, 76, 0.15);
+        border-color: rgba(201, 168, 76, 0.35);
+    }
 }
 
-/* Icon — large */
 .card-icon {
-    font-size: 2rem;
-    margin-bottom: 1.4rem;
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(200, 167, 76, 0.10);
-    border: 1px solid rgba(200, 167, 76, 0.20);
-    border-radius: 10px;
-}
-
-/* Icon — small cards */
-.card-icon-sm {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
-    width: 46px;
-    height: 46px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(200, 167, 76, 0.08);
-    border: 1px solid rgba(200, 167, 76, 0.16);
-    border-radius: 8px;
+    line-height: 1;
 }
 
 .card-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-size: 1.15rem;
     font-weight: 500;
     color: #c9a84c;
-    /* gold title like WeddingClickz */
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.75rem;
     line-height: 1.3;
 }
 
 .card-desc {
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    color: rgba(240, 236, 228, 0.65);
-    line-height: 1.75;
-    flex: 1;
+    font-size: 0.84rem;
+    color: rgba(240, 236, 228, 0.58);
+    line-height: 1.80;
+    margin-bottom: 1rem;
 }
 
-/* Location tags (large card) */
-.location-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-}
-
-.loc-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: rgba(200, 167, 76, 0.08);
-    border: 1px solid rgba(200, 167, 76, 0.22);
-    border-radius: 20px;
-    padding: 0.22rem 0.7rem;
+/* Small gold pill tag */
+.card-tag {
+    display: inline-block;
     font-family: 'Inter', sans-serif;
-    font-size: 0.65rem;
-    color: rgba(240, 236, 228, 0.75);
-    letter-spacing: 0.04em;
-}
-
-.loc-dot {
-    color: #c9a84c;
-    font-size: 0.55rem;
-}
-
-/* CTA text link */
-.card-cta {
-    margin-top: 1.2rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.62rem;
+    font-size: 0.58rem;
     font-weight: 600;
-    letter-spacing: 0.20em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: #c9a84c;
-    opacity: 0.80;
+    border: 1px solid rgba(201, 168, 76, 0.28);
+    border-radius: 20px;
+    padding: 0.18rem 0.6rem;
+    background: rgba(201, 168, 76, 0.06);
 }
 
-/* ── Mobile ────────────────────────── */
+/* ── Tablet ─────────────────────────── */
 @media (max-width: 900px) {
     .why-section {
-        padding: 5rem 1.2rem 4rem;
+        padding: 5rem 1.5rem 4rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ── Mobile ─────────────────────────── */
+@media (max-width: 600px) {
+    .why-section {
+        padding: 4rem 1rem 3rem;
     }
 
     .features-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
-
-        .card-large {
-            grid-column: 1;
-            grid-row: auto;
-        }
-    }
-}
-
-@media (max-width: 600px) {
-    .why-section {
-        padding: 4rem 1rem 3rem;
+        gap: 1rem;
     }
 
     .section-desc br {
