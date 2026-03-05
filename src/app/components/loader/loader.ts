@@ -28,7 +28,7 @@ export class LoaderComponent implements OnInit {
     'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=600&q=70',
     'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=70',
     'https://images.unsplash.com/photo-1560258018-c7db7645254e?w=600&q=70',
-    'https://images.unsplash.com/photo-1571168979770-c4e4c5c26d40?w=600&q=70',
+    'https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=600&q=70',
   ];
 
   ngOnInit() {
