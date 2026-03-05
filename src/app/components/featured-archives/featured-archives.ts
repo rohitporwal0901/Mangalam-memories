@@ -98,6 +98,8 @@ export class FeaturedArchivesComponent implements OnInit {
   ngOnInit() {
     this.fb.getFeaturedArchives().subscribe({
       next: data => {
+        console.log("data", data);
+
         this.archives = data.length ? data : this.fallback;
         this.loading = false;
         setTimeout(() => this.checkVisibility(), 100);

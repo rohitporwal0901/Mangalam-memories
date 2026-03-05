@@ -55,11 +55,15 @@ export class HeroComponent implements OnInit, OnDestroy {
     // Optionally load Firebase photos in background
     this.sub = this.fb.getHeroSlides().subscribe({
       next: (data) => {
+        console.log('data', data);
+
         const fp = data
           .filter(s => s.active && s.imageUrl)
           .map(s => ({ url: s.imageUrl, alt: s.title || 'Wedding photo' }));
         if (fp.length >= 5) {
           this.photoStrip = fp;
+          console.log('this.photoStrip', this.photoStrip);
+
           this.cdr.markForCheck();
         }
       },

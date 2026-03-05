@@ -65,13 +65,54 @@
         <div class="admin-card form-card">
             <h3 class="card-title">Add Hero Slide</h3>
             <form [formGroup]="heroForm" (ngSubmit)="saveHero()" class="admin-form">
+
+                <!-- ── File Upload Section ── -->
+                <div class="upload-section">
+                    <label class="upload-label">Hero Image *</label>
+                    <div class="upload-box" [class.has-preview]="heroPreviewUrl">
+                        @if (heroPreviewUrl) {
+                        <img [src]="heroPreviewUrl" alt="Preview" class="upload-preview" />
+                        <div class="upload-overlay-actions">
+                            <label class="upload-change-btn" for="heroFileInput">Change Image</label>
+                        </div>
+                        } @else {
+                        <div class="upload-placeholder">
+                            <div class="upload-icon">📷</div>
+                            <p class="upload-hint">Click to upload or drag & drop</p>
+                            <p class="upload-hint-sub">JPG, PNG, WebP — Max 10MB — High quality recommended</p>
+                            <label class="upload-cta" for="heroFileInput">Choose Image</label>
+                        </div>
+                        }
+                        <input id="heroFileInput" type="file" accept="image/*" class="file-input"
+                            (change)="onHeroImageSelected($event)" />
+                    </div>
+
+                    @if (heroUploading) {
+                    <div class="upload-progress-wrap">
+                        <div class="upload-progress-bar" [style.width.%]="heroUploadProgress"></div>
+                        <span class="upload-progress-text">Uploading to Firebase Storage... {{ heroUploadProgress
+                            }}%</span>
+                    </div>
+                    }
+                    @if (heroUploadError) {
+                    <p class="upload-error">⚠ {{ heroUploadError }}</p>
+                    }
+                    @if (heroPreviewUrl && !heroUploading) {
+                    <p class="upload-success">✓ Image saved to Firebase Storage</p>
+                    }
+
+                    <!-- Hidden URL field (auto-filled after upload, can also be typed) -->
+                    <div class="fg mt-2">
+                        <label>Or paste Image URL directly</label>
+                        <input formControlName="imageUrl" placeholder="https://... (auto-filled after upload)" />
+                    </div>
+                </div>
+
                 <div class="form-row">
-                    <div class="fg"><label>Image URL *</label><input formControlName="imageUrl"
-                            placeholder="https://..." /></div>
                     <div class="fg"><label>Title</label><input formControlName="title"
                             placeholder="eg. Eternal Moments" /></div>
-                </div>
-                <div class="fg"><label>Subtitle</label><input formControlName="subtitle" placeholder="Caption text" />
+                    <div class="fg"><label>Subtitle</label><input formControlName="subtitle"
+                            placeholder="Caption text" /></div>
                 </div>
                 <div class="form-row">
                     <div class="fg"><label>Order</label><input type="number" formControlName="order" /></div>
@@ -82,7 +123,9 @@
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn-save" [disabled]="saving">{{ saving ? 'Saving...' : 'Save Slide'
+                    <button type="submit" class="btn-save" [disabled]="saving || heroUploading">{{ saving ? 'Saving...'
+                        :
+                        'Save Slide'
                         }}</button>
                     <button type="button" class="btn-cancel" (click)="showHeroForm=false">Cancel</button>
                 </div>
@@ -122,10 +165,84 @@
                 </div>
                 <div class="fg"><label>Description</label><input formControlName="description"
                         placeholder="Short description" /></div>
-                <div class="fg"><label>Cover Image URL *</label><input formControlName="coverImage"
-                        placeholder="https://..." /></div>
-                <div class="fg"><label>Photo URLs (comma separated)</label><textarea formControlName="photos" rows="3"
-                        placeholder="url1, url2, url3..."></textarea></div>
+
+                <!-- ── Cover Image Upload ── -->
+                <div class="upload-section">
+                    <label class="upload-label">Cover / Main Photo *</label>
+                    <div class="upload-box" [class.has-preview]="archiveCoverPreviewUrl">
+                        @if (archiveCoverPreviewUrl) {
+                        <img [src]="archiveCoverPreviewUrl" alt="Cover Preview" class="upload-preview" />
+                        <div class="upload-overlay-actions">
+                            <label class="upload-change-btn" for="archiveCoverInput">Change</label>
+                        </div>
+                        } @else {
+                        <div class="upload-placeholder">
+                            <div class="upload-icon">🖼</div>
+                            <p class="upload-hint">Upload cover photo</p>
+                            <p class="upload-hint-sub">High resolution recommended (min 1200px wide)</p>
+                            <label class="upload-cta" for="archiveCoverInput">Choose Cover Photo</label>
+                        </div>
+                        }
+                        <input id="archiveCoverInput" type="file" accept="image/*" class="file-input"
+                            (change)="onArchiveCoverSelected($event)" />
+                    </div>
+                    @if (archiveCoverUploading) {
+                    <div class="upload-progress-wrap">
+                        <div class="upload-progress-bar" [style.width.%]="archiveCoverProgress"></div>
+                        <span class="upload-progress-text">Uploading... {{ archiveCoverProgress }}%</span>
+                    </div>
+                    }
+                    @if (archiveCoverUploadError) {
+                    <p class="upload-error">⚠ {{ archiveCoverUploadError }}</p>
+                    }
+                    @if (archiveCoverPreviewUrl && !archiveCoverUploading) {
+                    <p class="upload-success">✓ Cover photo saved to Firebase Storage</p>
+                    }
+                    <div class="fg mt-2">
+                        <label>Or paste Cover URL</label>
+                        <input formControlName="coverImage" placeholder="https://... (auto-filled after upload)" />
+                    </div>
+                </div>
+
+                <!-- ── Gallery Photos Upload ── -->
+                <div class="upload-section">
+                    <label class="upload-label">Gallery Photos (Multiple)</label>
+                    <div class="upload-box multi-upload">
+                        <div class="upload-placeholder">
+                            <div class="upload-icon">📸</div>
+                            <p class="upload-hint">Select multiple photos for the gallery</p>
+                            <p class="upload-hint-sub">All selected photos will be uploaded to Firebase Storage</p>
+                            <label class="upload-cta" for="archivePhotosInput">Choose Photos</label>
+                        </div>
+                        <input id="archivePhotosInput" type="file" accept="image/*" multiple class="file-input"
+                            (change)="onArchivePhotosSelected($event)" />
+                    </div>
+
+                    @if (archivePhotosUploading) {
+                    <div class="upload-progress-wrap">
+                        <div class="upload-progress-bar" style="width:60%;animation:loading-bar 1.5s ease infinite">
+                        </div>
+                        <span class="upload-progress-text">Uploading gallery photos...</span>
+                    </div>
+                    }
+
+                    <!-- Preview thumbnails -->
+                    @if (archivePhotosPreviewUrls.length > 0) {
+                    <div class="photo-thumbs">
+                        @for (url of archivePhotosPreviewUrls; track url) {
+                        <img [src]="url" alt="Gallery photo" class="photo-thumb-mini" />
+                        }
+                    </div>
+                    <p class="upload-success">✓ {{ archivePhotosPreviewUrls.length }} photo(s) uploaded</p>
+                    }
+
+                    <div class="fg mt-2">
+                        <label>Or paste Photo URLs (comma separated)</label>
+                        <textarea formControlName="photos" rows="3"
+                            placeholder="url1, url2, url3... (auto-filled after upload)"></textarea>
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="fg"><label>Order</label><input type="number" formControlName="order" /></div>
                     <div class="fg check-group">
@@ -134,7 +251,9 @@
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn-save" [disabled]="saving">{{ saving ? 'Saving...' : 'Save Archive'
+                    <button type="submit" class="btn-save"
+                        [disabled]="saving || archiveCoverUploading || archivePhotosUploading">{{ saving ? 'Saving...' :
+                        'Save Archive'
                         }}</button>
                     <button type="button" class="btn-cancel" (click)="showArchiveForm=false">Cancel</button>
                 </div>
@@ -147,7 +266,7 @@
                 <img [src]="a.coverImage" [alt]="a.coupleNames" class="item-thumb" />
                 <div class="item-info">
                     <span class="item-name">{{ a.coupleNames }}</span>
-                    <span class="item-sub">{{ a.location }} &bull; {{ a.photos?.length || 0 }} photos</span>
+                    <span class="item-sub">{{ a.location }} &bull; {{ a.photos ? a.photos.length : 0 }} photos</span>
                 </div>
                 <div class="item-actions">
                     <button class="toggle-btn" [class.on]="a.featured" (click)="toggleArchive(a)">{{ a.featured ?

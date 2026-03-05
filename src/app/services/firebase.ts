@@ -114,7 +114,6 @@ export class FirebaseService {
       collection(this.firestore, 'archives'),
       where('featured', '==', true),
       where('active', '==', true),
-      orderBy('order')
     );
     return collectionData(q, { idField: 'id' }) as Observable<Archive[]>;
   }
