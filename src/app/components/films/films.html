@@ -1,63 +1,76 @@
 <section id="films" class="films-section">
-    <div class="container">
 
-        <!-- Header -->
-        <div class="section-header">
-            <p class="section-label">CINEMATIC STORIES</p>
-            <h2 class="section-title">Our <em>Films</em></h2>
-            <p class="section-desc">Every love story deserves its own film — crafted with emotion, artistry, and heart.
-            </p>
-            <div class="gold-divider"></div>
-        </div>
+    <!-- Header -->
+    <div class="section-header">
+        <p class="section-label">Cinematic Stories</p>
+        <h2 class="section-title">Wedding <em>Films</em></h2>
+        <p class="section-desc">
+            Experience the emotion and artistry of our wedding cinematography<br>
+            through our featured highlight reels.
+        </p>
+    </div>
 
-        @if (loading) {
-        <div class="films-grid">
-            @for (n of [1,2,3]; track n) {
-            <div class="film-skeleton"></div>
-            }
-        </div>
-        }
+    <!-- Skeleton loading -->
+    @if (loading) {
+    <div class="slider-skeleton"></div>
+    }
 
-        @if (!loading) {
-        <div class="films-grid">
-            @for (film of films; track film.coupleNames) {
-            <div class="film-card">
+    <!-- Slider — WeddingClickz style -->
+    @if (!loading && films.length) {
+    <div class="slider-wrap">
 
-                <!-- Thumbnail or Player -->
-                <div class="film-video-wrap">
-                    @if (!isPlaying(film)) {
-                    <!-- Thumbnail + play button -->
-                    <div class="thumbnail-wrap" (click)="playFilm(film)">
-                        <img [src]="getThumbnail(film.youtubeUrl)" [alt]="film.coupleNames" class="film-thumb"
-                            onerror="this.src='https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=600&q=80'" />
-                        <div class="play-overlay">
-                            <div class="play-btn">
-                                <span class="play-icon">&#9654;</span>
-                            </div>
+        <!-- Prev arrow -->
+        <button class="arrow arrow-prev" (click)="prev()" aria-label="Previous film">
+            <span>&#8249;</span>
+        </button>
+
+        <!-- Film slide -->
+        <div class="slide">
+            @if (!isPlaying(activeIndex)) {
+            <!-- Thumbnail + play -->
+            <div class="thumb-wrap" (click)="playFilm(activeIndex)">
+                <img [src]="getThumbnail(activeFilm.youtubeUrl)" [alt]="activeFilm.coupleNames" class="thumb-img"
+                    onerror="this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80'" />
+
+                <!-- Dark overlay -->
+                <div class="slide-overlay">
+                    <!-- Play button -->
+                    <div class="play-outer">
+                        <div class="play-btn">
+                            <span class="play-icon">&#9654;</span>
                         </div>
+                        <p class="watch-label">Watch Film</p>
                     </div>
-                    } @else {
-                    <!-- Embedded YouTube -->
-                    <iframe [src]="getEmbedUrl(film.youtubeUrl)" class="film-iframe" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
-                    }
-                </div>
 
-                <!-- Info -->
-                <div class="film-info">
-                    <h3 class="film-couple">{{ film.coupleNames }}</h3>
-                    <p class="film-location">
-                        <span class="loc-dot">&#9632;</span>
-                        {{ film.location }}
-                    </p>
-                    <p class="film-title-text">{{ film.title }}</p>
+                    <!-- Film info at bottom -->
+                    <div class="slide-info">
+                        <h3 class="slide-title">{{ activeFilm.title }}</h3>
+                        <p class="slide-couple">{{ activeFilm.coupleNames }}</p>
+                    </div>
                 </div>
             </div>
+            } @else {
+            <!-- Embedded YouTube player -->
+            <iframe [src]="getEmbedUrl(activeFilm.youtubeUrl)" class="film-iframe" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
             }
         </div>
-        }
+
+        <!-- Next arrow -->
+        <button class="arrow arrow-next" (click)="next()" aria-label="Next film">
+            <span>&#8250;</span>
+        </button>
+
+        <!-- Dot navigation -->
+        <div class="dot-nav">
+            @for (f of films; track f.coupleNames; let i = $index) {
+            <button class="dot" [class.active]="i === activeIndex" (click)="goTo(i)"></button>
+            }
+        </div>
 
     </div>
+    }
+
 </section>

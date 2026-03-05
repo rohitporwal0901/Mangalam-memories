@@ -1,81 +1,62 @@
+/* =============================================
+   FILMS — WeddingClickz cinematic slider style
+   ============================================= */
+
 .films-section {
-    padding: 7rem 0;
+    padding: 7rem 0 5rem;
     background: #0a0a0a;
     color: #f5f0e8;
+    overflow: hidden;
 }
 
-.container {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-/* ── Header ────────────────────────── */
+/* ── Header ─────────────────────────── */
 .section-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
+    padding: 0 1.5rem;
 }
 
 .section-label {
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
+    font-size: 0.62rem;
+    letter-spacing: 0.44em;
     text-transform: uppercase;
-    color: #c8941a;
+    color: #c9a84c;
     margin-bottom: 1rem;
 }
 
 .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 500;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 400;
     color: #f5f0e8;
+    line-height: 1.1;
 
     em {
         font-style: italic;
-        color: #c8941a;
+        color: #c9a84c;
     }
 }
 
 .section-desc {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
     font-style: italic;
-    font-size: 1rem;
-    color: rgba(245, 240, 232, 0.5);
-    max-width: 460px;
-    margin: 1rem auto 0;
-    line-height: 1.7;
-}
-
-.gold-divider {
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #c8941a, transparent);
-    margin: 1.8rem auto 0;
-}
-
-/* ── Grid ──────────────────────────── */
-.films-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-
-    @media (max-width: 900px) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 600px) {
-        grid-template-columns: 1fr;
-    }
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: rgba(245, 240, 232, 0.48);
+    max-width: 520px;
+    margin: 1.2rem auto 0;
+    line-height: 1.75;
 }
 
 /* ── Skeleton ──────────────────────── */
-.film-skeleton {
-    height: 300px;
+.slider-skeleton {
+    max-width: 860px;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
     background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
     background-size: 200% 100%;
+    border-radius: 16px;
     animation: shimmer 1.5s infinite;
-    border-radius: 4px;
 }
 
 @keyframes shimmer {
@@ -88,99 +69,150 @@
     }
 }
 
-/* ── Film Card ─────────────────────── */
-.film-card {
-    border: 1px solid rgba(200, 148, 26, 0.1);
-    background: #141414;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 4px;
-    overflow: hidden;
-
-    &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(200, 148, 26, 0.2);
-    }
+/* ══════════════════════════════════════════
+   SLIDER WRAP — full-width with side arrows
+══════════════════════════════════════════ */
+.slider-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 72px;
+    /* space for arrows */
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
-/* ── Video Wrap ────────────────────── */
-.film-video-wrap {
-    position: relative;
+/* ── Slide ─────────────────────────── */
+.slide {
+    width: 100%;
+    max-width: 860px;
     aspect-ratio: 16/9;
+    border-radius: 16px;
     overflow: hidden;
-    cursor: pointer;
+    position: relative;
+    background: #111;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
 }
 
-/* Thumbnail */
-.thumbnail-wrap {
-    position: relative;
+/* ── Thumbnail ─────────────────────── */
+.thumb-wrap {
     width: 100%;
     height: 100%;
+    position: relative;
     cursor: pointer;
 }
 
-.film-thumb {
+.thumb-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.5s ease;
 
-    .thumbnail-wrap:hover & {
-        transform: scale(1.04);
+    .thumb-wrap:hover & {
+        transform: scale(1.03);
     }
 }
 
-.play-overlay {
+/* Dark overlay — gradient like WeddingClickz */
+.slide-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.30) 45%,
+            rgba(0, 0, 0, 0.15) 100%);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s;
+}
 
-    .thumbnail-wrap:hover & {
-        background: rgba(0, 0, 0, 0.3);
-    }
+/* Center play button & label */
+.play-outer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
 }
 
 .play-btn {
-    width: 60px;
-    height: 60px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
-    border: 2px solid rgba(200, 148, 26, 0.8);
+    border: 2px solid rgba(240, 220, 160, 0.7);
+    background: rgba(200, 167, 76, 0.18);
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(200, 148, 26, 0.2);
-    backdrop-filter: blur(4px);
-    transition: all 0.3s;
-    animation: pulse-ring 2s ease-in-out infinite;
+    transition: all 0.3s ease;
+    animation: pulse-ring 2.5s ease-in-out infinite;
 
-    .thumbnail-wrap:hover & {
-        background: rgba(200, 148, 26, 0.5);
+    .thumb-wrap:hover & {
+        background: rgba(200, 167, 76, 0.45);
+        border-color: #c9a84c;
         transform: scale(1.1);
     }
 }
 
 .play-icon {
-    color: #f4d03f;
-    font-size: 1.2rem;
-    margin-left: 4px;
+    color: #f5f0e8;
+    font-size: 1.4rem;
+    margin-left: 5px;
 }
 
 @keyframes pulse-ring {
 
     0%,
     100% {
-        box-shadow: 0 0 0 0 rgba(200, 148, 26, 0.4);
+        box-shadow: 0 0 0 0 rgba(200, 167, 76, 0.35);
     }
 
     50% {
-        box-shadow: 0 0 0 12px rgba(200, 148, 26, 0);
+        box-shadow: 0 0 0 14px rgba(200, 167, 76, 0);
     }
 }
 
-/* Iframe */
+.watch-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.80);
+}
+
+/* Film info at bottom of slide */
+.slide-info {
+    position: absolute;
+    bottom: 1.6rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.slide-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 3vw, 1.8rem);
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.slide-couple {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c9a84c;
+}
+
+/* Embedded YouTube */
 .film-iframe {
     width: 100%;
     height: 100%;
@@ -188,38 +220,111 @@
     border: none;
 }
 
-/* ── Info ──────────────────────────── */
-.film-info {
-    padding: 1rem 1.2rem 1.2rem;
-}
-
-.film-couple {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    font-weight: 500;
+/* ── Arrows — WeddingClickz circles ── */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(245, 240, 232, 0.30);
+    background: rgba(20, 20, 20, 0.55);
+    backdrop-filter: blur(8px);
     color: #f5f0e8;
-}
-
-.film-location {
+    font-size: 1.6rem;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    color: #888;
-    letter-spacing: 0.05em;
-    margin-top: 0.25rem;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+
+    &:hover {
+        border-color: #c9a84c;
+        background: rgba(200, 167, 76, 0.18);
+        color: #c9a84c;
+    }
+
+    span {
+        line-height: 1;
+        margin-top: -2px;
+    }
+
+    &.arrow-prev {
+        left: 0;
+    }
+
+    &.arrow-next {
+        right: 0;
+    }
 }
 
-.loc-dot {
-    color: #c8941a;
-    font-size: 0.5rem;
+/* ── Dots ──────────────────────────── */
+.dot-nav {
+    position: absolute;
+    bottom: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
 }
 
-.film-title-text {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 0.82rem;
-    color: rgba(200, 148, 26, 0.6);
-    margin-top: 0.3rem;
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(245, 240, 232, 0.28);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.active {
+        background: #c9a84c;
+        width: 22px;
+        border-radius: 3px;
+    }
+}
+
+/* ── Mobile ────────────────────────── */
+@media (max-width: 900px) {
+    .films-section {
+        padding: 5rem 0 4rem;
+    }
+
+    .slider-wrap {
+        padding: 0 52px;
+        max-width: 100%;
+    }
+
+    .arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+    }
+
+    .play-btn {
+        width: 56px;
+        height: 56px;
+    }
+
+    .play-icon {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .slider-wrap {
+        padding: 0 42px;
+    }
+
+    .arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 1.1rem;
+    }
+
+    .section-desc br {
+        display: none;
+    }
 }
