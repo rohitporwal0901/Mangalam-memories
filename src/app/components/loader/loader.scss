@@ -1,19 +1,18 @@
 /* =============================================
-   MANGALAM MEMORIES — CINEMATIC LOADER
+   LOADER — WeddingClickz Exact Style
+   Fullscreen photo grid + dim overlay
+   + centered brand name only
    ============================================= */
 
-/* Wrap */
 .loader-wrap {
     position: fixed;
     inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     z-index: 9999;
     overflow: hidden;
-    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-        visibility 1.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease, visibility 1s ease;
 
     &.hide {
         opacity: 0;
@@ -22,26 +21,38 @@
     }
 }
 
-/* Background photo layer */
-.loader-bg-photo {
+/* ════════════════════════════════
+   PHOTO GRID BG — WeddingClickz
+   3×3 grid of dimmed wedding photos
+════════════════════════════════ */
+.loader-grid {
     position: absolute;
     inset: 0;
+    display: grid;
+    /* WeddingClickz: 3 equal columns */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0;
     z-index: 0;
-    overflow: hidden;
 }
 
-.loader-bg-img {
+.grid-cell {
+    overflow: hidden;
+    position: relative;
+}
+
+.grid-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transform: scale(1.05);
-    animation: bg-slow-zoom 20s ease-out forwards;
+    /* Slow subtle zoom on each cell */
+    animation: cell-zoom 6s ease-out forwards;
 }
 
-@keyframes bg-slow-zoom {
+@keyframes cell-zoom {
     from {
-        transform: scale(1.05);
+        transform: scale(1.08);
     }
 
     to {
@@ -49,118 +60,30 @@
     }
 }
 
-.loader-bg-dim {
+/* Heavy dim so photos are moody — WeddingClickz uses an 80% dark overlay */
+.grid-dim {
     position: absolute;
     inset: 0;
-    /* Heavy dim so photo is dark/moody, logo stays prominent */
-    background: rgba(0, 0, 0, 0.80);
-}
-
-/* Gradient overlay — creates vignette + warm centre glow */
-.bg-overlay {
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(ellipse 60% 50% at 50% 45%, rgba(30, 18, 2, 0.55) 0%, transparent 70%),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 40%, rgba(0, 0, 0, 0.5) 100%);
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Ambient glow blobs */
-.glow-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 2;
-    animation: blob-drift 8s ease-in-out infinite alternate;
-
-    &.glow-1 {
-        width: 500px;
-        height: 300px;
-        top: 20%;
-        left: 15%;
-        background: radial-gradient(circle, rgba(180, 120, 20, 0.12) 0%, transparent 70%);
-        animation-delay: 0s;
-    }
-
-    &.glow-2 {
-        width: 400px;
-        height: 400px;
-        bottom: 20%;
-        right: 10%;
-        background: radial-gradient(circle, rgba(200, 148, 26, 0.08) 0%, transparent 70%);
-        animation-delay: -4s;
-        animation-direction: alternate-reverse;
-    }
-}
-
-@keyframes blob-drift {
-    from {
-        transform: translate(0, 0) scale(1);
-    }
-
-    to {
-        transform: translate(30px, -20px) scale(1.1);
-    }
-}
-
-/* Particles */
-.particles {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+    /* WeddingClickz: very dark dim, brand name is the focus */
+    background: rgba(5, 5, 5, 0.78);
     z-index: 1;
 }
 
-.particle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: rgba(200, 148, 26, 0.6);
-    animation: particle-float linear infinite;
-
-    &:nth-child(even) {
-        width: 1px;
-        height: 1px;
-        background: rgba(244, 208, 63, 0.4);
-    }
-}
-
-@keyframes particle-float {
-    0% {
-        transform: translateY(100vh) scale(0);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    90% {
-        opacity: 0.6;
-    }
-
-    100% {
-        transform: translateY(-10vh) scale(1.5);
-        opacity: 0;
-    }
-}
-
-/* =============================================
-   CENTER CONTENT
-   ============================================= */
-.center-content {
+/* ════════════════════════════════
+   BRAND CENTER — WeddingClickz
+   Just logo ring + "Wedding" white + "Clickz" gold
+════════════════════════════════ */
+.brand-center {
     position: relative;
     z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.8rem;
+    text-align: center;
+    gap: 0;
+
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(12px);
     transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 
     &.visible {
@@ -169,266 +92,137 @@
     }
 }
 
-/* Logo with halo rings */
-.logo-halo {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.halo-ring {
-    position: absolute;
+/* Circular logo ring — same as WeddingClickz's "WC" circular emblem */
+.loader-logo-ring {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: halo-pulse ease-in-out infinite;
-
-    &.halo-1 {
-        width: 180px;
-        height: 180px;
-        border: 1px solid rgba(200, 148, 26, 0.35);
-        animation-duration: 3s;
-        animation-delay: 0s;
-    }
-
-    &.halo-2 {
-        width: 220px;
-        height: 220px;
-        border: 1px solid rgba(200, 148, 26, 0.15);
-        animation-duration: 3s;
-        animation-delay: 0.5s;
-    }
-}
-
-@keyframes halo-pulse {
-
-    0%,
-    100% {
-        opacity: 0.3;
-        transform: translate(-50%, -50%) scale(1);
-    }
-
-    50% {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1.04);
-    }
-}
-
-.logo-img {
-    position: relative;
-    z-index: 2;
-    width: 130px;
-    height: 130px;
-    object-fit: contain;
-    border-radius: 12px;
-    filter:
-        drop-shadow(0 0 20px rgba(200, 148, 26, 0.5)) drop-shadow(0 0 60px rgba(200, 148, 26, 0.2));
-    animation: logo-breathe 4s ease-in-out infinite;
-}
-
-@keyframes logo-breathe {
-
-    0%,
-    100% {
-        filter: drop-shadow(0 0 20px rgba(200, 148, 26, 0.5)) drop-shadow(0 0 60px rgba(200, 148, 26, 0.2));
-    }
-
-    50% {
-        filter: drop-shadow(0 0 35px rgba(200, 148, 26, 0.8)) drop-shadow(0 0 90px rgba(200, 148, 26, 0.35));
-    }
-}
-
-/* =============================================
-   BRAND TEXT
-   ============================================= */
-.brand-block {
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-
-    &.visible {
-        opacity: 1;
-    }
-}
-
-.brand-name {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5.5vw, 3.2rem);
-    letter-spacing: 0.06em;
-    line-height: 1.15;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0 0.45rem;
-    margin: 0;
-}
-
-.word {
-    display: inline-flex;
-    gap: 0.01em;
-    overflow: hidden;
-    padding-bottom: 4px;
-}
-
-/* Individual letter animation */
-.letter {
-    display: inline-block;
-    color: #f5f0e8;
-    opacity: 0;
-    transform: translateY(30px) rotateX(-40deg);
-    animation: letter-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-
-    &.gold {
-        background: linear-gradient(135deg, #f7dc6f 0%, #c8941a 40%, #f4d03f 70%, #a87615 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-}
-
-@keyframes letter-rise {
-    to {
-        opacity: 1;
-        transform: translateY(0) rotateX(0deg);
-    }
-}
-
-/* Divider */
-.divider-wrap {
+    border: 1px solid rgba(201, 168, 124, 0.55);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    margin: 1rem auto 0.8rem;
+    margin-bottom: 1.4rem;
+    position: relative;
+    box-shadow:
+        0 0 0 5px rgba(201, 168, 124, 0.06),
+        0 0 30px rgba(201, 168, 124, 0.18);
+    animation: ring-breathe 3.5s ease-in-out infinite alternate;
+
+    /* Inner concentric ring */
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 5px;
+        border-radius: 50%;
+        border: 0.5px solid rgba(201, 168, 124, 0.22);
+        pointer-events: none;
+    }
+}
+
+@keyframes ring-breathe {
+    from {
+        box-shadow: 0 0 0 5px rgba(201, 168, 124, 0.04), 0 0 25px rgba(201, 168, 124, 0.14);
+    }
+
+    to {
+        box-shadow: 0 0 0 8px rgba(201, 168, 124, 0.08), 0 0 50px rgba(201, 168, 124, 0.28);
+    }
+}
+
+.loader-logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+/* Brand text — WeddingClickz: Cormorant Garamond, large, "Wedding" white + "Clickz" gold */
+.loader-brand {
+    font-family: 'Cormorant Garamond', serif;
+    /* WeddingClickz is about 4.5–5rem on desktop */
+    font-size: clamp(2.2rem, 6vw, 4.8rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    margin: 0 0 0.9rem;
+
     opacity: 0;
-    transition: opacity 0.6s ease 0.8s;
+    transform: translateY(10px);
+    transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* "Wedding" → white, exactly like WeddingClickz */
+.lb-white {
+    color: #ffffff;
+}
+
+/* "Clickz" → warm gold, exactly like WeddingClickz */
+.lb-gold {
+    color: #c9a87c;
+}
+
+/* Thin gold divider — WeddingClickz has a slim horizontal line below the brand name */
+.loader-divider {
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c9a87c, transparent);
+    margin: 0 auto 0.9rem;
+    transition: width 0.8s ease 0.4s;
+
+    &.visible {
+        width: 120px;
+    }
+}
+
+/* Tagline — PREMIUM WEDDING PHOTOGRAPHY, WeddingClickz style */
+.loader-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.5rem, 1.3vw, 0.65rem);
+    font-weight: 400;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: rgba(201, 168, 124, 0.7);
+    margin: 0;
+
+    opacity: 0;
+    transition: opacity 0.6s ease 0.6s;
 
     &.visible {
         opacity: 1;
     }
 }
 
-.divider-line {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(200, 148, 26, 0.7), transparent);
-
-    &.line-left {
-        width: 60px;
-        background: linear-gradient(90deg, transparent, rgba(200, 148, 26, 0.7));
-        animation: line-expand 0.8s ease 1s both;
-    }
-
-    &.line-right {
-        width: 60px;
-        background: linear-gradient(90deg, rgba(200, 148, 26, 0.7), transparent);
-        animation: line-expand 0.8s ease 1s both;
-    }
-}
-
-@keyframes line-expand {
-    from {
-        width: 0;
-        opacity: 0;
-    }
-
-    to {
-        width: 60px;
-        opacity: 1;
-    }
-}
-
-.divider-diamond {
-    width: 6px;
-    height: 6px;
-    background: #c8941a;
-    transform: rotate(45deg);
-    flex-shrink: 0;
-    animation: diamond-appear 0.4s ease 1.2s both;
-    box-shadow: 0 0 10px rgba(200, 148, 26, 0.8);
-}
-
-@keyframes diamond-appear {
-    from {
-        opacity: 0;
-        transform: rotate(45deg) scale(0);
-    }
-
-    to {
-        opacity: 1;
-        transform: rotate(45deg) scale(1);
-    }
-}
-
-/* Tagline */
-.tagline {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(0.58rem, 1.5vw, 0.7rem);
-    letter-spacing: 0.38em;
-    text-transform: uppercase;
-    color: rgba(200, 148, 26, 0.75);
-    margin: 0;
-}
-
-.tag-letter {
-    display: inline-block;
-    opacity: 0;
-    animation: tag-fade 0.3s ease forwards;
-}
-
-@keyframes tag-fade {
-    to {
-        opacity: 1;
-    }
-}
-
-/* =============================================
-   PROGRESS BAR
-   ============================================= */
-.progress-zone {
+/* ════════════════════════════════
+   SLIM PROGRESS BAR — bottom
+   WeddingClickz has a very minimal thin bar
+════════════════════════════════ */
+.loader-progress {
     position: absolute;
-    bottom: 48px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 6px;
-    width: min(320px, 65vw);
-    z-index: 10;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.06);
+    z-index: 20;
 }
 
-.progress-pct {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
-    color: rgba(200, 148, 26, 0.55);
-    align-self: flex-end;
-}
-
-.progress-track {
-    width: 100%;
-    height: 1.5px;
-    background: rgba(255, 255, 255, 0.07);
-    border-radius: 2px;
-    overflow: hidden;
-    position: relative;
-}
-
-.progress-fill {
+.loader-bar {
     height: 100%;
-    background: linear-gradient(90deg, #7a5510, #c8941a, #f4d03f, #c8941a);
+    background: linear-gradient(90deg, #7a5510, #c9a87c, #e8c660, #c9a87c);
     background-size: 300% 100%;
-    border-radius: 2px;
-    transition: width 0.25s ease;
-    position: relative;
-    animation: gold-shift 2.5s linear infinite;
+    animation: bar-shimmer 2s linear infinite;
+    transition: width 0.22s ease;
 }
 
-@keyframes gold-shift {
+@keyframes bar-shimmer {
     0% {
         background-position: 0% 0;
     }
@@ -438,46 +232,33 @@
     }
 }
 
-.progress-gleam {
-    position: absolute;
-    right: -4px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #f4d03f;
-    box-shadow: 0 0 10px 3px rgba(244, 208, 63, 0.7);
+/* ════════════════════════════════
+   RESPONSIVE
+════════════════════════════════ */
+@media (max-width: 768px) {
+    .loader-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+    /* Hide extra cells on mobile */
+    .grid-cell:nth-child(n+5) {
+        display: none;
+    }
+
+    .loader-logo-ring {
+        width: 76px;
+        height: 76px;
+    }
+
+    .loader-logo {
+        width: 54px;
+        height: 54px;
+    }
 }
 
-/* =============================================
-   RESPONSIVE
-   ============================================= */
 @media (max-width: 480px) {
-    .logo-img {
-        width: 110px;
-        height: 110px;
-    }
-
-    .halo-ring.halo-1 {
-        width: 145px;
-        height: 145px;
-    }
-
-    .halo-ring.halo-2 {
-        width: 180px;
-        height: 180px;
-    }
-
-    .brand-name {
-        font-size: 1.8rem;
-    }
-
-    .divider-line {
-
-        &.line-left,
-        &.line-right {
-            width: 40px;
-        }
+    .loader-divider.visible {
+        width: 80px;
     }
 }

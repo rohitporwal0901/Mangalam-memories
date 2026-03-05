@@ -1,69 +1,43 @@
 <div class="loader-wrap" [class.hide]="hiding">
 
-    <!-- Background wedding photo (dimmed) -->
-    <div class="loader-bg-photo">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=60" alt="" class="loader-bg-img"
-            aria-hidden="true" />
-        <div class="loader-bg-dim"></div>
+    <!-- Fullscreen photo grid bg — WeddingClickz style -->
+    <div class="loader-grid">
+        @for (img of gridImages; track img) {
+        <div class="grid-cell">
+            <img [src]="img" alt="" class="grid-img" aria-hidden="true" loading="eager" />
+        </div>
+        }
     </div>
 
-    <!-- Background gradient overlay -->
-    <div class="bg-overlay"></div>
+    <!-- Heavy dim overlay -->
+    <div class="grid-dim"></div>
 
-    <!-- Ambient glow blobs -->
-    <div class="glow-blob glow-1"></div>
-    <div class="glow-blob glow-2"></div>
+    <!-- Center brand — WeddingClickz style: just logo + name -->
+    <div class="brand-center" [class.visible]="showLogo">
 
-    <!-- Floating particles -->
-    <div class="particles">
-        <span class="particle" *ngFor="let p of particles" [style]="p.style"></span>
+        <!-- Circular logo emblem -->
+        <div class="loader-logo-ring">
+            <img src="/logo.png" alt="Mangalam Memories" class="loader-logo" />
+        </div>
+
+        <!-- Brand name — exactly like WeddingClickz.com -->
+        <h1 class="loader-brand" [class.visible]="showText">
+            <span class="lb-white">Mangalam</span><span class="lb-gold">Memories</span>
+        </h1>
+
+        <!-- Thin gold divider line -->
+        <div class="loader-divider" [class.visible]="showText"></div>
+
+        <!-- Tagline -->
+        <p class="loader-tagline" [class.visible]="showText">
+            Premium Indian Wedding Photography
+        </p>
+
     </div>
 
-    <!-- Center content -->
-    <div class="center-content" [class.visible]="showLogo">
-
-        <!-- Logo with halo -->
-        <div class="logo-halo">
-            <div class="halo-ring halo-1"></div>
-            <div class="halo-ring halo-2"></div>
-            <img src="/logo.png" alt="Mangalam Memories" class="logo-img" />
-        </div>
-
-        <!-- Brand name letter by letter -->
-        <div class="brand-block" [class.visible]="showText">
-            <h1 class="brand-name">
-                <span class="word word-1">
-                    <span class="letter" *ngFor="let letter of word1; let i = index"
-                        [style.animation-delay]="(i * 0.06) + 's'">{{ letter }}</span>
-                </span>
-                <span class="word word-2">
-                    <span class="letter gold" *ngFor="let letter of word2; let i = index"
-                        [style.animation-delay]="((word1.length + i) * 0.06 + 0.1) + 's'">{{ letter }}</span>
-                </span>
-            </h1>
-
-            <!-- Animated divider -->
-            <div class="divider-wrap" [class.visible]="showText">
-                <div class="divider-line line-left"></div>
-                <div class="divider-diamond"></div>
-                <div class="divider-line line-right"></div>
-            </div>
-
-            <p class="tagline">
-                <span class="tag-letter" *ngFor="let l of taglineLetters; let i = index"
-                    [style.animation-delay]="(i * 0.04 + 0.6) + 's'">{{ l }}</span>
-            </p>
-        </div>
-    </div>
-
-    <!-- Bottom progress -->
-    <div class="progress-zone">
-        <div class="progress-track">
-            <div class="progress-fill" [style.width.%]="progress">
-                <div class="progress-gleam"></div>
-            </div>
-        </div>
-        <span class="progress-pct">{{ progress | number:'1.0-0' }}%</span>
+    <!-- Slim progress bar at very bottom -->
+    <div class="loader-progress">
+        <div class="loader-bar" [style.width.%]="progress"></div>
     </div>
 
 </div>

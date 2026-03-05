@@ -17,17 +17,17 @@
 }
 
 .section-label {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.62rem;
     letter-spacing: 0.44em;
     text-transform: uppercase;
-    color: #c9a84c;
+    color: #c9a87c;
     margin-bottom: 1rem;
     display: block;
 }
 
 .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2.4rem, 6vw, 4.2rem);
     font-weight: 400;
     color: #f5f0e8;
@@ -35,12 +35,12 @@
 
     em {
         font-style: italic;
-        color: #c9a84c;
+        color: #c9a87c;
     }
 }
 
 .section-desc {
-    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: clamp(0.95rem, 1.8vw, 1.05rem);
     color: rgba(245, 240, 232, 0.48);
@@ -204,11 +204,11 @@
 }
 
 .slide-couple {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.65rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #c9a84c;
+    color: #c9a87c;
 }
 
 /* Embedded YouTube */
@@ -270,9 +270,9 @@
     z-index: 10;
 
     &:hover {
-        border-color: #c9a84c;
-        background: rgba(201, 168, 76, 0.18);
-        color: #c9a84c;
+        border-color: #c9a87c;
+        background: rgba(201, 168, 124, 0.18);
+        color: #c9a87c;
     }
 
     span {
@@ -309,7 +309,7 @@
     transition: all 0.3s ease;
 
     &.active {
-        background: #c9a84c;
+        background: #c9a87c;
         width: 22px;
         border-radius: 3px;
     }
@@ -338,7 +338,7 @@
     opacity: 0.5;
 
     &.active-thumb {
-        border-color: #c9a84c;
+        border-color: #c9a87c;
         opacity: 1;
     }
 

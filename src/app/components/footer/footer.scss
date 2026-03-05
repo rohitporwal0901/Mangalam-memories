@@ -3,9 +3,10 @@
    ============================================= */
 
 .site-footer {
+    /* WeddingClickz footer: very dark */
     background: #0d0d0d;
     color: #f5f0e8;
-    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    border-top: 1px solid rgba(201, 168, 124, 0.12);
 }
 
 .footer-container {
@@ -45,11 +46,13 @@
     margin-bottom: 1.2rem;
 
     img {
-        width: 44px;
-        height: 44px;
+        width: 48px;
+        height: 48px;
         object-fit: contain;
-        filter: brightness(0) invert(1);
-        opacity: 0.85;
+        /* New logo has transparent bg with gold MM — no filter needed */
+        border-radius: 50%;
+        border: 1px solid rgba(201, 168, 124, 0.35);
+        padding: 2px;
     }
 }
 
@@ -59,33 +62,32 @@
 }
 
 .brand-white {
-    font-family: 'Playfair Display', serif;
+    /* WeddingClickz: Cormorant Garamond for brand */
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
     color: #f5f0e8;
     letter-spacing: 0.02em;
 }
 
 .brand-gold {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
-    background: linear-gradient(135deg, #f4d03f, #c8941a);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-left: 4px;
+    /* WeddingClickz: warm gold */
+    color: #c9a87c;
+    margin-left: 0;
 }
 
 .brand-tagline {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.52rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: rgba(201, 168, 76, 0.5);
+    color: rgba(201, 168, 124, 0.5);
     margin-top: 3px;
 }
 
 .brand-desc {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.83rem;
     color: rgba(245, 240, 232, 0.45);
     line-height: 1.75;
@@ -103,8 +105,8 @@
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    border: 1px solid rgba(201, 168, 76, 0.25);
-    background: rgba(201, 168, 76, 0.04);
+    border: 1px solid rgba(201, 168, 124, 0.25);
+    background: rgba(201, 168, 124, 0.04);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,9 +115,9 @@
     transition: all 0.3s ease;
 
     &:hover {
-        border-color: #c9a84c;
-        background: rgba(201, 168, 76, 0.15);
-        color: #c9a84c;
+        border-color: #c9a87c;
+        background: rgba(201, 168, 124, 0.15);
+        color: #c9a87c;
     }
 }
 
@@ -123,12 +125,12 @@
 .footer-col {}
 
 .col-heading {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.62rem;
     font-weight: 600;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: #c9a84c;
+    color: #c9a87c;
     margin-bottom: 1.4rem;
 }
 
@@ -142,7 +144,7 @@
     gap: 0.75rem;
 
     a {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 0.83rem;
         color: rgba(245, 240, 232, 0.5);
         text-decoration: none;
@@ -150,7 +152,7 @@
         display: inline-block;
 
         &:hover {
-            color: #c9a84c;
+            color: #c9a87c;
             padding-left: 4px;
         }
     }
@@ -172,17 +174,17 @@
     }
 
     .c-label {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 0.58rem;
         font-weight: 600;
         letter-spacing: 0.2em;
         text-transform: uppercase;
-        color: rgba(201, 168, 76, 0.6);
+        color: rgba(201, 168, 124, 0.6);
     }
 
     a,
     span {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 0.82rem;
         color: rgba(245, 240, 232, 0.5);
         text-decoration: none;
@@ -191,16 +193,16 @@
     }
 
     a:hover {
-        color: #c9a84c;
+        color: #c9a87c;
     }
 }
 
 /* CTA Button */
 .footer-cta {
     display: inline-block;
-    background: linear-gradient(135deg, #c9a84c, #a07820);
+    background: linear-gradient(135deg, #c9a87c, #a07848);
     color: #fff;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.18em;
@@ -211,8 +213,8 @@
     transition: all 0.3s;
 
     &:hover {
-        background: linear-gradient(135deg, #d4b55e, #b08930);
-        box-shadow: 0 8px 24px rgba(201, 168, 76, 0.3);
+        background: linear-gradient(135deg, #d4b590, #b08950);
+        box-shadow: 0 8px 24px rgba(201, 168, 124, 0.3);
         transform: translateY(-1px);
     }
 }
@@ -236,21 +238,21 @@
 }
 
 .copy {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.72rem;
     color: rgba(245, 240, 232, 0.28);
 }
 
 .admin-link {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.62rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(201, 168, 76, 0.25);
+    color: rgba(201, 168, 124, 0.25);
     text-decoration: none;
     transition: color 0.3s;
 
     &:hover {
-        color: rgba(201, 168, 76, 0.6);
+        color: rgba(201, 168, 124, 0.6);
     }
 }

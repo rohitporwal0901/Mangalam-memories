@@ -1,5 +1,6 @@
 .archives-section {
     padding: 6rem 0 5rem;
+    /* WeddingClickz archives: pure white */
     background: #ffffff;
     color: #1a1a1a;
 }
@@ -25,16 +26,16 @@
 }
 
 .section-label {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.42em;
     text-transform: uppercase;
-    color: #c9a84c;
+    color: #c9a87c;
     margin-bottom: 0.9rem;
 }
 
 .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2rem, 4.5vw, 3.2rem);
     font-weight: 400;
     color: #1a1a1a;
@@ -42,12 +43,12 @@
 
     em {
         font-style: italic;
-        color: #c9a84c;
+        color: #c9a87c;
     }
 }
 
 .section-desc {
-    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: clamp(0.95rem, 1.8vw, 1.05rem);
     color: #999;
@@ -59,7 +60,7 @@
 .gold-divider {
     width: 52px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    background: linear-gradient(90deg, transparent, #c9a87c, transparent);
     margin: 1.6rem auto 0;
 }
 
@@ -75,6 +76,7 @@
     background: linear-gradient(90deg, #efefef 25%, #f8f8f8 50%, #efefef 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
+    border-radius: 0;
 }
 
 @keyframes shimmer {
@@ -248,7 +250,7 @@
 }
 
 .overlay-names {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(0.9rem, 1.8vw, 1.1rem);
     font-weight: 500;
     color: #fff;
@@ -259,7 +261,7 @@
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.65rem;
     color: rgba(255, 255, 255, 0.75);
     letter-spacing: 0.05em;
@@ -267,7 +269,7 @@
 }
 
 .loc-pin {
-    color: #c9a84c;
+    color: #c9a87c;
     font-size: 0.38rem;
 }
 
@@ -293,9 +295,9 @@
     align-items: center;
     gap: 0.4rem;
     background: transparent;
-    border: 1px solid rgba(200, 167, 76, 0.75);
-    color: #f0dda0;
-    font-family: 'Inter', sans-serif;
+    border: 1px solid rgba(201, 168, 124, 0.75);
+    color: #c9a87c;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.6rem;
     font-weight: 500;
     letter-spacing: 0.22em;
@@ -313,7 +315,7 @@
     }
 
     &:hover {
-        background: rgba(200, 148, 26, 0.25);
+        background: rgba(201, 168, 124, 0.2);
         color: #fff;
     }
 }
@@ -324,8 +326,8 @@
     top: 0.65rem;
     right: 0.65rem;
     background: rgba(0, 0, 0, 0.65);
-    color: #c9a84c;
-    font-family: 'Inter', sans-serif;
+    color: #c9a87c;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.55rem;
     font-weight: 600;
     letter-spacing: 0.14em;

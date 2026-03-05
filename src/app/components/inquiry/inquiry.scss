@@ -4,7 +4,8 @@
    ============================================= */
 
 .inquiry-section {
-    background: #faf8f4;
+    /* WeddingClickz contact: warm cream */
+    background: #faf7f2;
     color: #1a1a1a;
     padding: 0;
 }
@@ -24,17 +25,17 @@
 }
 
 .section-label {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.62rem;
     letter-spacing: 0.44em;
     text-transform: uppercase;
-    color: #c9a84c;
+    color: #c9a87c;
     margin-bottom: 1rem;
     display: block;
 }
 
 .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 400;
     color: #1a1a1a;
@@ -42,12 +43,12 @@
 
     em {
         font-style: italic;
-        color: #c9a84c;
+        color: #c9a87c;
     }
 }
 
 .section-desc {
-    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: clamp(0.95rem, 1.8vw, 1.05rem);
     color: #999;
@@ -81,7 +82,7 @@
 }
 
 .info-subtitle {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.4rem, 3vw, 2rem);
     font-weight: 400;
     color: #1a1a1a;
@@ -89,7 +90,7 @@
 }
 
 .info-text {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.88rem;
     color: #666;
     line-height: 1.85;
@@ -115,12 +116,12 @@
     height: 40px;
     min-width: 40px;
     border-radius: 50%;
-    border: 1px solid rgba(201, 168, 76, 0.35);
-    background: rgba(201, 168, 76, 0.06);
+    border: 1px solid rgba(201, 168, 124, 0.35);
+    background: rgba(201, 168, 124, 0.06);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #c9a84c;
+    color: #c9a87c;
     margin-top: 2px;
 }
 
@@ -130,7 +131,7 @@
     gap: 0.2rem;
 
     strong {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 0.6rem;
         font-weight: 600;
         letter-spacing: 0.2em;
@@ -139,7 +140,7 @@
     }
 
     span {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 0.82rem;
         color: #666;
         line-height: 1.65;
@@ -161,19 +162,19 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 1px solid rgba(201, 168, 76, 0.3);
+    border: 1px solid rgba(201, 168, 124, 0.3);
     background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #c9a84c;
+    color: #c9a87c;
     text-decoration: none;
     transition: all 0.3s ease;
 
     &:hover {
-        background: #c9a84c;
+        background: #c9a87c;
         color: #fff;
-        border-color: #c9a84c;
+        border-color: #c9a87c;
     }
 }
 
@@ -192,7 +193,7 @@
 }
 
 .form-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
     font-weight: 400;
     color: #1a1a1a;
@@ -200,7 +201,7 @@
 }
 
 .form-desc {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.82rem;
     color: #888;
     margin-bottom: 1.5rem;
@@ -245,11 +246,11 @@ label {
 input,
 textarea,
 select {
-    background: #faf8f4;
-    border: 1px solid rgba(201, 168, 76, 0.3);
+    background: #faf7f2;
+    border: 1px solid rgba(201, 168, 124, 0.3);
     color: #1a1a1a;
     padding: 0.75rem 1rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.88rem;
     outline: none;
     border-radius: 8px;
@@ -261,9 +262,9 @@ select {
     }
 
     &:focus {
-        border-color: #c9a84c;
+        border-color: #c9a87c;
         background: #fff;
-        box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12);
+        box-shadow: 0 0 0 3px rgba(201, 168, 124, 0.12);
     }
 
     &.invalid {
@@ -314,11 +315,11 @@ textarea {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background: linear-gradient(135deg, #c9a84c, #a07820);
+    background: linear-gradient(135deg, #c9a87c, #a07848);
     color: #fff;
     border: none;
     padding: 1.05rem 2.5rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.22em;
@@ -329,8 +330,8 @@ textarea {
     margin-top: 0.4rem;
 
     &:hover:not(:disabled) {
-        background: linear-gradient(135deg, #d4b55e, #b08930);
-        box-shadow: 0 8px 32px rgba(201, 168, 76, 0.35);
+        background: linear-gradient(135deg, #d4b590, #b08950);
+        box-shadow: 0 8px 32px rgba(201, 168, 124, 0.35);
         transform: translateY(-1px);
     }
 

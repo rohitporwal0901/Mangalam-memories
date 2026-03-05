@@ -5,6 +5,7 @@
 
 .services-section {
     padding: 7rem 0 6rem;
+    /* WeddingClickz services: warm cream */
     background: #f5f1eb;
     color: #1a1a1a;
 }
@@ -30,17 +31,17 @@
 }
 
 .section-label {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.62rem;
     letter-spacing: 0.44em;
     text-transform: uppercase;
-    color: #c9a84c;
+    color: #c9a87c;
     margin-bottom: 1rem;
     display: block;
 }
 
 .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 400;
     color: #1a1a1a;
@@ -48,12 +49,12 @@
 
     em {
         font-style: italic;
-        color: #c9a84c;
+        color: #c9a87c;
     }
 }
 
 .section-desc {
-    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: clamp(0.95rem, 1.8vw, 1.05rem);
     color: #999;
@@ -164,7 +165,7 @@
 }
 
 .service-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.15rem, 2vw, 1.45rem);
     font-weight: 400;
     color: #1a1a1a;
@@ -173,7 +174,7 @@
 }
 
 .service-desc {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.84rem;
     color: #666;
     line-height: 1.78;
@@ -202,7 +203,7 @@
 }
 
 .check {
-    color: #c9a84c;
+    color: #c9a87c;
     font-size: 0.85rem;
     margin-top: 1px;
     flex-shrink: 0;
@@ -214,12 +215,12 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #a07820;
+    color: #a07848;
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -227,7 +228,7 @@
     align-self: flex-start;
 
     &:hover {
-        color: #c9a84c;
+        color: #c9a87c;
         gap: 0.65rem;
     }
 }

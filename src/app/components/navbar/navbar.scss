@@ -1,3 +1,7 @@
+/* =============================================
+   NAVBAR — WeddingClickz Exact Colors
+   ============================================= */
+
 .nav-bar {
     position: fixed;
     top: 0;
@@ -12,9 +16,10 @@
     &.scrolled {
         transform: translateY(0);
         opacity: 1;
-        background: rgba(10, 10, 10, 0.92);
+        /* WeddingClickz navbar exact: #2C2C2C charcoal */
+        background: rgba(44, 44, 44, 0.97);
         backdrop-filter: blur(16px);
-        border-bottom: 1px solid rgba(200, 148, 26, 0.2);
+        border-bottom: 1px solid rgba(201, 168, 124, 0.15);
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
 }
@@ -45,21 +50,21 @@
 }
 
 .nav-brand {
-    font-family: 'Playfair Display', serif;
+    /* WeddingClickz uses serif for brand name */
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1.15rem;
     line-height: 1;
     white-space: nowrap;
 }
 
 .brand-white {
-    color: #f5f0e8;
+    /* White for "Mangalam" */
+    color: #ffffff;
 }
 
 .brand-gold {
-    background: linear-gradient(135deg, #f4d03f, #c8941a);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    /* WeddingClickz gold: #C9A87C  */
+    color: #c9a87c;
     margin-left: 4px;
 }
 
@@ -78,12 +83,13 @@
     background: none;
     border: none;
     cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
+    /* WeddingClickz nav: Montserrat */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(245, 240, 232, 0.7);
+    color: rgba(255, 255, 255, 0.8);
     transition: color 0.3s;
     padding: 4px 0;
     position: relative;
@@ -95,12 +101,12 @@
         left: 0;
         width: 0;
         height: 1px;
-        background: #c8941a;
+        background: #c9a87c;
         transition: width 0.3s ease;
     }
 
     &:hover {
-        color: #c8941a;
+        color: #c9a87c;
 
         &::after {
             width: 100%;
@@ -110,22 +116,24 @@
 
 /* Book CTA */
 .btn-book {
-    background: linear-gradient(135deg, #e6ac2e, #a87615);
-    color: #0a0a0a;
-    border: none;
+    /* WeddingClickz style: warm gold outline */
+    background: transparent;
+    color: #c9a87c;
+    border: 1px solid rgba(201, 168, 124, 0.6);
     padding: 0.5rem 1.4rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     cursor: pointer;
-    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
     transition: all 0.3s;
 
     &:hover {
-        box-shadow: 0 6px 20px rgba(200, 148, 26, 0.5);
-        transform: translateY(-1px);
+        background: #c9a87c;
+        color: #1a1a1a;
+        border-color: #c9a87c;
+        box-shadow: 0 6px 20px rgba(201, 168, 124, 0.35);
     }
 
     @media (max-width: 768px) {
@@ -151,7 +159,7 @@
         display: block;
         width: 24px;
         height: 1px;
-        background: #f5f0e8;
+        background: #ffffff;
         transition: all 0.3s ease;
         transform-origin: center;
     }
@@ -177,8 +185,8 @@
     display: none;
     flex-direction: column;
     padding: 1rem 2rem 1.5rem;
-    background: rgba(10, 10, 10, 0.98);
-    border-top: 1px solid rgba(200, 148, 26, 0.15);
+    background: rgba(44, 44, 44, 0.98);
+    border-top: 1px solid rgba(201, 168, 124, 0.12);
     transform: translateY(-10px);
     opacity: 0;
     transition: all 0.3s ease;
@@ -214,17 +222,17 @@
     background: none;
     border: none;
     cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.80rem;
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(245, 240, 232, 0.8);
+    color: rgba(255, 255, 255, 0.8);
     padding: 0.75rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: color 0.3s;
 
     &:hover {
-        color: #c8941a;
+        color: #c9a87c;
     }
 }

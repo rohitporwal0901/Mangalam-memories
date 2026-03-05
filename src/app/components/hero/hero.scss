@@ -1,28 +1,28 @@
 /* =============================================
-   MANGALAM MEMORIES — WEDDINGCLICKZ-STYLE HERO
+   HERO — WeddingClickz Color Match
    ============================================= */
 
 .hero-section {
     position: relative;
     width: 100%;
-    /* exact full viewport — svh is safer on mobile (excludes browser chrome) */
     height: 100svh;
     min-height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* brand block at top, photo strip at bottom — exactly like WeddingClickz */
     justify-content: space-between;
     padding-top: 110px;
     overflow: hidden;
-    background: #111111;
+    /* WeddingClickz hero: pure dark charcoal — not brownish */
+    background: #0f0f0f;
 }
 
 /* ── Background ambient ─────────────────── */
 .hero-bg {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 80% 50% at 50% 25%, #1c1205 0%, #111111 65%);
+    /* WeddingClickz: very subtle dark gradient, no warm brown */
+    background: radial-gradient(ellipse 90% 45% at 50% 25%, #181818 0%, #0f0f0f 70%);
     z-index: 0;
     pointer-events: none;
 }
@@ -33,22 +33,23 @@
     filter: blur(120px);
     pointer-events: none;
 
+    /* Very subtle — WeddingClickz doesn't have strong glow on hero bg */
     &.glow-a {
-        width: 500px;
-        height: 250px;
-        top: 8%;
-        left: 25%;
-        background: radial-gradient(circle, rgba(180, 120, 12, 0.12) 0%, transparent 70%);
-        animation: glow-drift 10s ease-in-out infinite alternate;
+        width: 400px;
+        height: 200px;
+        top: 10%;
+        left: 28%;
+        background: radial-gradient(circle, rgba(201, 168, 124, 0.05) 0%, transparent 70%);
+        animation: glow-drift 12s ease-in-out infinite alternate;
     }
 
     &.glow-b {
-        width: 350px;
-        height: 350px;
-        bottom: 20%;
-        right: 10%;
-        background: radial-gradient(circle, rgba(200, 148, 26, 0.07) 0%, transparent 70%);
-        animation: glow-drift 13s ease-in-out infinite alternate-reverse;
+        width: 300px;
+        height: 300px;
+        bottom: 25%;
+        right: 12%;
+        background: radial-gradient(circle, rgba(201, 168, 124, 0.03) 0%, transparent 70%);
+        animation: glow-drift 15s ease-in-out infinite alternate-reverse;
     }
 }
 
@@ -63,13 +64,12 @@
 }
 
 /* ══════════════════════════════════════════
-   TOP BRAND BLOCK  (WeddingClickz style)
+   TOP BRAND BLOCK
 ══════════════════════════════════════════ */
 .top-brand {
     position: relative;
     z-index: 5;
     flex-shrink: 0;
-    /* never squish the brand block */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -85,30 +85,29 @@
     }
 }
 
-/* Logo emblem circle — exact WeddingClickz style */
+/* Logo emblem — WeddingClickz circular ring style */
 .logo-badge {
     width: 108px;
     height: 108px;
     border-radius: 50%;
-    border: 1px solid rgba(200, 148, 26, 0.55);
+    /* Warm gold ring matching WeddingClickz exact */
+    border: 1px solid rgba(201, 168, 124, 0.55);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1.4rem;
     position: relative;
 
-    /* Outer subtle glow ring */
     box-shadow:
-        0 0 0 5px rgba(200, 148, 26, 0.06),
-        0 0 35px rgba(200, 148, 26, 0.14);
+        0 0 0 5px rgba(201, 168, 124, 0.06),
+        0 0 35px rgba(201, 168, 124, 0.14);
 
-    /* Inner thin ring */
     &::before {
         content: '';
         position: absolute;
         inset: 4px;
         border-radius: 50%;
-        border: 0.5px solid rgba(200, 148, 26, 0.22);
+        border: 0.5px solid rgba(201, 168, 124, 0.22);
         pointer-events: none;
     }
 
@@ -117,11 +116,11 @@
 
 @keyframes badge-breathe {
     from {
-        box-shadow: 0 0 0 5px rgba(200, 148, 26, 0.04), 0 0 28px rgba(200, 148, 26, 0.10);
+        box-shadow: 0 0 0 5px rgba(201, 168, 124, 0.04), 0 0 28px rgba(201, 168, 124, 0.10);
     }
 
     to {
-        box-shadow: 0 0 0 7px rgba(200, 148, 26, 0.08), 0 0 50px rgba(200, 148, 26, 0.22);
+        box-shadow: 0 0 0 7px rgba(201, 168, 124, 0.08), 0 0 50px rgba(201, 168, 124, 0.22);
     }
 }
 
@@ -130,12 +129,13 @@
     height: 78px;
     object-fit: contain;
     border-radius: 50%;
-    filter: drop-shadow(0 2px 10px rgba(200, 148, 26, 0.35));
+    filter: drop-shadow(0 2px 10px rgba(201, 168, 124, 0.35));
 }
 
-/* Brand name — WeddingClickz style: serif, mixed white+gold */
+/* Brand name — WeddingClickz uses Cormorant Garamond for display */
 .hero-title {
-    font-family: 'Playfair Display', serif;
+    /* WeddingClickz heading font */
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2rem, 5.5vw, 4.6rem);
     font-weight: 400;
     letter-spacing: 0.01em;
@@ -144,44 +144,38 @@
 }
 
 .title-white {
-    color: #f0ece4;
-    /* warm white, same as WeddingClickz */
+    /* White like WeddingClickz "Wedding" */
+    color: #ffffff;
 }
 
 .title-gold {
-    /* exact WeddingClickz gold tone */
-    background: linear-gradient(135deg, #d4aa4a 0%, #c8941a 45%, #e8c660 80%, #a87615 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    /* WeddingClickz gold: #C9A87C */
+    color: #c9a87c;
     margin-left: 0.25rem;
 }
 
-/* Tagline — tight tracking, uppercase, muted gold */
+/* Tagline */
 .hero-tagline {
-    font-family: 'Inter', sans-serif;
+    /* Montserrat for body text like WeddingClickz */
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(0.55rem, 1.3vw, 0.68rem);
     font-weight: 400;
     letter-spacing: 0.40em;
     text-transform: uppercase;
-    color: rgba(196, 145, 25, 0.68);
+    color: rgba(201, 168, 124, 0.68);
     margin: 0;
 }
 
 /* ══════════════════════════════════════════
    PHOTO STRIP — INFINITE MARQUEE
-   Works on BOTH desktop and mobile
 ══════════════════════════════════════════ */
 .photo-strip-wrap {
     position: relative;
     width: 100%;
     z-index: 5;
     flex-shrink: 0;
-    /* don't compress  */
     margin-top: auto;
     margin-bottom: 61px;
-    /* push to bottom like WeddingClickz */
-    /* Fixed height strip — same as WeddingClickz */
     height: 280px;
     opacity: 0;
     transform: translateY(28px);
@@ -194,7 +188,6 @@
     }
 }
 
-/* The scrolling track */
 .photo-strip {
     display: flex;
     gap: 12px;
@@ -218,7 +211,6 @@
     }
 }
 
-/* Photo card — portrait */
 .photo-card {
     flex: 0 0 auto;
     width: 185px;
@@ -234,7 +226,7 @@
         transform: translateY(-9px) scale(1.03);
         box-shadow:
             0 22px 55px rgba(0, 0, 0, 0.6),
-            0 0 0 1.5px rgba(200, 148, 26, 0.4);
+            0 0 0 1.5px rgba(201, 168, 124, 0.4);
 
         .photo-img {
             transform: scale(1.07);
@@ -283,9 +275,7 @@
 }
 
 /* ══════════════════════════════════════════
-   RESPONSIVE — MOBILE
-   Fixed height strip at bottom, marquee ON
-   3 cards visible — exactly like WeddingClickz
+   RESPONSIVE
 ══════════════════════════════════════════ */
 @media (max-width: 768px) {
     .hero-section {
@@ -293,7 +283,6 @@
         padding-bottom: 0;
     }
 
-    /* Fixed strip height on mobile */
     .photo-strip-wrap {
         height: 230px;
     }
@@ -316,13 +305,11 @@
         padding-bottom: 0;
     }
 
-    /* 3 cards exactly fit the screen width */
     .photo-card {
         width: calc(33.3vw - 5px);
         height: 100%;
         border-radius: 10px;
 
-        /* no hover lift on touch */
         &:hover {
             transform: none;
             box-shadow: none;
@@ -334,14 +321,12 @@
         padding: 0;
     }
 
-    /* Narrow fade edges */
     .strip-fade {
         width: 30px;
         bottom: 0;
     }
 }
 
-/* Very small phones */
 @media (max-width: 390px) {
     .photo-strip-wrap {
         height: 200px;
