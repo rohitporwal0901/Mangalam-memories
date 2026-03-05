@@ -66,24 +66,15 @@
 /* ── Skeleton ──────────────────────── */
 .skeleton-grid {
     display: grid;
-    grid-template-columns: 1.6fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 6px;
-
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-    }
 }
 
 .skeleton-card {
-    height: 420px;
+    height: 300px;
     background: linear-gradient(90deg, #efefef 25%, #f8f8f8 50%, #efefef 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
-
-    &:nth-child(2),
-    &:nth-child(3) {
-        height: 207px;
-    }
 }
 
 @keyframes shimmer {
@@ -97,56 +88,56 @@
 }
 
 /* ══════════════════════════════════════════
-   ARCHIVES GRID — WeddingClickz layout
+   ARCHIVES GRID — WeddingClickz EXACT
+   ─────────────────────────────────────────
+   3-column base grid:
 
-   Desktop row 1: big left (1.6fr) + 2 stacked right (1fr)
-   Desktop row 2+: 3-column equal grid
-   Mobile: full-width cards, single column
+   Desktop:
+   ┌────────────┬──────┐
+   │  Card 1    │ Cd 2 │  row 1
+   │ (col 1-2)  ├──────┤
+   │            │ Cd 3 │  row 2
+   ├──────┬─────┴──────┤
+   │ Cd 4 │ Cd 5 │ Cd 6│  row 3
+   └──────┴──────┴─────┘
+
+   Mobile:
+   ┌───────────────────┐
+   │     Card 1        │ (full width)
+   ├──────────┬────────┤
+   │  Card 2  │ Card 3 │
+   ├──────────┼────────┤
+   │  Card 4  │ Card 5 │
+   └──────────┴────────┘
 ══════════════════════════════════════════ */
 .archives-grid {
-    /* Row 1: asymmetric, rows 2+: 3-col via auto-flow */
     display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    grid-auto-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 6px;
+    /* Rows auto-size to content */
+    grid-auto-rows: auto;
 
-    /* Big card spans 2 rows */
+    /* ── Card 1: BIG — spans 2 cols + 2 rows ── */
     >.archive-card:nth-child(1) {
-        grid-row: span 2;
+        grid-column: 1 / span 2;
+        grid-row: 1 / span 2;
     }
 
-    /* From 3rd card onwards — 3-column rows */
-    >.archive-card:nth-child(n+3) {
+    /* ── Cards 2 & 3: stacked in col 3 ── */
+    >.archive-card:nth-child(2) {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    >.archive-card:nth-child(3) {
+        grid-column: 3;
+        grid-row: 2;
+    }
+
+    /* ── Cards 4+: auto 3-col flow ── */
+    >.archive-card:nth-child(n+4) {
         grid-column: auto;
-    }
-
-    @media (min-width: 901px) {
-
-        /* After first 3 items, switch to 3 cols */
-        >.archive-card:nth-child(n+4) {
-            grid-column: span 1;
-        }
-
-        /* Restructure: items 4+ go in a new 3-col row */
-        grid-template-columns: 1.6fr 1fr;
-    }
-
-    @media (max-width: 900px) {
-        grid-template-columns: 1fr 1fr;
-
-        >.archive-card:nth-child(1) {
-            grid-column: span 2;
-            /* full width on tablet */
-            grid-row: span 1;
-        }
-    }
-
-    @media (max-width: 600px) {
-        grid-template-columns: 1fr;
-
-        >.archive-card:nth-child(1) {
-            grid-column: span 1;
-        }
+        grid-row: auto;
     }
 }
 
@@ -154,11 +145,11 @@
 .archive-card {
     position: relative;
     cursor: pointer;
-    background: #fff;
+    overflow: hidden;
 
     /* Scroll reveal */
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(24px);
     transition: opacity 0.65s ease, transform 0.65s ease;
 
     &.visible {
@@ -171,46 +162,42 @@
     }
 
     &:nth-child(3) {
-        transition-delay: 0.22s;
+        transition-delay: 0.20s;
     }
 
     &:nth-child(4) {
-        transition-delay: 0.34s;
+        transition-delay: 0.30s;
     }
 
     &:nth-child(5) {
-        transition-delay: 0.46s;
+        transition-delay: 0.40s;
     }
 
     &:nth-child(6) {
-        transition-delay: 0.58s;
+        transition-delay: 0.50s;
     }
 }
 
-/* Image wrapper — no border-radius like WeddingClickz */
+/* ── Image wrapper ─────────────────── */
 .card-img-wrap {
     position: relative;
     overflow: hidden;
+    /* No border-radius — WeddingClickz square corners */
     border-radius: 0;
-    aspect-ratio: 4/3;
+    /* Default: landscape for small cards */
+    height: 300px;
 
-    /* First card: tall portrait */
+    /* Card 1 (big): fixed max height so it doesn't go crazy tall */
     .archive-card:nth-child(1) & {
-        aspect-ratio: 3/4;
-        height: 100%;
-        aspect-ratio: unset;
+        height: 614px;
+        /* exactly 2 × 300px + 1 × 6px gap */
+        max-height: 614px;
     }
 
-    @media (max-width: 900px) {
-        .archive-card:nth-child(1) & {
-            aspect-ratio: 16/9;
-            height: auto;
-        }
-    }
-
-    @media (max-width: 600px) {
-        aspect-ratio: 4/3 !important;
-        height: auto !important;
+    /* Cards 2 & 3: each exactly half the big card */
+    .archive-card:nth-child(2) &,
+    .archive-card:nth-child(3) & {
+        height: 304px;
     }
 }
 
@@ -223,43 +210,46 @@
 }
 
 .archive-card:hover .card-img {
-    transform: scale(1.06);
+    transform: scale(1.05);
 }
 
-/* ── Hover overlay with couple info ── */
+/* ══════════════════════════════════════════
+   OVERLAY — ALWAYS VISIBLE at bottom
+   Names + location permanently shown
+   Hover: stronger + View Gallery appears
+══════════════════════════════════════════ */
 .card-overlay {
     position: absolute;
     inset: 0;
+    /* Permanent bottom gradient — always visible */
     background: linear-gradient(to top,
-            rgba(0, 0, 0, 0.80) 0%,
-            rgba(0, 0, 0, 0.28) 45%,
-            rgba(0, 0, 0, 0.0) 72%);
+            rgba(0, 0, 0, 0.72) 0%,
+            rgba(0, 0, 0, 0.20) 35%,
+            rgba(0, 0, 0, 0) 60%);
     display: flex;
     align-items: flex-end;
-    padding: 1.2rem 1.2rem;
-    opacity: 0;
-    transition: opacity 0.4s ease;
+    padding: 1rem 1.1rem;
     cursor: pointer;
-}
-
-.archive-card:hover .card-overlay {
+    /* Always visible — NOT opacity:0 */
     opacity: 1;
+    transition: background 0.4s ease;
+
+    &:hover {
+        background: linear-gradient(to top,
+                rgba(0, 0, 0, 0.88) 0%,
+                rgba(0, 0, 0, 0.45) 45%,
+                rgba(0, 0, 0, 0.12) 72%);
+    }
 }
 
-/* Info in overlay */
+/* Info block — always visible */
 .overlay-info {
     width: 100%;
-    transform: translateY(6px);
-    transition: transform 0.4s ease;
-
-    .archive-card:hover & {
-        transform: translateY(0);
-    }
 }
 
 .overlay-names {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
     font-weight: 500;
     color: #fff;
     margin-bottom: 0.15rem;
@@ -272,27 +262,84 @@
     font-family: 'Inter', sans-serif;
     font-size: 0.65rem;
     color: rgba(255, 255, 255, 0.75);
-    letter-spacing: 0.04em;
-    margin-bottom: 0.65rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0;
 }
 
 .loc-pin {
     color: #c9a84c;
-    font-size: 0.4rem;
+    font-size: 0.38rem;
 }
 
+/* Description — only on hover */
 .overlay-desc {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: rgba(255, 255, 255, 0.58);
-    margin-bottom: 0.7rem;
+    margin-top: 0.3rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+
+    .archive-card:hover & {
+        max-height: 3rem;
+    }
 }
 
-/* ── PERMANENT bottom info — always visible ── */
-/* WeddingClickz shows names below each photo always */
+/* View Gallery — only on hover */
+.view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: 1px solid rgba(200, 167, 76, 0.75);
+    color: #f0dda0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-top: 0.7rem;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.35s ease, transform 0.35s ease, background 0.3s;
+
+    .archive-card:hover & {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    &:hover {
+        background: rgba(200, 148, 26, 0.25);
+        color: #fff;
+    }
+}
+
+/* Photo count badge */
+.photo-count {
+    position: absolute;
+    top: 0.65rem;
+    right: 0.65rem;
+    background: rgba(0, 0, 0, 0.65);
+    color: #c9a84c;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.22rem 0.48rem;
+    z-index: 2;
+}
+
+/* ── Permanent text BELOW image ─────── */
+/* WeddingClickz shows couple name + location
+   in white space below each photo */
 .card-info {
-    padding: 0.65rem 0.1rem 0.5rem;
+    padding: 0.7rem 0.1rem 0.5rem;
+    background: #fff;
 }
 
 .card-names {
@@ -308,72 +355,35 @@
     align-items: center;
     gap: 0.3rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.66rem;
+    font-size: 0.65rem;
     color: #aaa;
     letter-spacing: 0.04em;
 }
 
 .loc-dot {
     color: #c9a84c;
-    font-size: 0.4rem;
+    font-size: 0.38rem;
 }
 
 .card-desc {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 0.85rem;
+    font-size: 0.84rem;
     color: #bbb;
     margin-top: 0.2rem;
 }
 
-/* Photo count badge */
-.photo-count {
-    position: absolute;
-    top: 0.65rem;
-    right: 0.65rem;
-    background: rgba(0, 0, 0, 0.70);
-    color: #c9a84c;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.56rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.5rem;
-    z-index: 2;
-}
-
-/* View Gallery button */
-.view-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    background: transparent;
-    border: 1px solid rgba(200, 167, 76, 0.75);
-    color: #f0dda0;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    padding: 0.55rem 1.1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-        background: rgba(200, 148, 26, 0.22);
-        border-color: #c9a84c;
-        color: #fff;
-    }
-}
-
-/* ── Mobile ────────────────────────── */
+/* ══════════════════════════════════════════
+   MOBILE — WeddingClickz mobile layout
+   Card 1: full width, then 2-col
+══════════════════════════════════════════ */
 @media (max-width: 768px) {
     .archives-section {
         padding: 4rem 0 3rem;
     }
 
     .container {
-        padding: 0 0.85rem;
+        padding: 0 0.75rem;
     }
 
     .section-header {
@@ -381,6 +391,51 @@
     }
 
     .archives-grid {
+        /* 2-column grid on mobile */
+        grid-template-columns: repeat(2, 1fr);
         gap: 5px;
+
+        /* Card 1: full width */
+        >.archive-card:nth-child(1) {
+            grid-column: 1 / span 2;
+            grid-row: auto;
+            /* single row on mobile */
+        }
+
+        >.archive-card:nth-child(2) {
+            grid-column: auto;
+            grid-row: auto;
+        }
+
+        >.archive-card:nth-child(3) {
+            grid-column: auto;
+            grid-row: auto;
+        }
     }
+
+    .card-img-wrap {
+        height: 220px !important;
+        max-height: 220px !important;
+    }
+
+    /* Card 1 on mobile: wider aspect */
+    .archive-card:nth-child(1) .card-img-wrap {
+        height: 260px !important;
+        max-height: 260px !important;
+    }
+
+    /* Smaller text in overlays on mobile */
+    .overlay-names {
+        font-size: 0.85rem;
+    }
+
+    .overlay-loc {
+        font-size: 0.6rem;
+    }
+
+    .view-btn {
+        display: none;
+    }
+
+    /* hide button on mobile */
 }

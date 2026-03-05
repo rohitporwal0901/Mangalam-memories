@@ -15,27 +15,28 @@
         <!-- Skeletons while loading -->
         @if (loading) {
         <div class="skeleton-grid">
-            @for (n of [1,2,3,4]; track n) {
+            @for (n of [1,2,3,4,5,6]; track n) {
             <div class="skeleton-card"></div>
             }
         </div>
         }
 
-        <!-- Archives Grid — WeddingClickz layout -->
+        <!-- Archives Grid — WeddingClickz 3-col layout -->
         @if (!loading) {
         <div class="archives-grid">
             @for (archive of archives; track archive.coupleNames; let i = $index) {
 
             <div class="archive-card" [class.visible]="isVisible(i)">
-
-                <!-- Photo + hover overlay -->
                 <div class="card-img-wrap">
+
+                    <!-- Photo -->
                     <img [src]="archive.coverImage" [alt]="archive.coupleNames" class="card-img" loading="lazy" />
 
-                    <!-- Photo count badge (always visible) -->
+                    <!-- Photo count -->
                     <div class="photo-count">{{ archive.photos.length }} Photos</div>
 
-                    <!-- Hover overlay — name + location inside -->
+                    <!-- Always-visible overlay: name + location at bottom
+                         Hover: darkens + description + View Gallery -->
                     <div class="card-overlay" (click)="viewGallery(archive, $event)">
                         <div class="overlay-info">
                             <h3 class="overlay-names">{{ archive.coupleNames }}</h3>
@@ -51,20 +52,8 @@
                             </button>
                         </div>
                     </div>
-                </div>
 
-                <!-- Permanent info below photo — like WeddingClickz -->
-                <div class="card-info">
-                    <h3 class="card-names">{{ archive.coupleNames }}</h3>
-                    <p class="card-location">
-                        <span class="loc-dot">&#9632;</span>
-                        {{ archive.location }}
-                    </p>
-                    @if (archive.description) {
-                    <p class="card-desc">{{ archive.description }}</p>
-                    }
                 </div>
-
             </div>
 
             }
