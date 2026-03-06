@@ -2,10 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { FirebaseService, Archive, Film, HeroSlide, InquiryForm, Testimonial } from '../../services/firebase';
+import { FirebaseService, Archive, Film, HeroSlide, InquiryForm, Testimonial, BeforeAfter } from '../../services/firebase';
 import { AuthService } from '../../services/auth';
 
-type Tab = 'hero' | 'archives' | 'films' | 'inquiries' | 'testimonials';
+type Tab = 'hero' | 'archives' | 'films' | 'inquiries' | 'testimonials' | 'beforeafter';
 
 @Component({
   selector: 'app-admin',
@@ -26,11 +26,13 @@ export class Admin implements OnInit {
   films: Film[] = [];
   inquiries: InquiryForm[] = [];
   testimonials: Testimonial[] = [];
+  beforeAfters: BeforeAfter[] = [];
 
   showHeroForm = false;
   showArchiveForm = false;
   showFilmForm = false;
   showTestimonialForm = false;
+  showBeforeAfterForm = false;
 
   saving = false;
   message = '';
@@ -49,10 +51,26 @@ export class Admin implements OnInit {
   archivePhotosUploading = false;
   archivePhotosPreviewUrls: string[] = [];
 
+  beforeUploading = false;
+  beforePreviewUrl = '';
+  beforeUploadError = '';
+
+  afterUploading = false;
+  afterPreviewUrl = '';
+  afterUploadError = '';
+
   heroForm = this.fbg.group({
     imageUrl: ['', Validators.required],
     title: ['', Validators.required],
     subtitle: [''],
+    order: [1],
+    active: [true],
+  });
+
+  beforeAfterForm = this.fbg.group({
+    title: ['', Validators.required],
+    beforeImage: ['', Validators.required],
+    afterImage: ['', Validators.required],
     order: [1],
     active: [true],
   });
@@ -94,6 +112,7 @@ export class Admin implements OnInit {
     this.fire.getAllFilms().subscribe(d => this.films = d);
     this.fire.getInquiries().subscribe(d => this.inquiries = d);
     this.fire.getAllTestimonials().subscribe(d => this.testimonials = d);
+    this.fire.getBeforeAfters().subscribe(d => this.beforeAfters = d);
   }
 
   /* ── Hero Image Upload ──────────────────── */
@@ -309,6 +328,74 @@ export class Admin implements OnInit {
   toggleTestimonial(t: Testimonial) {
     if (!t.id) return;
     this.fire.updateTestimonial(t.id, { active: !t.active }).subscribe();
+  }
+
+  /* ── Before & After Uploads ──────────────── */
+  async onBeforeImageSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+    this.beforeUploading = true;
+    this.beforeUploadError = '';
+    const reader = new FileReader();
+    reader.onload = e => this.beforePreviewUrl = e.target?.result as string;
+    reader.readAsDataURL(file);
+    try {
+      const url = await this.fire.uploadImage(file, `before-after/before_${Date.now()}_${file.name}`);
+      this.beforeAfterForm.patchValue({ beforeImage: url });
+      this.beforePreviewUrl = url;
+    } catch (err: any) {
+      this.beforeUploadError = 'Upload failed: ' + err?.message;
+    } finally {
+      this.beforeUploading = false;
+    }
+  }
+
+  async onAfterImageSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+    this.afterUploading = true;
+    this.afterUploadError = '';
+    const reader = new FileReader();
+    reader.onload = e => this.afterPreviewUrl = e.target?.result as string;
+    reader.readAsDataURL(file);
+    try {
+      const url = await this.fire.uploadImage(file, `before-after/after_${Date.now()}_${file.name}`);
+      this.beforeAfterForm.patchValue({ afterImage: url });
+      this.afterPreviewUrl = url;
+    } catch (err: any) {
+      this.afterUploadError = 'Upload failed: ' + err?.message;
+    } finally {
+      this.afterUploading = false;
+    }
+  }
+
+  saveBeforeAfter() {
+    if (this.beforeAfterForm.invalid) return;
+    this.saving = true;
+    const val = this.beforeAfterForm.value;
+    this.fire.addBeforeAfter({
+      title: val.title!,
+      beforeImage: val.beforeImage!,
+      afterImage: val.afterImage!,
+      order: val.order ?? 1,
+      active: val.active ?? true,
+    }).subscribe(() => {
+      this.saving = false; this.showBeforeAfterForm = false;
+      this.beforeAfterForm.reset({ order: 1, active: true });
+      this.beforePreviewUrl = '';
+      this.afterPreviewUrl = '';
+      this.notify('Before & After added!');
+    });
+  }
+
+  deleteBeforeAfter(id: string) {
+    if (!confirm('Delete this before/after slide?')) return;
+    this.fire.deleteBeforeAfter(id).subscribe(() => this.notify('Deleted'));
+  }
+
+  toggleBeforeAfter(slide: BeforeAfter) {
+    if (!slide.id) return;
+    this.fire.updateBeforeAfter(slide.id, { active: !slide.active }).subscribe();
   }
 
   setTab(tab: Tab) { this.activeTab = tab; }

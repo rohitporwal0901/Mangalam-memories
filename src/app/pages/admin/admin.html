@@ -14,6 +14,8 @@
             <button [class.active]="activeTab==='hero'" (click)="setTab('hero')">&#9670; Hero Slides</button>
             <button [class.active]="activeTab==='archives'" (click)="setTab('archives')">&#9670; Archives</button>
             <button [class.active]="activeTab==='films'" (click)="setTab('films')">&#9670; Films</button>
+            <button [class.active]="activeTab==='beforeafter'" (click)="setTab('beforeafter')">&#9670; Before &
+                After</button>
             <button [class.active]="activeTab==='testimonials'" (click)="setTab('testimonials')">&#9670;
                 Testimonials</button>
             <button [class.active]="activeTab==='inquiries'" (click)="setTab('inquiries')">
@@ -39,6 +41,7 @@
                 @if (activeTab==='hero') { Hero Slides }
                 @if (activeTab==='archives') { Wedding Archives }
                 @if (activeTab==='films') { Films }
+                @if (activeTab==='beforeafter') { Before & After Slider }
                 @if (activeTab==='testimonials') { Client Testimonials }
                 @if (activeTab==='inquiries') { Inquiries }
             </h1>
@@ -54,6 +57,8 @@
                     Archive</button> }
                 @if (activeTab==='films') { <button class="btn-add" (click)="showFilmForm=!showFilmForm">+ Add
                     Film</button> }
+                @if (activeTab==='beforeafter') { <button class="btn-add"
+                    (click)="showBeforeAfterForm=!showBeforeAfterForm">+ Add Slider</button> }
                 @if (activeTab==='testimonials') { <button class="btn-add"
                     (click)="showTestimonialForm=!showTestimonialForm">+ Add Testimonial</button> }
             </div>
@@ -408,6 +413,91 @@
             </div>
             }
             @if (!testimonials.length) { <p class="empty">No testimonials yet. Add your first review!</p> }
+        </div>
+        }
+
+        <!-- ── BEFORE & AFTER ── -->
+        @if (activeTab === 'beforeafter') {
+        @if (showBeforeAfterForm) {
+        <div class="admin-card form-card">
+            <h3 class="card-title">Add Before & After Slider</h3>
+            <form [formGroup]="beforeAfterForm" (ngSubmit)="saveBeforeAfter()" class="admin-form">
+                <div class="form-row">
+                    <div class="fg"><label>Title</label><input formControlName="title"
+                            placeholder="eg. Mehndi Night Editing" /></div>
+                </div>
+
+                <div class="upload-section">
+                    <label class="upload-label">Before Image (Original) *</label>
+                    <div class="upload-box" [class.has-preview]="beforePreviewUrl">
+                        @if (beforePreviewUrl) {
+                        <img [src]="beforePreviewUrl" alt="Preview" class="upload-preview" />
+                        <div class="upload-overlay-actions">
+                            <label class="upload-change-btn" for="beforeFileInput">Change Image</label>
+                        </div>
+                        } @else {
+                        <div class="upload-placeholder">
+                            <div class="upload-icon">📷</div>
+                            <p class="upload-hint">Upload Original Image</p>
+                            <label class="upload-cta" for="beforeFileInput">Choose Image</label>
+                        </div>
+                        }
+                        <input id="beforeFileInput" type="file" accept="image/*" class="file-input"
+                            (change)="onBeforeImageSelected($event)" />
+                    </div>
+                </div>
+
+                <div class="upload-section">
+                    <label class="upload-label">After Image (Edited) *</label>
+                    <div class="upload-box" [class.has-preview]="afterPreviewUrl">
+                        @if (afterPreviewUrl) {
+                        <img [src]="afterPreviewUrl" alt="Preview" class="upload-preview" />
+                        <div class="upload-overlay-actions">
+                            <label class="upload-change-btn" for="afterFileInput">Change Image</label>
+                        </div>
+                        } @else {
+                        <div class="upload-placeholder">
+                            <div class="upload-icon">📷</div>
+                            <p class="upload-hint">Upload Edited Image</p>
+                            <label class="upload-cta" for="afterFileInput">Choose Image</label>
+                        </div>
+                        }
+                        <input id="afterFileInput" type="file" accept="image/*" class="file-input"
+                            (change)="onAfterImageSelected($event)" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="fg"><label>Order</label><input type="number" formControlName="order" /></div>
+                    <div class="fg check-group">
+                        <label class="check-label"><input type="checkbox" formControlName="active" /> Active</label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save" [disabled]="saving || beforeUploading || afterUploading">{{
+                        saving ? 'Saving...' : 'Save
+                        Slider' }}</button>
+                    <button type="button" class="btn-cancel" (click)="showBeforeAfterForm=false">Cancel</button>
+                </div>
+            </form>
+        </div>
+        }
+        <div class="items-grid">
+            @for (ba of beforeAfters; track ba.id) {
+            <div class="item-card">
+                <img [src]="ba.afterImage" alt="After image" class="item-thumb" onerror="this.src=''" />
+                <div class="item-info">
+                    <span class="item-name">{{ ba.title || '(No Title)' }}</span>
+                    <span class="item-sub">Order: {{ ba.order }}</span>
+                </div>
+                <div class="item-actions">
+                    <button class="toggle-btn" [class.on]="ba.active" (click)="toggleBeforeAfter(ba)">{{ ba.active ?
+                        'Active' : 'Hidden' }}</button>
+                    <button class="delete-btn" (click)="deleteBeforeAfter(ba.id!)">&#10005;</button>
+                </div>
+            </div>
+            }
+            @if (!beforeAfters.length) { <p class="empty">No sliders yet.</p> }
         </div>
         }
 

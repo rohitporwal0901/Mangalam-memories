@@ -11,6 +11,16 @@ import {
 } from '@angular/fire/storage';
 import { Observable, from } from 'rxjs';
 
+export interface BeforeAfter {
+  id?: string;
+  beforeImage: string;
+  afterImage: string;
+  title: string;
+  order: number;
+  active: boolean;
+  createdAt?: any;
+}
+
 export interface HeroSlide {
   id?: string;
   imageUrl: string;
@@ -201,6 +211,36 @@ export class FirebaseService {
 
   deleteTestimonial(id: string) {
     return from(deleteDoc(doc(this.firestore, 'testimonials', id)));
+  }
+
+  /* ── Before & After ────────────────────────── */
+  getBeforeAfters(): Observable<BeforeAfter[]> {
+    const q = query(
+      collection(this.firestore, 'beforeAfters'),
+    );
+    return collectionData(q, { idField: 'id' }) as Observable<BeforeAfter[]>;
+  }
+
+  getActiveBeforeAfters(): Observable<BeforeAfter[]> {
+    const q = query(
+      collection(this.firestore, 'beforeAfters'),
+      where('active', '==', true),
+    );
+    return collectionData(q, { idField: 'id' }) as Observable<BeforeAfter[]>;
+  }
+
+  addBeforeAfter(ba: Omit<BeforeAfter, 'id' | 'createdAt'>) {
+    return from(addDoc(collection(this.firestore, 'beforeAfters'), {
+      ...ba, createdAt: new Date()
+    }));
+  }
+
+  updateBeforeAfter(id: string, data: Partial<BeforeAfter>) {
+    return from(updateDoc(doc(this.firestore, 'beforeAfters', id), data));
+  }
+
+  deleteBeforeAfter(id: string) {
+    return from(deleteDoc(doc(this.firestore, 'beforeAfters', id)));
   }
 
   /* ── Site Settings ────────────────────────── */
