@@ -1,0 +1,38 @@
+<section class="before-after-section">
+    <div class="container">
+        <!-- Header -->
+        <div class="section-header" data-aos="fade-up">
+            <p class="section-label">Our Craft</p>
+            <h2 class="section-title">Before <em>&</em> After</h2>
+            <p class="section-desc">Slide to reveal the art of our post-production process.</p>
+            <div class="gold-divider"></div>
+        </div>
+
+        <div class="slider-wrapper" #container (mousedown)="startDrag($event)" (touchstart)="startDrag($event)">
+
+            <!-- Base Image (After) -->
+            <img [src]="afterImage" alt="After Editing" class="base-image" draggable="false">
+
+            <!-- Overlay Image (Before) clipped by slider -->
+            <div class="overlay-container" [style.width.%]="sliderValue">
+                <img [src]="beforeImage" alt="Before Editing" class="overlay-image" draggable="false">
+            </div>
+
+            <!-- Slider Handle -->
+            <div class="slider-handle" [style.left.%]="sliderValue">
+                <div class="handle-line"></div>
+                <div class="handle-button">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
+                            transform="translate(-4, 0)" />
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" transform="translate(4, 0)" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Labels -->
+            <div class="label before-label">Original</div>
+            <div class="label after-label">Edited</div>
+        </div>
+    </div>
+</section>

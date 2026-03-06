@@ -1,0 +1,226 @@
+.before-after-section {
+    padding: 6rem 0;
+    /* Soft dark background to let the images stand out */
+    background-color: #111111;
+    color: #fff;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: #c9a87c;
+    margin-bottom: 0.9rem;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+
+    em {
+        font-style: italic;
+        color: #c9a87c;
+    }
+}
+
+.section-desc {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    color: #999;
+    max-width: 520px;
+    margin: 1rem auto 0;
+}
+
+.gold-divider {
+    width: 52px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c9a87c, transparent);
+    margin: 1.6rem auto 0;
+}
+
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    cursor: ew-resize;
+    /* Horizontal resize cursor */
+    user-select: none;
+    border-radius: 4px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    background-color: #222;
+    /* Placeholder if image takes time */
+}
+
+/* Base Image (After) */
+.base-image {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    /* Optional: add some CSS filter "after effect" here if you don't have an edited photo */
+}
+
+/* Overlay Container (Before) clipped to slider value */
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+    /* Filter to simulate an unedited photo */
+    filter: sepia(0.2) brightness(0.9) contrast(0.85);
+}
+
+/* Overlay Image (Before) itself should stay 100% of parent width */
+.overlay-image {
+    width: 100vw;
+    /* In fallback strategy width should match the container width, calculate dynamically or use large width with object-position */
+    max-width: 900px;
+    height: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    object-position: left center;
+    pointer-events: none;
+}
+
+/* Fix overlay img width properly based on wrapper width */
+.slider-wrapper .overlay-image {
+    width: 100%;
+    max-width: none;
+    /* To ensure image doesn't scale with the container's width, 
+       we make it position absolute with width bound to the wrapping boundary */
+}
+
+/* Better fix for dynamic width */
+.overlay-container img {
+    width: auto;
+    height: 100%;
+    max-width: none;
+    /* remove max-width to not break aspect ratio */
+}
+
+/* Actually, a more robust way without JS calculating img width: */
+.overlay-image {
+    display: block;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Wait, the container crops right, but if container width shrinks, the img will compress.
+    We need the image to remain the size of `.slider-wrapper`. Let's use `calc` or vw if needed, OR just set width/height from DOM in TS.
+    For this simple setup, using object-fit cover and object-position left center mostly works.
+    But to be bulletproof:
+*/
+.overlay-container {
+    width: 50%;
+    /* inline style overrides this */
+}
+
+/* Using object-fit properly when parent is shrinking */
+.overlay-image {
+    width: 100vw;
+    /* The trick is that we can't easily pin its width without JS. 
+       Let's use a nested container approach or just adjust width to '100%' but bound by max width of slider.
+       Since slider wrapper max-width is 900px, we can just say: */
+}
+
+@media(min-width: 900px) {
+    .overlay-image {
+        width: 900px;
+    }
+}
+
+@media(max-width: 900px) {
+
+    /* on small devices the wrapper is 100% width, so we can use 100vw minus padding */
+    .overlay-image {
+        width: calc(100vw - 3rem);
+    }
+}
+
+
+/* Slider Handle Line */
+.slider-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #c9a87c;
+    cursor: ew-resize;
+    z-index: 10;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.handle-line {
+    width: 100%;
+    height: 100%;
+}
+
+/* Slider Handle Button */
+.handle-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    background: #c9a87c;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    color: #1a1a1a;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* Labels */
+.label {
+    position: absolute;
+    bottom: 15px;
+    padding: 6px 14px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #e0e0e0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 5;
+    user-select: none;
+}
+
+.before-label {
+    left: 15px;
+}
+
+.after-label {
+    right: 15px;
+}

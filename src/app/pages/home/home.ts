@@ -11,6 +11,7 @@ import { GalleryModalComponent } from '../../components/gallery-modal/gallery-mo
 import { FilmsComponent } from '../../components/films/films';
 import { InquiryComponent } from '../../components/inquiry/inquiry';
 import { FooterComponent } from '../../components/footer/footer';
+import { BeforeAfterSlider } from '../../components/before-after-slider/before-after-slider';
 import { Archive } from '../../services/firebase';
 
 @Component({
@@ -23,12 +24,13 @@ import { Archive } from '../../services/firebase';
     FeaturedArchivesComponent,
     WhyChooseUsComponent,
     ServicesComponent,
+    BeforeAfterSlider,
     TestimonialsComponent,
     AboutComponent,
-    GalleryModalComponent,
     FilmsComponent,
     InquiryComponent,
     FooterComponent,
+    GalleryModalComponent,
   ],
   templateUrl: './home.html',
   styleUrls: ['./home.scss']
