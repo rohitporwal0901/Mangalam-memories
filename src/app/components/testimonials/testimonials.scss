@@ -5,8 +5,10 @@
 .testimonials-section {
     position: relative;
     padding: 7rem 2rem 6rem;
-    background: #2e2c28;
-    /* WeddingClickz charcoal */
+    /* Add background image behind overlay */
+    background: linear-gradient(to right, rgba(46, 44, 40, 0.96), rgba(46, 44, 40, 0.90)),
+        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    background-attachment: fixed;
     overflow: hidden;
 }
 
@@ -57,20 +59,50 @@
 }
 
 /* ── Slide ─────────────────────────── */
-.testimonial-slide {
-    text-align: center;
-    animation: fade-in 0.5s ease;
+.testimonial-wrapper {
+    position: relative;
+    min-height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
-@keyframes fade-in {
-    from {
+.testimonial-slide {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+}
+
+.enter-right {
+    animation: slide-in-right 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.enter-left {
+    animation: slide-in-left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slide-in-right {
+    0% {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateX(100px);
     }
 
-    to {
+    100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-left {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 

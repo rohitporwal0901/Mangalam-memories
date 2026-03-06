@@ -12,24 +12,26 @@
         </div>
 
         @if (!loading && active) {
-        <div class="testimonial-slide">
+        <div class="testimonial-wrapper">
+            <div class="testimonial-slide" [class]="slideDirection">
 
-            <!-- Stars -->
-            <div class="stars">
-                @for (s of stars(active.rating); track $index) {
-                <span class="star">★</span>
-                }
+                <!-- Stars -->
+                <div class="stars">
+                    @for (s of stars(active.rating); track $index) {
+                    <span class="star">★</span>
+                    }
+                </div>
+
+                <!-- Quote -->
+                <blockquote class="quote-text">
+                    &ldquo;{{ active.quote }}&rdquo;
+                </blockquote>
+
+                <!-- Couple -->
+                <p class="couple-name">{{ active.coupleNames }}</p>
+                <p class="couple-loc">{{ active.location }}</p>
+
             </div>
-
-            <!-- Quote -->
-            <blockquote class="quote-text">
-                &ldquo;{{ active.quote }}&rdquo;
-            </blockquote>
-
-            <!-- Couple -->
-            <p class="couple-name">{{ active.coupleNames }}</p>
-            <p class="couple-loc">{{ active.location }}</p>
-
         </div>
 
         <!-- Prev / Next arrows -->

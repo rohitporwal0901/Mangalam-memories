@@ -37,6 +37,9 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, 120px);
     gap: 6px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
 }
 
 .photo-cell {

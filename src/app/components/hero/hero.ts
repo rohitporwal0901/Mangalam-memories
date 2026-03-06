@@ -32,9 +32,9 @@ export class HeroComponent implements OnInit, OnDestroy {
     { url: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', alt: 'Wedding couple' },
     { url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80', alt: 'Grand wedding celebration' },
     { url: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=600&q=80', alt: 'Couple first dance' },
-    { url: 'https://images.unsplash.com/photo-1529636444745-588f0a0d0d34?auto=format&fit=crop&w=600&q=80', alt: 'Bride portrait closeup' },
+    // { url: 'https://images.unsplash.com/photo-1529636444745-588f0a0d0d34?auto=format&fit=crop&w=600&q=80', alt: 'Bride portrait closeup' },
     { url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80', alt: 'Wedding venue decor' },
-    { url: 'https://images.unsplash.com/photo-1578923931302-cbb86a2bd8ae?auto=format&fit=crop&w=600&q=80', alt: 'Couple outdoor portrait' },
+    // { url: 'https://images.unsplash.com/photo-1578923931302-cbb86a2bd8ae?auto=format&fit=crop&w=600&q=80', alt: 'Couple outdoor portrait' },
   ];
 
   private sub!: Subscription;

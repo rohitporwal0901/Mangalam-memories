@@ -35,7 +35,7 @@
 
                 <!-- Row 3 -->
                 <div class="photo-cell">
-                    <img src="https://images.unsplash.com/photo-1529636444745-588f0a0d0d34?auto=format&fit=crop&w=400&q=80"
+                    <img src="https://images.unsplash.com/photo-1509927083803-4bd519298ac4?auto=format&fit=crop&w=600&q=80"
                         alt="Bridal portrait" loading="lazy" />
                 </div>
                 <div class="photo-cell">
@@ -47,13 +47,15 @@
                         alt="Couple dancing" loading="lazy" />
                 </div>
 
+
+
                 <!-- Row 4: 2 photos + badge cell -->
                 <div class="photo-cell">
                     <img src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?auto=format&fit=crop&w=400&q=80"
                         alt="Wedding reception" loading="lazy" />
                 </div>
                 <div class="photo-cell">
-                    <img src="https://images.unsplash.com/photo-1578923931302-cbb86a2bd8ae?auto=format&fit=crop&w=400&q=80"
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=400&q=80"
                         alt="Couple portrait" loading="lazy" />
                 </div>
                 <!-- Badge cell -->
@@ -97,7 +99,7 @@
             <div class="stats-grid">
                 @for (stat of stats; track stat.label) {
                 <div class="stat-item" [class.stat-large]="stat.large">
-                    <span class="stat-number">{{ stat.value }}</span>
+                    <span class="stat-number">{{ stat.current }}{{ stat.suffix }}</span>
                     <span class="stat-label">{{ stat.label }}</span>
                 </div>
                 }

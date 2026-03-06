@@ -14,6 +14,7 @@ export class TestimonialsComponent implements OnInit, OnDestroy {
     testimonials: Testimonial[] = [];
     loading = true;
     activeIndex = 0;
+    slideDirection = 'enter-right';
     private autoTimer: any;
 
     private fallback: Testimonial[] = [
@@ -68,14 +69,23 @@ export class TestimonialsComponent implements OnInit, OnDestroy {
 
     prev() {
         this.stopAutoPlay();
-        this.activeIndex = (this.activeIndex - 1 + this.testimonials.length) % this.testimonials.length;
-        this.startAutoPlay();
+        this.slideDirection = 'enter-left';
+
+        // Timeout allows DOM to remove old class before reapplying
+        setTimeout(() => {
+            this.activeIndex = (this.activeIndex - 1 + this.testimonials.length) % this.testimonials.length;
+            this.startAutoPlay();
+        }, 50);
     }
 
     next() {
         this.stopAutoPlay();
-        this.activeIndex = (this.activeIndex + 1) % this.testimonials.length;
-        this.startAutoPlay();
+        this.slideDirection = 'enter-right';
+
+        setTimeout(() => {
+            this.activeIndex = (this.activeIndex + 1) % this.testimonials.length;
+            this.startAutoPlay();
+        }, 50);
     }
 
     get active(): Testimonial { return this.testimonials[this.activeIndex]; }
@@ -84,7 +94,10 @@ export class TestimonialsComponent implements OnInit, OnDestroy {
 
     private startAutoPlay() {
         this.autoTimer = setInterval(() => {
-            this.activeIndex = (this.activeIndex + 1) % this.testimonials.length;
+            this.slideDirection = 'enter-right';
+            setTimeout(() => {
+                this.activeIndex = (this.activeIndex + 1) % this.testimonials.length;
+            }, 50);
         }, 6000);
     }
 
