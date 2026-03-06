@@ -196,8 +196,10 @@
     height: 100%;
     animation: marquee-slide 35s linear infinite;
 
-    &:hover {
-        animation-play-state: paused;
+    @media (hover: hover) {
+        &:hover {
+            animation-play-state: paused;
+        }
     }
 }
 
