@@ -24,7 +24,7 @@ export class FeaturedArchivesComponent implements OnInit {
     {
       coupleNames: 'Priya & Arjun', location: 'Udaipur, Rajasthan',
       description: 'A royal celebration at Lake Pichola palace',
-      coverImage: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80',
+      coverImage: 'https://images.unsplash.com/photo-1644337111604-aa1816b542a1?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       photos: [
         'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80',
         'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
@@ -37,7 +37,7 @@ export class FeaturedArchivesComponent implements OnInit {
     {
       coupleNames: 'Meera & Rohit', location: 'Jaipur, Rajasthan',
       description: 'A vibrant Rajasthani palace celebration',
-      coverImage: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=800&q=80',
+      coverImage: 'https://images.unsplash.com/photo-1722952934708-749c22eb2e58?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       photos: [
         'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=800&q=80',
         'https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=800&q=80',
@@ -49,7 +49,7 @@ export class FeaturedArchivesComponent implements OnInit {
     {
       coupleNames: 'Ananya & Karthik', location: 'Mysore, Karnataka',
       description: 'A traditional South Indian ceremony at the palace',
-      coverImage: 'https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=800&q=80',
+      coverImage: 'https://images.unsplash.com/photo-1727430201245-fb796167e302?q=80&w=830&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       photos: [
         'https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=800&q=80',
         'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
@@ -61,7 +61,7 @@ export class FeaturedArchivesComponent implements OnInit {
     {
       coupleNames: 'Shreya & Vikram', location: 'Goa',
       description: 'An intimate beachside ceremony at sunset',
-      coverImage: 'https://images.unsplash.com/photo-1529543544282-ea669407fca3?auto=format&fit=crop&w=800&q=80',
+      coverImage: 'https://plus.unsplash.com/premium_photo-1691030256206-b7398c8bfc49?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       photos: [
         'https://images.unsplash.com/photo-1529543544282-ea669407fca3?auto=format&fit=crop&w=800&q=80',
         'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80',
@@ -72,7 +72,7 @@ export class FeaturedArchivesComponent implements OnInit {
     {
       coupleNames: 'Naina & Dev', location: 'Delhi',
       description: 'A grand Mughal-inspired celebration in Old Delhi',
-      coverImage: 'https://images.unsplash.com/photo-1509927083803-4bd519298ac4?auto=format&fit=crop&w=800&q=80',
+      coverImage: 'https://images.unsplash.com/photo-1600685912448-8bc35c141e18?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       photos: [
         'https://images.unsplash.com/photo-1509927083803-4bd519298ac4?auto=format&fit=crop&w=800&q=80',
         'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80',
@@ -83,7 +83,7 @@ export class FeaturedArchivesComponent implements OnInit {
     {
       coupleNames: 'Kavya & Rahul', location: 'Kerala',
       description: 'A serene backwater wedding ceremony',
-      coverImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
+      coverImage: 'https://plus.unsplash.com/premium_photo-1661964459043-9a346662cdaf?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       photos: [
         'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
         'https://images.unsplash.com/photo-1529543544282-ea669407fca3?auto=format&fit=crop&w=800&q=80',

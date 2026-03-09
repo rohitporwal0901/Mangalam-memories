@@ -24,16 +24,16 @@ export class HeroComponent implements OnInit, OnDestroy {
 
   /** Curated Indian wedding portrait photos — brides & grooms */
   photoStrip: PhotoCard[] = [
-    { url: 'https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=600&q=80', alt: 'Indian bride in red lehenga' },
-    { url: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80', alt: 'Bride & groom portrait' },
-    { url: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=600&q=80', alt: 'Indian wedding ceremony' },
-    { url: 'https://images.unsplash.com/photo-1529543544282-ea669407fca3?auto=format&fit=crop&w=600&q=80', alt: 'Bridal portrait' },
-    { url: 'https://images.unsplash.com/photo-1509927083803-4bd519298ac4?auto=format&fit=crop&w=600&q=80', alt: 'Groom in sherwani' },
-    { url: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', alt: 'Wedding couple' },
-    { url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80', alt: 'Grand wedding celebration' },
-    { url: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=600&q=80', alt: 'Couple first dance' },
+    { url: 'https://plus.unsplash.com/premium_photo-1724762182780-000d248f9301?q=80&w=417&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Indian bride in red lehenga' },
+    { url: 'https://images.unsplash.com/photo-1654764746225-e63f5e90facd?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Bride & groom portrait' },
+    { url: 'https://images.unsplash.com/photo-1587271315307-eaebc181c749?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Indian wedding ceremony' },
+    { url: 'https://images.unsplash.com/photo-1570212773364-e30cd076539e?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Bridal portrait' },
+    { url: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Groom in sherwani' },
+    { url: 'https://images.unsplash.com/photo-1717341829793-7dd4390e59e7?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Wedding couple' },
+    { url: 'https://plus.unsplash.com/premium_photo-1682096067532-3e89ab323ebf?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Grand wedding celebration' },
+    { url: 'https://images.unsplash.com/photo-1610047614256-023d7c028d0b?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Couple first dance' },
     // { url: 'https://images.unsplash.com/photo-1529636444745-588f0a0d0d34?auto=format&fit=crop&w=600&q=80', alt: 'Bride portrait closeup' },
-    { url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80', alt: 'Wedding venue decor' },
+    { url: 'https://images.unsplash.com/photo-1668371459824-094a960a227d?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Wedding venue decor' },
     // { url: 'https://images.unsplash.com/photo-1578923931302-cbb86a2bd8ae?auto=format&fit=crop&w=600&q=80', alt: 'Couple outdoor portrait' },
   ];
 
