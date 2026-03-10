@@ -1,7 +1,7 @@
 /* =============================================
-   LOADER — WeddingClickz Exact Style
+   LOADER — Mangalam Memories Style
    Fullscreen photo grid + dim overlay
-   + centered brand name only
+   + centered brand name with letter-jump animation
    ============================================= */
 
 .loader-wrap {
@@ -22,14 +22,13 @@
 }
 
 /* ════════════════════════════════
-   PHOTO GRID BG — WeddingClickz
+   PHOTO GRID BG
    3×3 grid of dimmed wedding photos
 ════════════════════════════════ */
 .loader-grid {
     position: absolute;
     inset: 0;
     display: grid;
-    /* WeddingClickz: 3 equal columns */
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 0;
@@ -46,7 +45,6 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    /* Slow subtle zoom on each cell */
     animation: cell-zoom 6s ease-out forwards;
 }
 
@@ -60,18 +58,16 @@
     }
 }
 
-/* Heavy dim so photos are moody — WeddingClickz uses an 80% dark overlay */
+/* Heavy dim so photos are moody */
 .grid-dim {
     position: absolute;
     inset: 0;
-    /* WeddingClickz: very dark dim, brand name is the focus */
     background: rgba(5, 5, 5, 0.78);
     z-index: 1;
 }
 
 /* ════════════════════════════════
-   BRAND CENTER — WeddingClickz
-   Just logo ring + "Wedding" white + "Clickz" gold
+   BRAND CENTER
 ════════════════════════════════ */
 .brand-center {
     position: relative;
@@ -92,7 +88,7 @@
     }
 }
 
-/* Circular logo ring — same as WeddingClickz's "WC" circular emblem */
+/* Circular logo ring */
 .loader-logo-ring {
     width: 100px;
     height: 100px;
@@ -136,10 +132,11 @@
     border-radius: 50%;
 }
 
-/* Brand text — WeddingClickz: Cormorant Garamond, large, "Wedding" white + "Clickz" gold */
+/* ════════════════════════════════
+   BRAND TEXT with per-letter jump
+════════════════════════════════ */
 .loader-brand {
     font-family: 'Cormorant Garamond', serif;
-    /* WeddingClickz is about 4.5–5rem on desktop */
     font-size: clamp(2.2rem, 6vw, 4.8rem);
     font-weight: 400;
     letter-spacing: 0.01em;
@@ -148,28 +145,76 @@
     align-items: baseline;
     gap: 0.3rem;
     margin: 0 0 0.9rem;
+    /* Brand itself always visible once brand-center is visible */
+    opacity: 1;
+    transform: none;
+}
 
+/* Each word wraps letters inline */
+.word-wrap {
+    display: inline-flex;
+    align-items: baseline;
+}
+
+/* ════════════════════════════════
+   JUMP LETTER ANIMATION
+   Letters start hidden (fallen from above),
+   then jump in one by one with a bouncy settle
+════════════════════════════════ */
+.jump-letter {
+    display: inline-block;
+    /* Hidden by default — waiting to jump in */
     opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+    transform: translateY(-60px) scaleY(1.3);
+    /* Smooth spring-like easing */
+    transition: none;
 
-    &.visible {
-        opacity: 1;
-        transform: translateY(0);
+    &.animate {
+        /* Trigger the jump-in keyframe animation */
+        animation: letter-jump 0.6s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
     }
 }
 
-/* "Wedding" → white, exactly like WeddingClickz */
+@keyframes letter-jump {
+    /* Start: letter is high above, slightly stretched */
+    0% {
+        opacity: 0;
+        transform: translateY(-70px) scaleY(1.4);
+    }
+
+    /* Coming down fast */
+    55% {
+        opacity: 1;
+        transform: translateY(8px) scaleY(0.9);
+    }
+
+    /* Slight overshoot / squish on impact */
+    70% {
+        transform: translateY(-4px) scaleY(1.05);
+    }
+
+    /* Small bounce back up */
+    85% {
+        transform: translateY(2px) scaleY(0.98);
+    }
+
+    /* Settle perfectly */
+    100% {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+    }
+}
+
+/* Colour variants */
 .lb-white {
     color: #ffffff;
 }
 
-/* "Clickz" → warm gold, exactly like WeddingClickz */
 .lb-gold {
     color: #c9a87c;
 }
 
-/* Thin gold divider — WeddingClickz has a slim horizontal line below the brand name */
+/* Thin gold divider */
 .loader-divider {
     width: 0;
     height: 1px;
@@ -182,7 +227,7 @@
     }
 }
 
-/* Tagline — PREMIUM WEDDING PHOTOGRAPHY, WeddingClickz style */
+/* Tagline */
 .loader-tagline {
     font-family: 'Montserrat', sans-serif;
     font-size: clamp(0.5rem, 1.3vw, 0.65rem);
@@ -202,7 +247,6 @@
 
 /* ════════════════════════════════
    SLIM PROGRESS BAR — bottom
-   WeddingClickz has a very minimal thin bar
 ════════════════════════════════ */
 .loader-progress {
     position: absolute;

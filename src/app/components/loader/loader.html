@@ -1,6 +1,6 @@
 <div class="loader-wrap" [class.hide]="hiding">
 
-    <!-- Fullscreen photo grid bg — WeddingClickz style -->
+    <!-- Fullscreen photo grid bg -->
     <div class="loader-grid">
         @for (img of gridImages; track img) {
         <div class="grid-cell">
@@ -12,7 +12,7 @@
     <!-- Heavy dim overlay -->
     <div class="grid-dim"></div>
 
-    <!-- Center brand — WeddingClickz style: just logo + name -->
+    <!-- Center brand -->
     <div class="brand-center" [class.visible]="showLogo">
 
         <!-- Circular logo emblem -->
@@ -20,9 +20,26 @@
             <img src="/logo.png" alt="Mangalam Memories" class="loader-logo" />
         </div>
 
-        <!-- Brand name — exactly like WeddingClickz.com -->
-        <h1 class="loader-brand" [class.visible]="showText">
-            <span class="lb-white">Mangalam</span><span class="lb-gold">Memories</span>
+        <!-- Brand name with per-letter jump animation -->
+        <h1 class="loader-brand" [class.visible]="showText" aria-label="Mangalam Memories">
+            <span class="lb-white word-wrap">
+                @for (letter of mangalamLetters; track $index) {
+                    <span
+                        class="jump-letter"
+                        [class.animate]="showText"
+                        [style.animation-delay]="letter.delay + 'ms'"
+                    >{{ letter.char }}</span>
+                }
+            </span>
+            <span class="lb-gold word-wrap">
+                @for (letter of memoriesLetters; track $index) {
+                    <span
+                        class="jump-letter"
+                        [class.animate]="showText"
+                        [style.animation-delay]="letter.delay + 'ms'"
+                    >{{ letter.char }}</span>
+                }
+            </span>
         </h1>
 
         <!-- Thin gold divider line -->

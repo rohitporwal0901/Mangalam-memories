@@ -3,6 +3,11 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+interface JumpLetter {
+  char: string;
+  delay: number;
+}
+
 @Component({
   selector: 'app-loader',
   standalone: true,
@@ -18,20 +23,42 @@ export class LoaderComponent implements OnInit {
   showLogo = false;
   showText = false;
 
-  // Fullscreen grid images — high quality Indian wedding photos
+  // Per-letter arrays with staggered animation delay
+  mangalamLetters: JumpLetter[] = [];
+  memoriesLetters: JumpLetter[] = [];
+
+  // Fullscreen grid images — curated Indian wedding photos (brides, grooms, ceremonies)
+  // Same source as hero.ts for visual consistency
   gridImages = [
-    'https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=600&q=70',
-    'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=70',
-    'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=70',
-    'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=70',
-    'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=600&q=70',
-    'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=600&q=70',
-    'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=70',
-    'https://images.unsplash.com/photo-1560258018-c7db7645254e?w=600&q=70',
-    'https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=600&q=70',
+    'https://plus.unsplash.com/premium_photo-1724762182780-000d248f9301?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1654764746225-e63f5e90facd?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1587271315307-eaebc181c749?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1570212773364-e30cd076539e?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1717341829793-7dd4390e59e7?q=80&w=600&auto=format&fit=crop',
+    'https://plus.unsplash.com/premium_photo-1682096067532-3e89ab323ebf?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1610047614256-023d7c028d0b?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1668371459824-094a960a227d?q=80&w=600&auto=format&fit=crop',
   ];
 
   ngOnInit() {
+    // Build letter arrays with staggered delays
+    // Each letter offset by 60ms, Memories starts after Mangalam
+    const mangalam = 'Mangalam';
+    const memories = 'Memories';
+    const baseDelay = 80; // ms per letter
+
+    this.mangalamLetters = mangalam.split('').map((char, i) => ({
+      char,
+      delay: i * baseDelay
+    }));
+
+    this.memoriesLetters = memories.split('').map((char, i) => ({
+      char,
+      // Start Memories letters after all Mangalam letters + small gap
+      delay: (mangalam.length + i) * baseDelay + 60
+    }));
+
     setTimeout(() => this.showLogo = true, 150);
     setTimeout(() => this.showText = true, 550);
 
