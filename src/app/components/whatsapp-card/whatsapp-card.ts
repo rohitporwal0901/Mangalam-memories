@@ -10,10 +10,10 @@ import { CommonModule } from '@angular/common';
 })
 export class WhatsAppCardComponent implements OnInit {
   isVisible = false;
-  phoneNumber = '8461909143';
+  phoneNumber = '9691752388';
   ownerImage = 'assets/images/owner.jpg'; // Path to the sketch photo in assets folder
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -25,7 +25,7 @@ export class WhatsAppCardComponent implements OnInit {
   openWhatsApp() {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const message = encodeURIComponent('Hello! I clicked on your website and would like to connect.');
-    
+
     if (isMobile) {
       // In mobile, just try to open the app directly
       window.location.href = `whatsapp://send?phone=91${this.phoneNumber}&text=${message}`;
