@@ -1,16 +1,16 @@
 <div class="login-page">
     <div class="login-card">
         <div class="login-logo">
-            <img src="/logo.png" alt="Mangalam Memories" />
+            <img src="/logo.png" alt="Boss Photography" />
         </div>
         <h1 class="login-title">Admin Panel</h1>
-        <p class="login-sub">Mangalam Memories — Secure Access</p>
+        <p class="login-sub">Boss Photography — Secure Access</p>
         <div class="gold-divider"></div>
 
         <form [formGroup]="form" (ngSubmit)="login()" class="login-form" novalidate>
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" formControlName="email" placeholder="admin@mangalammemories.in"
+                <input type="email" formControlName="email" placeholder="admin@bossphotography.in"
                     [class.invalid]="f('email').invalid && f('email').touched" autocomplete="email" />
                 @if (f('email').invalid && f('email').touched) {
                 <span class="err">Valid email required</span>

@@ -43,20 +43,18 @@ export class LoaderComponent implements OnInit {
 
   ngOnInit() {
     // Build letter arrays with staggered delays
-    // Each letter offset by 60ms, Memories starts after Mangalam
-    const mangalam = 'Mangalam';
-    const memories = 'Memories';
-    const baseDelay = 80; // ms per letter
+    const boss = 'Boss';
+    const photography = 'Photography';
+    const baseDelay = 80;
 
-    this.mangalamLetters = mangalam.split('').map((char, i) => ({
+    this.mangalamLetters = boss.split('').map((char, i) => ({
       char,
       delay: i * baseDelay
     }));
 
-    this.memoriesLetters = memories.split('').map((char, i) => ({
+    this.memoriesLetters = photography.split('').map((char, i) => ({
       char,
-      // Start Memories letters after all Mangalam letters + small gap
-      delay: (mangalam.length + i) * baseDelay + 60
+      delay: (boss.length + i) * baseDelay + 60
     }));
 
     setTimeout(() => this.showLogo = true, 150);

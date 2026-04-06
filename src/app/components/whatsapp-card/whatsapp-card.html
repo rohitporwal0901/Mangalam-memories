@@ -1,0 +1,29 @@
+<div class="whatsapp-card-wrapper" [class.visible]="isVisible" (click)="openWhatsApp()">
+  <!-- Desktop Card UI -->
+  <div class="contact-card desktop-only">
+    <div class="photo-side">
+      <img [src]="ownerImage" alt="Photographer" class="owner-portrait">
+      <div class="online-indicator"></div>
+    </div>
+
+    <div class="info-side">
+      <!-- <span class="activity-label">Connect with Photographer</span> -->
+      <h3 class="name-label">Connect with <span class="accent-name">Boss</span></h3>
+      <!-- <p class="status-text"><span class="status-dot-inner"></span>Usually replies in minutes</p> -->
+    </div>
+
+    <div class="whatsapp-badge">
+      <div class="icon-circle">
+        <i class="fa-brands fa-whatsapp"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Icon Mode -->
+  <div class="whatsapp-mobile-mode mobile-only">
+    <div class="mobile-whatsapp-circle">
+      <i class="fa-brands fa-whatsapp"></i>
+      <!-- <div class="status-dot-mini"></div> -->
+    </div>
+  </div>
+</div>

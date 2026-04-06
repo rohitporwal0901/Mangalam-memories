@@ -21,7 +21,7 @@ export class TestimonialsComponent implements OnInit, OnDestroy {
         {
             coupleNames: 'Priya & Arjun Sharma',
             location: 'Destination Wedding, Udaipur',
-            quote: 'Mangalam Memories captured our wedding with such artistry and emotion. Every time we watch our film, we relive the magic of that day. They are truly artists who understand the depth of love.',
+            quote: 'Boss Photography captured our wedding with such artistry and emotion. Every time we watch our film, we relive the magic of that day. They are truly artists who understand the depth of love.',
             rating: 5, order: 1, active: true
         },
         {
@@ -33,7 +33,7 @@ export class TestimonialsComponent implements OnInit, OnDestroy {
         {
             coupleNames: 'Ananya & Karthik Nair',
             location: 'Traditional Wedding, Mysore',
-            quote: 'From our first call to the final delivery, the Mangalam Memories team made us feel so special. The attention to detail in our wedding film brought us to tears. Highly recommended!',
+            quote: 'From our first call to the final delivery, the Boss Photography team made us feel so special. The attention to detail in our wedding film brought us to tears. Highly recommended!',
             rating: 5, order: 3, active: true
         },
         {
@@ -45,7 +45,7 @@ export class TestimonialsComponent implements OnInit, OnDestroy {
         {
             coupleNames: 'Divya & Sameer Gupta',
             location: 'Grand Celebration, Mumbai',
-            quote: 'The best decision we made for our wedding was hiring Mangalam Memories. They understood our vision completely and delivered photographs that will be treasured for generations.',
+            quote: 'The best decision we made for our wedding was hiring Boss Photography. They understood our vision completely and delivered photographs that will be treasured for generations.',
             rating: 5, order: 5, active: true
         },
     ];
