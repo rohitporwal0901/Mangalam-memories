@@ -1,16 +1,30 @@
 {
-    "hosting": {
-        "public": "dist/mangalam-memories/browser",
-        "ignore": [
-            "firebase.json",
-            "**/.*",
-            "**/node_modules/**"
-        ],
-        "rewrites": [
-            {
-                "source": "**",
-                "destination": "/index.html"
-            }
-        ]
-    }
+    "hosting": [
+        {
+            "target": "boss",
+            "public": "dist/mangalam-memories/browser",
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**"
+            ],
+            "rewrites": [
+                {
+                    "source": "**",
+                    "destination": "/index.html"
+                }
+            ]
+        },
+        {
+            "target": "old",
+            "public": "public_old",
+            "redirects": [
+                {
+                    "source": "**",
+                    "destination": "https://boss-photography.web.app",
+                    "type": 301
+                }
+            ]
+        }
+    ]
 }

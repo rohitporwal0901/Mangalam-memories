@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "mangalam-memories"
+  },
+  "targets": {
+    "mangalam-memories": {
+      "hosting": {
+        "boss": [
+          "boss-photography"
+        ],
+        "old": [
+          "mangalam-memories"
+        ]
+      }
+    }
   }
 }

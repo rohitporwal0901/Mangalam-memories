@@ -189,7 +189,6 @@ export class FirebaseService {
     const q = query(
       collection(this.firestore, 'testimonials'),
       where('active', '==', true),
-      orderBy('order')
     );
     return collectionData(q, { idField: 'id' }) as Observable<Testimonial[]>;
   }
