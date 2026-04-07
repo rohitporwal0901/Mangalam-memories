@@ -21,10 +21,71 @@
 .hero-bg {
     position: absolute;
     inset: 0;
-    /* WeddingClickz: very subtle dark gradient, no warm brown */
+    /* Transition from solid dark to subtle gradient to eventually showing the video */
     background: radial-gradient(ellipse 90% 45% at 50% 25%, #181818 0%, #0f0f0f 70%);
     z-index: 0;
     pointer-events: none;
+    overflow: hidden;
+}
+
+.video-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+
+    iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 115vw; // Slightly larger to avoid any black bars
+        height: 64.68vw; 
+        min-height: 115vh;
+        min-width: 204.44vh; 
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 2s ease-in-out;
+        filter: brightness(0.7) contrast(1.1) saturate(1.1); // Make it more cinematic
+
+        .loaded & {
+            opacity: 0.65; 
+        }
+    }
+
+    // Heavy vignette for that high-end cinematic feel
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 50%, 
+            transparent 0%, 
+            rgba(15, 15, 15, 0.4) 40%, 
+            rgba(15, 15, 15, 0.9) 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+}
+
+.video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, 
+        rgba(15, 15, 15, 0.6) 0%, 
+        transparent 30%, 
+        transparent 70%, 
+        #0f0f0f 100%);
+    z-index: 1;
+}
+
+.video-placeholder {
+    position: absolute;
+    inset: 0;
+    background: #0f0f0f;
+    z-index: -1;
 }
 
 .hero-bg-glow {

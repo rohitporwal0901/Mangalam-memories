@@ -2,6 +2,20 @@
 
     <!-- Dark ambient background -->
     <div class="hero-bg">
+        @if (bgVideoUrl) {
+        <div class="video-bg-container">
+            <iframe 
+                [src]="bgVideoUrl" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen>
+            </iframe>
+            <div class="video-overlay"></div>
+        </div>
+        } @else {
+        <!-- Dark fallback placeholder -->
+        <div class="video-placeholder"></div>
+        }
         <div class="hero-bg-glow glow-a"></div>
         <div class="hero-bg-glow glow-b"></div>
     </div>
