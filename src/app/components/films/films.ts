@@ -89,7 +89,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
       }
       return {
         ...f,
-        safeUrl: this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`),
+        safeUrl: this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0&iv_load_policy=3&disablekb=1`),
         thumbImg: f.thumbnailUrl || (id ? `https://img.youtube.com/vi/${id}/maxresdefault.jpg` : '')
       };
     });
