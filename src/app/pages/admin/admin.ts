@@ -84,6 +84,7 @@ export class Admin implements OnInit {
     order: [1],
     active: [true],
     featured: [true],
+    isPrewedding: [false],
   });
 
   filmForm = this.fbg.group({
@@ -262,7 +263,7 @@ export class Admin implements OnInit {
 
     this.fire.addArchive({ ...val, photos } as Archive).subscribe(() => {
       this.saving = false; this.showArchiveForm = false;
-      this.archiveForm.reset({ order: 1, active: true, featured: true });
+      this.archiveForm.reset({ order: 1, active: true, featured: true, isPrewedding: false });
       this.archiveCoverPreviewUrl = '';
       this.archivePhotosPreviewUrls = [];
       this.notify('Archive added!');
@@ -293,6 +294,11 @@ export class Admin implements OnInit {
   deleteFilm(id: string) {
     if (!confirm('Delete this film?')) return;
     this.fire.deleteFilm(id).subscribe(() => this.notify('Deleted'));
+  }
+
+  toggleFilm(film: Film) {
+    if (!film.id) return;
+    this.fire.updateFilm(film.id, { active: !film.active }).subscribe();
   }
 
   /* ── Inquiries ─────────────────────── */

@@ -1,0 +1,350 @@
+.prewedding-section {
+    padding: 7rem 0 6rem;
+    background: #ffffff;
+    color: #1a1a1a;
+    overflow: hidden;
+}
+
+/* Header */
+.section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    padding: 0 1.5rem;
+}
+
+.section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.44em;
+    text-transform: uppercase;
+    color: #c9a87c;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 400;
+    color: #1a1a1a;
+    line-height: 1.1;
+
+    em {
+        font-style: italic;
+        color: #c9a87c;
+    }
+}
+
+.section-desc {
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: rgba(0, 0, 0, 0.6);
+    max-width: 520px;
+    margin: 1.2rem auto 0;
+    line-height: 1.75;
+}
+
+/* Slider Wrap */
+.slider-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 100px;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+}
+
+/* Slide Card */
+.slide {
+    width: 100%;
+    max-width: 860px;
+    aspect-ratio: 16/9;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background: #fdfdfd;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.08);
+}
+
+/* Thumbnail */
+.thumb-wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+.thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+
+    .thumb-wrap:hover & {
+        transform: scale(1.08);
+    }
+}
+
+/* Cinematic Overlay */
+.slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, 
+        rgba(0, 0, 0, 0.9) 0%, 
+        rgba(0, 0, 0, 0.2) 50%, 
+        rgba(0, 0, 0, 0.4) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+
+    .thumb-wrap:hover & {
+        background: rgba(0, 0, 0, 0.65);
+    }
+}
+
+/* View Button */
+.view-btn-outer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+    .thumb-wrap:hover & {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.view-btn {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: rgba(201, 168, 124, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        transition: all 0.4s;
+    }
+
+    &:hover {
+        background: #c9a87c;
+        transform: scale(1.1);
+        box-shadow: 0 0 40px rgba(201, 168, 124, 0.4);
+        &::after {
+            inset: -10px;
+            opacity: 0;
+        }
+    }
+}
+
+.view-icon {
+    font-size: 1.6rem;
+}
+
+.view-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+/* Slide Info At Bottom */
+.slide-info {
+    position: absolute;
+    bottom: 2.2rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0 2.5rem;
+    pointer-events: none;
+    transition: all 0.5s ease;
+
+    .thumb-wrap:hover & {
+        transform: translateY(10px);
+        opacity: 0.8;
+    }
+}
+
+.slide-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 4vw, 2.5rem);
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.01em;
+}
+
+.slide-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Navigation Arrows */
+.arrow {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 168, 124, 0.4);
+    background: #ffffff;
+    color: #c9a87c;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+    &:hover {
+        border-color: #c9a87c;
+        background: #c9a87c;
+        color: #ffffff;
+        transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(201, 168, 124, 0.4);
+    }
+
+    &.disabled {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    span {
+        line-height: 1;
+        margin-top: -3px;
+    }
+}
+
+.arrow-prev, .arrow-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.arrow-prev { left: 24px; }
+.arrow-next { right: 24px; }
+
+/* Indicators */
+.dot-nav {
+    position: absolute;
+    bottom: -3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 168, 124, 0.4);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.4s;
+
+    &.active {
+        background: #c9a87c;
+        border-color: #c9a87c;
+        width: 18px;
+        border-radius: 3px;
+    }
+}
+
+/* ── Mobile Logic ── */
+.mobile-nav { display: none; }
+.desktop-only { display: flex; }
+
+@media (max-width: 900px) {
+    .slider-wrap {
+        padding: 0 70px;
+    }
+    .arrow-prev { left: 10px; }
+    .arrow-next { right: 10px; }
+}
+
+@media (max-width: 768px) {
+    .prewedding-section {
+        padding: 5rem 0 4rem;
+    }
+    
+    .slider-wrap {
+        padding: 0 1.25rem;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .desktop-only { display: none !important; }
+
+    .slide {
+        aspect-ratio: 4/5; /* Taller for mobile impact */
+        max-width: 100%;
+        border-radius: 12px;
+    }
+
+    .view-btn-outer {
+        opacity: 1;
+        transform: none;
+        gap: 0.8rem;
+    }
+
+    .view-btn {
+        width: 64px;
+        height: 64px;
+        font-size: 1.3rem;
+    }
+
+    .view-label {
+        letter-spacing: 0.35em;
+        font-size: 0.52rem;
+    }
+
+    .slide-info {
+        bottom: 1.5rem;
+        padding: 0 1.5rem;
+    }
+
+    /* Combined mobile navigation row */
+    .mobile-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        margin-top: -0.5rem;
+    }
+
+    .dot-nav-mini {
+        display: flex;
+        gap: 10px;
+    }
+
+    .arrow {
+        width: 44px;
+        height: 44px;
+        background: #fdfdfd; 
+    }
+}

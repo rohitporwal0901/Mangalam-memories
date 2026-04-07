@@ -40,6 +40,7 @@ export interface Archive {
   order: number;
   active: boolean;
   featured: boolean;
+  isPrewedding?: boolean;
   createdAt?: any;
 }
 
@@ -115,7 +116,22 @@ export class FirebaseService {
 
   /* ── Archives ─────────────────────────────── */
   getArchives(): Observable<Archive[]> {
-    const q = query(collection(this.firestore, 'archives'), orderBy('order'));
+    const q = query(
+      collection(this.firestore, 'archives'),
+      where('isPrewedding', '!=', true),
+      orderBy('isPrewedding'),
+      orderBy('order')
+    );
+    return collectionData(q, { idField: 'id' }) as Observable<Archive[]>;
+  }
+
+  getPreweddings(): Observable<Archive[]> {
+    const q = query(
+      collection(this.firestore, 'archives'),
+      where('isPrewedding', '==', true),
+      where('active', '==', true),
+      orderBy('order')
+    );
     return collectionData(q, { idField: 'id' }) as Observable<Archive[]>;
   }
 
@@ -124,6 +140,8 @@ export class FirebaseService {
       collection(this.firestore, 'archives'),
       where('featured', '==', true),
       where('active', '==', true),
+      where('isPrewedding', '!=', true),
+      orderBy('isPrewedding'),
     );
     return collectionData(q, { idField: 'id' }) as Observable<Archive[]>;
   }

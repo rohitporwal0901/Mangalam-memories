@@ -253,6 +253,7 @@
                     <div class="fg check-group">
                         <label class="check-label"><input type="checkbox" formControlName="active" /> Active</label>
                         <label class="check-label"><input type="checkbox" formControlName="featured" /> Featured</label>
+                        <label class="check-label"><input type="checkbox" formControlName="isPrewedding" /> Pre-Wedding</label>
                     </div>
                 </div>
                 <div class="form-actions">
@@ -270,7 +271,9 @@
             <div class="item-card">
                 <img [src]="a.coverImage" [alt]="a.coupleNames" class="item-thumb" />
                 <div class="item-info">
-                    <span class="item-name">{{ a.coupleNames }}</span>
+                    <span class="item-name">{{ a.coupleNames }} 
+                        @if (a.isPrewedding) { <small style="color:#c9a87c">(Pre-Wedding)</small> }
+                    </span>
                     <span class="item-sub">{{ a.location }} &bull; {{ a.photos ? a.photos.length : 0 }} photos</span>
                 </div>
                 <div class="item-actions">
@@ -325,7 +328,7 @@
                     <span class="item-url">{{ film.youtubeUrl }}</span>
                 </div>
                 <div class="item-actions">
-                    <button class="toggle-btn" [class.on]="film.active">{{ film.active ? 'Active' : 'Hidden' }}</button>
+                    <button class="toggle-btn" [class.on]="film.active" (click)="toggleFilm(film)">{{ film.active ? 'Active' : 'Hidden' }}</button>
                     <button class="delete-btn" (click)="deleteFilm(film.id!)">&#10005;</button>
                 </div>
             </div>

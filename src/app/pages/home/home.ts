@@ -9,6 +9,7 @@ import { TestimonialsComponent } from '../../components/testimonials/testimonial
 import { AboutComponent } from '../../components/about/about';
 import { GalleryModalComponent } from '../../components/gallery-modal/gallery-modal';
 import { FilmsComponent } from '../../components/films/films';
+import { PreweddingShootsComponent } from '../../components/pre-wedding-shoots/pre-wedding-shoots';
 import { InquiryComponent } from '../../components/inquiry/inquiry';
 import { FooterComponent } from '../../components/footer/footer';
 import { BeforeAfterSlider } from '../../components/before-after-slider/before-after-slider';
@@ -22,6 +23,7 @@ import { Archive } from '../../services/firebase';
     NavbarComponent,
     HeroComponent,
     FeaturedArchivesComponent,
+    PreweddingShootsComponent,
     WhyChooseUsComponent,
     ServicesComponent,
     BeforeAfterSlider,

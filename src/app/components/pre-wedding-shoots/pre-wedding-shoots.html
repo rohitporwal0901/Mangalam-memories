@@ -1,0 +1,81 @@
+<section id="pre-wedding" class="prewedding-section">
+
+    <!-- Header -->
+    <div class="section-header">
+        <p class="section-label">Love before the vows</p>
+        <h2 class="section-title">Pre-Wedding <em>Shoots</em></h2>
+        <p class="section-desc">
+            Capturing the romance and excitement before the big day — intimate, <br>
+            creative, and unforgettable.
+        </p>
+    </div>
+
+    <!-- Skeleton loading -->
+    @if (loading) {
+    <div class="slider-skeleton"></div>
+    }
+
+    <!-- Slider -->
+    @if (!loading && shoots.length) {
+    <div class="slider-wrap">
+
+        <!-- Desktop arrows -->
+        <button class="arrow arrow-prev desktop-only" (click)="prev()" aria-label="Previous shoot" [class.disabled]="shoots.length <= 1">
+            <span>&#8249;</span>
+        </button>
+
+        <!-- Main Slide -->
+        <div class="slide">
+            <div class="thumb-wrap" (click)="onViewGallery(activeShoot)">
+                <img [src]="activeShoot.coverImage" [alt]="activeShoot.coupleNames + ' pre-wedding portfolio'" class="thumb-img" />
+
+                <!-- Cinematic overlay -->
+                <div class="slide-overlay">
+                    <div class="view-btn-outer">
+                        <div class="view-btn">
+                            <span class="view-icon">📸</span>
+                        </div>
+                        <p class="view-label">View Gallery</p>
+                    </div>
+
+                    <div class="slide-info">
+                        <h3 class="slide-title">{{ activeShoot.coupleNames }}</h3>
+                        <p class="slide-subtitle">{{ activeShoot.location }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop arrows -->
+        <button class="arrow arrow-next desktop-only" (click)="next()" aria-label="Next shoot" [class.disabled]="shoots.length <= 1">
+            <span>&#8250;</span>
+        </button>
+
+        <!-- Dot indicators (Desktop) -->
+        <div class="dot-nav desktop-only">
+            @for (s of shoots; track s.id; let i = $index) {
+            <button class="dot" [class.active]="i === activeIndex" (click)="goTo(i)"></button>
+            }
+        </div>
+
+        <!-- Compact Mobile Navigation -->
+        <div class="mobile-nav">
+             <button class="arrow" (click)="prev()" [class.disabled]="shoots.length <= 1">
+                <span>&#8249;</span>
+            </button>
+            
+            <div class="dot-nav-mini">
+                @for (s of shoots; track s.id; let i = $index) {
+                <button class="dot" [class.active]="i === activeIndex" (click)="goTo(i)"></button>
+                }
+            </div>
+
+            <button class="arrow" (click)="next()" [class.disabled]="shoots.length <= 1">
+                <span>&#8250;</span>
+            </button>
+        </div>
+
+    </div>
+    }
+
+</section>
