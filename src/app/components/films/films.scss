@@ -394,14 +394,29 @@
 
 @media (max-width: 768px) {
     .films-section {
-        padding: 5rem 0 4.5rem;
+        padding: 4.5rem 0 4rem;
+    }
+    .section-header {
+        margin-bottom: 2.2rem;
     }
     .slider-wrap {
-        padding: 0 50px;
+        padding: 0 40px;
+        margin-bottom: 2rem;
     }
     .play-btn {
-        width: 65px;
-        height: 65px;
+        width: 60px;
+        height: 60px;
+    }
+    .play-icon {
+        font-size: 1.1rem;
+    }
+    .slide-info {
+        bottom: 1.2rem;
+        padding: 0 1.5rem;
+    }
+    .slide-title {
+        font-size: 1.4rem;
+        margin-bottom: 0.4rem;
     }
     .dot-nav {
         bottom: -2.8rem;
@@ -411,17 +426,39 @@
 
 @media (max-width: 480px) {
     .slider-wrap {
-        padding: 0 40px;
+        padding: 0 20px;
+    }
+    .slide {
+        aspect-ratio: 4/5; /* Portrait-ish for mobile to avoid overlap */
+        border-radius: 12px;
+    }
+    .play-btn {
+        width: 54px;
+        height: 54px;
+    }
+    .watch-label {
+        letter-spacing: 0.25em;
+        font-size: 0.55rem;
+    }
+    .slide-info {
+        bottom: 1rem;
+    }
+    .slide-title {
+        font-size: 1.2rem;
     }
     .arrow {
-        width: 36px;
-        height: 36px;
+        width: 32px;
+        height: 32px;
         font-size: 1rem;
+        background: rgba(0, 0, 0, 0.4);
     }
-    .arrow.arrow-prev { left: 2px; }
-    .arrow.arrow-next { right: 2px; }
+    .arrow.arrow-prev { left: 5px; }
+    .arrow.arrow-next { right: 5px; }
+    .film-strip {
+        gap: 0.8rem;
+    }
     .film-thumb {
-        width: 80px;
-        height: 48px;
+        width: 70px;
+        height: 42px;
     }
 }
