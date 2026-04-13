@@ -3,12 +3,14 @@
     <!-- Dark ambient background -->
     <div class="hero-bg">
         @if (bgVideoUrl) {
-        <div class="video-bg-container">
+        <div class="video-bg-container" [class.ready]="videoReady">
+            <!-- Loading shimmer shown until iframe fires (load) -->
+            <div class="video-loading-bar" [class.hidden]="videoReady"></div>
             <iframe 
                 [src]="bgVideoUrl" 
                 frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen>
+                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                (load)="onVideoLoad()">
             </iframe>
             <div class="video-overlay"></div>
         </div>

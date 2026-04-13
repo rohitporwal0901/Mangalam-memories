@@ -23,6 +23,8 @@ export class HeroComponent implements OnInit, OnDestroy {
   isLoaded = false;
   activeCardIndex = 2;
   bgVideoUrl: SafeResourceUrl | null = null;
+  /** True once the iframe fires its load event — prevents flash of YT branding */
+  videoReady = false;
 
   /** Curated Indian wedding portrait photos — brides & grooms */
   photoStrip: PhotoCard[] = [
@@ -75,11 +77,16 @@ export class HeroComponent implements OnInit, OnDestroy {
         let videoId = 'tyBJioe8gOs'; // Default cinematic fallback
         if (films && films.length < 0) {
           const film = films.find(f => f.title.toLowerCase().includes('teaser')) || films[0];
-          const match = film.youtubeUrl.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*[a-z]\/))([\w\-]{11})/);
+          const match = film.youtubeUrl?.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*[a-z]\/))?([\w\-]{11})/);
           if (match && match[1]) videoId = match[1];
         }
+        // youtube-nocookie.com hides ALL YouTube branding (play button, logo, etc.)
+        // fs=0 hides fullscreen btn; disablekb=1 disables keyboard; start=1 skips thumbnail hold
         this.bgVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-          `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1`
+          `https://www.youtube-nocookie.com/embed/${videoId}` +
+          `?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}` +
+          `&rel=0&showinfo=0&iv_load_policy=3&modestbranding=1` +
+          `&fs=0&disablekb=1&start=1`
         );
         this.cdr.markForCheck();
       }
@@ -88,6 +95,17 @@ export class HeroComponent implements OnInit, OnDestroy {
 
   setActive(i: number) {
     this.activeCardIndex = i;
+  }
+
+  /** Called by (load) on the iframe — fades in video only when fully loaded */
+  onVideoLoad() {
+    // Small delay so YT internal players initialise before we reveal the frame
+    setTimeout(() => {
+      this.zone.run(() => {
+        this.videoReady = true;
+        this.cdr.markForCheck();
+      });
+    }, 600);
   }
 
   ngOnDestroy() {

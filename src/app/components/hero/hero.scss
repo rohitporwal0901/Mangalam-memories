@@ -41,19 +41,20 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 115vw; // Slightly larger to avoid any black bars
+        width: 115vw;
         height: 64.68vw; 
         min-height: 115vh;
         min-width: 204.44vh; 
         transform: translate(-50%, -50%);
         pointer-events: none;
         opacity: 0;
-        transition: opacity 2s ease-in-out;
-        filter: brightness(0.7) contrast(1.1) saturate(1.1); // Make it more cinematic
+        transition: opacity 1.8s ease-in-out;
+        filter: brightness(0.7) contrast(1.1) saturate(1.1);
+    }
 
-        .loaded & {
-            opacity: 0.65; 
-        }
+    // Fade in iframe only when .ready class is added (after iframe load event)
+    &.ready iframe {
+        opacity: 0.65;
     }
 
     // Heavy vignette for that high-end cinematic feel
@@ -68,6 +69,36 @@
         z-index: 2;
         pointer-events: none;
     }
+}
+
+/* Thin shimmer bar at top while video loads */
+.video-loading-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(201, 168, 124, 0.6) 40%,
+        rgba(201, 168, 124, 0.9) 50%,
+        rgba(201, 168, 124, 0.6) 60%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s ease-in-out infinite;
+    z-index: 10;
+    transition: opacity 0.5s ease;
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+@keyframes loading-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
 .video-overlay {
