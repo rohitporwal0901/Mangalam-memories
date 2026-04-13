@@ -1,86 +1,50 @@
 <section id="films" class="films-section">
 
-    <!-- Header -->
-    <div class="section-header">
-        <p class="section-label">Cinematic Stories</p>
-        <h2 class="section-title">Wedding <em>Films</em></h2>
-        <p class="section-desc">
-            Experience the emotion and artistry of our wedding cinematography<br>
-            through our featured highlight reels.
-        </p>
-    </div>
-
-    <!-- Skeleton loading -->
     @if (loading) {
-    <div class="slider-skeleton"></div>
+    <div class="films-skeleton"></div>
     }
 
-    <!-- Slider -->
-    @if (!loading && films.length) {
-    <div class="slider-wrap">
+    <!-- All layers stacked — only active one visible -->
+    @for (f of films; track f.videoId; let i = $index) {
+    <div class="film-layer" [class.film-layer--active]="i === activeIndex">
 
-        <!-- Prev arrow -->
-        <button class="arrow arrow-prev" (click)="prev()" aria-label="Previous film">
-            <span>&#8249;</span>
-        </button>
+        <!-- Inactive: show thumbnail as background -->
+        @if (i !== activeIndex) {
+        <div class="film-thumb-bg" [style.backgroundImage]="'url(' + f.thumbImg + ')'"></div>
+        }
 
-        <!-- Main film slide -->
-        <div class="slide">
-            @if (!isPlaying(activeIndex)) {
-            <!-- Thumbnail + play button overlay -->
-            <div class="thumb-wrap" (click)="playFilm(activeIndex)">
-                <img [src]="activeFilm.thumbImg" [alt]="activeFilm.coupleNames + ' wedding film'" class="thumb-img" />
-
-                <!-- Dark cinematic overlay -->
-                <div class="slide-overlay">
-                    <div class="play-outer">
-                        <div class="play-btn">
-                            <span class="play-icon">&#9654;</span>
-                        </div>
-                        <p class="watch-label">Watch Film</p>
-                    </div>
-
-                    <div class="slide-info">
-                        <h3 class="slide-title">{{ activeFilm.coupleNames }}</h3>
-                        <p class="slide-couple">{{ activeFilm.location }}</p>
-                    </div>
-                </div>
-            </div>
-            } @else {
-            <!-- YouTube Player -->
-            <div class="player-wrap">
-                <button class="close-player" (click)="stopFilm()" aria-label="Close video">✕</button>
-                <iframe [src]="activeFilm.safeUrl" class="film-iframe" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            }
-        </div>
-
-        <!-- Next arrow -->
-        <button class="arrow arrow-next" (click)="next()" aria-label="Next film">
-            <span>&#8250;</span>
-        </button>
-
-        <!-- Dot indicators -->
-        <div class="dot-nav">
-            @for (f of films; track f.title; let i = $index) {
-            <button class="dot" [class.active]="i === activeIndex" (click)="goTo(i)"></button>
-            }
-        </div>
-
-    </div>
-
-    <!-- Film thumbnail strip -->
-    <div class="film-strip">
-        @for (f of films; track f.title; let i = $index) {
-        <div class="film-thumb" [class.active-thumb]="i === activeIndex" (click)="goTo(i)">
-            <img [src]="f.thumbImg" [alt]="f.coupleNames" />
-            <span class="thumb-label">{{ f.coupleNames }}</span>
+        <!-- Active only: load iframe WITH audio -->
+        @if (i === activeIndex) {
+        <div class="film-video-wrap">
+            <iframe
+                [src]="f.safeUrl"
+                frameborder="0"
+                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                class="film-iframe">
+            </iframe>
         </div>
         }
+
+        <!-- Overlay gradient -->
+        <div class="film-overlay"></div>
+
+        <!-- Info — zigzag: even index → RIGHT, odd → LEFT -->
+        <div class="film-info" [class.film-info--left]="i % 2 !== 0">
+            <p class="film-tag">{{ f.title }}</p>
+            <h2 class="film-names">{{ f.coupleNames }}</h2>
+            <div class="film-rule"></div>
+            <p class="film-location">{{ f.location }}</p>
+        </div>
+
     </div>
     }
+
+    <!-- Gold progress tick bar -->
+    <div class="progress-track" aria-hidden="true">
+        <div class="progress-fill"
+             [class.progress-even]="activeIndex % 2 === 0"
+             [class.progress-odd]="activeIndex % 2 !== 0">
+        </div>
+    </div>
 
 </section>

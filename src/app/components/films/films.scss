@@ -1,464 +1,257 @@
 /* =============================================
-   FILMS — WeddingClickz cinematic slider style
+   FILMS — Hero-style muted video background
+   Stacked iframes, crossfade, no buttons
+   Couple name bottom-right (like screenshot)
    ============================================= */
 
+$gold:     #c9a87c;
+$dark:     #0a0a0a;
+
+/* ══ SECTION ══════════════════════════════════ */
 .films-section {
-    padding: 7rem 0 6rem;
-    background: #0a0a0a;
-    color: #f5f0e8;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 560px;
     overflow: hidden;
+    background: $dark;
 }
 
-/* Header */
-.section-header {
-    text-align: center;
-    margin-bottom: 3.5rem;
-    padding: 0 1.5rem;
-}
-
-.section-label {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.62rem;
-    letter-spacing: 0.44em;
-    text-transform: uppercase;
-    color: #c9a87c;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.4rem, 6vw, 4.2rem);
-    font-weight: 400;
-    color: #f5f0e8;
-    line-height: 1.1;
-
-    em {
-        font-style: italic;
-        color: #c9a87c;
-    }
-}
-
-.section-desc {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
-    color: rgba(245, 240, 232, 0.48);
-    max-width: 520px;
-    margin: 1.2rem auto 0;
-    line-height: 1.75;
-}
-
-/* Slider Wrap */
-.slider-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 100px;
-    max-width: 1200px;
-    margin: 0 auto 3rem;
-}
-
-/* Slide Card */
-.slide {
-    width: 100%;
-    max-width: 860px;
-    aspect-ratio: 16/9;
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    background: #000;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
-}
-
-/* Thumbnail */
-.thumb-wrap {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    cursor: pointer;
-}
-
-.thumb-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-
-    .thumb-wrap:hover & {
-        transform: scale(1.06);
-    }
-}
-
-/* Cinematic Overlay */
-.slide-overlay {
+/* ══ SKELETON ══════════════════════════════════ */
+.films-skeleton {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, 
-        rgba(0, 0, 0, 0.95) 0%, 
-        rgba(0, 0, 0, 0.1) 45%, 
-        rgba(0, 0, 0, 0) 70%,
-        rgba(0, 0, 0, 0.4) 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.4s ease;
+    background: linear-gradient(90deg, #111 25%, #1e1e1e 50%, #111 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.6s infinite;
+    z-index: 5;
 }
 
-/* Play Button */
-.play-outer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-    transition: transform 0.4s ease;
-
-    .thumb-wrap:hover & {
-        transform: scale(1.08);
-    }
+@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
 }
 
-.play-btn {
-    width: 84px;
-    height: 84px;
-    border-radius: 50%;
-    background: rgba(201, 168, 124, 0.7);
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    position: relative;
-
-    &::after {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        border: 1px solid rgba(201, 168, 124, 0.35);
-        border-radius: 50%;
-        transition: all 0.4s;
-    }
-
-    .thumb-wrap:hover & {
-        background: #c9a87c;
-        transform: scale(1.1);
-        box-shadow: 0 0 30px rgba(201, 168, 124, 0.4);
-        &::after {
-            inset: -10px;
-            opacity: 0;
-        }
-    }
-}
-
-.play-icon {
-    color: #fff;
-    font-size: 1.3rem;
-    margin-left: 5px;
-}
-
-.watch-label {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 600;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-/* Film Info At Bottom */
-.slide-info {
+/* ══ EACH FILM LAYER (stacked) ════════════════ */
+.film-layer {
     position: absolute;
-    bottom: 2.2rem;
-    left: 0;
-    right: 0;
-    text-align: center;
-    padding: 0 2.5rem;
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+    /* Crossfade in/out */
+    transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
+
+    &.film-layer--active {
+        opacity: 1;
+        z-index: 2;
+        pointer-events: auto;
+    }
 }
 
-.slide-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.3rem, 4vw, 2.2rem);
-    font-weight: 500;
-    color: #fff;
-    margin-bottom: 0.6rem;
-    letter-spacing: 0.01em;
+/* ══ THUMBNAIL BG for inactive slides ════════ */
+.film-thumb-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5);
+    z-index: 0;
 }
 
-.slide-couple {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55);
-}
-
-/* Embedded YouTube Player with clean crop hack */
-.player-wrap {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    background: #000;
-    overflow: hidden; /* Important for crop */
+/* ══ IFRAME WRAPPER (active slide only) ══════ */
+.film-video-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
 }
 
 .film-iframe {
     position: absolute;
-    top: -60px; /* Hide top bar (title) */
-    left: 0;
-    width: 100%;
-    height: calc(100% + 120px); /* Adjust for top/bottom crop */
-    display: block;
-    border: none;
-    pointer-events: all;
-}
-
-.close-player {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    z-index: 20;
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    font-size: 0.85rem;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-
-    &:hover {
-        background: #ff4757;
-        border-color: #ff4757;
-        transform: rotate(90deg);
-    }
-}
-
-/* Navigation Arrows */
-.arrow {
-    position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid rgba(201, 168, 124, 0.4);
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(14px);
-    color: #fff;
-    font-size: 1.4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    z-index: 10;
-    padding: 0;
-
-    &:hover {
-        border-color: #c9a87c;
-        background: rgba(201, 168, 124, 0.45);
-        transform: translateY(-50%) scale(1.12);
-        box-shadow: 0 0 20px rgba(201, 168, 124, 0.15);
-    }
-
-    span {
-        line-height: 1;
-        margin-top: -3px;
-        font-weight: 300;
-    }
-
-    &.arrow-prev {
-        left: 24px;
-    }
-
-    &.arrow-next {
-        right: 24px;
-    }
-}
-
-/* Indicators */
-.dot-nav {
-    position: absolute;
-    bottom: -3.8rem;
     left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 14px;
+    /* Oversized so YouTube UI is off-screen */
+    width: 115vw;
+    height: 64.68vw;
+    min-height: 115vh;
+    min-width: 204.44vh;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border: none;
+    /* Cinematic grade */
+    filter: brightness(0.75) contrast(1.08) saturate(1.1);
 }
 
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1px solid rgba(201, 168, 124, 0.25);
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+/* ══ DARK OVERLAY / VIGNETTE ══════════════════ */
+.film-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            to right,
+            rgba(0,0,0,0.88) 0%,
+            rgba(0,0,0,0.30) 38%,
+            rgba(0,0,0,0.05) 65%,
+            transparent 100%
+        ),
+        linear-gradient(
+            to left,
+            rgba(0,0,0,0.88) 0%,
+            rgba(0,0,0,0.30) 38%,
+            rgba(0,0,0,0.05) 65%,
+            transparent 100%
+        ),
+        linear-gradient(to top,    rgba(0,0,0,0.50) 0%, transparent 35%),
+        linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 22%);
+}
 
-    &.active {
-        background: #c9a87c;
-        border-color: #c9a87c;
-        transform: scale(1.5);
+/* ══ FILM INFO — bottom right ══════════════════ */
+.film-info {
+    position: absolute;
+    z-index: 3;
+    bottom: 4.5rem;
+    right: 5vw;
+    text-align: right;
+    max-width: 380px;
+
+    /* Slide up + fade when layer becomes active */
+    .film-layer--active & {
+        animation: info-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+    }
+
+    /* Zigzag — odd index: info goes to LEFT side */
+    &.film-info--left {
+        left: 5vw;
+        right: auto;
+        text-align: left;
+
+        .film-rule { margin-left: 0; margin-right: auto; }
     }
 }
 
-/* Film Strip Preview */
-.film-strip {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 0 1.5rem;
-    flex-wrap: wrap;
-    max-width: 900px;
-    margin: 0 auto;
+@keyframes info-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.film-thumb {
-    width: 130px;
-    height: 75px;
-    border-radius: 8px;
+/* Small tag */
+.film-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: $gold;
+    margin-bottom: 0.85rem;
+}
+
+/* Couple names — large cinematic */
+.film-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4.5vw, 3.8rem);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    margin: 0 0 1rem;
+
+    /* Heart symbol matching screenshot */
+    &::after {
+        content: ' ♥';
+        color: $gold;
+        font-size: 0.65em;
+        vertical-align: middle;
+    }
+}
+
+/* Gold rule */
+.film-rule {
+    width: 38px;
+    height: 1px;
+    background: $gold;
+    opacity: 0.7;
+    margin: 0 0 0.85rem auto; /* right-aligned */
+}
+
+/* Location */
+.film-location {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+/* ══ PROGRESS LINE ════════════════════════════ */
+.progress-track {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255,255,255,0.07);
+    z-index: 10;
     overflow: hidden;
-    cursor: pointer;
-    position: relative;
-    border: 2px solid transparent;
-    transition: all 0.4s;
-    opacity: 0.4;
-
-    &.active-thumb {
-        border-color: #c9a87c;
-        opacity: 1;
-        transform: translateY(-3px);
-    }
-
-    &:hover {
-        opacity: 1;
-        transform: translateY(-2px);
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .thumb-label {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-        padding: 0.5rem 0.5rem 0.4rem;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 0.55rem;
-        letter-spacing: 0.05em;
-        color: #fff;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
 }
 
-/* Skeleton Loading */
-.slider-skeleton {
-    max-width: 860px;
-    margin: 0 auto;
-    aspect-ratio: 16/9;
-    background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%);
-    background-size: 200% 100%;
-    border-radius: 16px;
-    animation: shimmer 1.8s infinite;
+/* Two identical keyframes with different names so toggling class restarts animation */
+.progress-fill {
+    height: 100%;
+    background: $gold;
+    transform-origin: left;
 }
 
-@keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+.progress-even {
+    animation: prog-even 12s linear forwards;
 }
 
-/* Responsive Styles */
-@media (max-width: 1024px) {
-    .slider-wrap {
-        padding: 0 70px;
-    }
-    .arrow.arrow-prev { left: 10px; }
-    .arrow.arrow-next { right: 10px; }
+.progress-odd {
+    animation: prog-odd 12s linear forwards;
 }
 
+@keyframes prog-even {
+    from { width: 0%; }
+    to   { width: 100%; }
+}
+
+@keyframes prog-odd {
+    from { width: 0%; }
+    to   { width: 100%; }
+}
+
+/* ══ RESPONSIVE ═══════════════════════════════ */
 @media (max-width: 768px) {
-    .films-section {
-        padding: 4.5rem 0 4rem;
+    .films-section { height: 90svh; min-height: 480px; }
+
+    .film-info {
+        bottom: 3.5rem;
+        right: 5vw;
+        max-width: 75vw;
     }
-    .section-header {
-        margin-bottom: 2.2rem;
-    }
-    .slider-wrap {
-        padding: 0 40px;
-        margin-bottom: 2rem;
-    }
-    .play-btn {
-        width: 60px;
-        height: 60px;
-    }
-    .play-icon {
-        font-size: 1.1rem;
-    }
-    .slide-info {
-        bottom: 1.2rem;
-        padding: 0 1.5rem;
-    }
-    .slide-title {
-        font-size: 1.4rem;
-        margin-bottom: 0.4rem;
-    }
-    .dot-nav {
-        bottom: -2.8rem;
-        gap: 10px;
-    }
+
+    .film-names { font-size: clamp(1.6rem, 7vw, 2.5rem); }
 }
 
 @media (max-width: 480px) {
-    .slider-wrap {
-        padding: 0 20px;
+    .films-section { height: 85svh; }
+
+    .film-info {
+        right: auto;
+        left: 5vw;
+        text-align: left;
+        max-width: 90vw;
+        bottom: 3rem;
     }
-    .slide {
-        aspect-ratio: 4/5; /* Portrait-ish for mobile to avoid overlap */
-        border-radius: 12px;
-    }
-    .play-btn {
-        width: 54px;
-        height: 54px;
-    }
-    .watch-label {
-        letter-spacing: 0.25em;
-        font-size: 0.55rem;
-    }
-    .slide-info {
-        bottom: 1rem;
-    }
-    .slide-title {
-        font-size: 1.2rem;
-    }
-    .arrow {
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
-        background: rgba(0, 0, 0, 0.4);
-    }
-    .arrow.arrow-prev { left: 5px; }
-    .arrow.arrow-next { right: 5px; }
-    .film-strip {
-        gap: 0.8rem;
-    }
-    .film-thumb {
-        width: 70px;
-        height: 42px;
-    }
+
+    .film-rule { margin: 0 0 0.85rem 0; }
+
+    .film-names { font-size: clamp(1.5rem, 9vw, 2.2rem); }
 }

@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FirebaseService, Film } from '../../services/firebase';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 export interface ViewFilm extends Film {
-  safeUrl?: SafeResourceUrl;
-  thumbImg?: string;
+  safeUrl: SafeResourceUrl;
+  thumbImg: string;
+  videoId: string;
 }
 
 @Component({
@@ -20,13 +21,13 @@ export class FilmsComponent implements OnInit, OnDestroy {
   films: ViewFilm[] = [];
   loading = true;
   activeIndex = 0;
-  playingIndex: number | null = null;
 
   private autoTimer: any;
+  private readonly INTERVAL = 12000; // 12s per film video
 
   private fallback: Film[] = [
     {
-      title: 'A Royal Rajasthani Affair',
+      title: 'Pre-Wedding Film',
       coupleNames: 'Priya & Arjun',
       location: 'Udaipur, Rajasthan',
       youtubeUrl: 'https://www.youtube.com/watch?v=2Vv-BfVoq4g',
@@ -34,7 +35,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
       order: 1, active: true
     },
     {
-      title: 'Love in the Pink City',
+      title: 'Wedding Highlight',
       coupleNames: 'Meera & Rohit',
       location: 'Jaipur, Rajasthan',
       youtubeUrl: 'https://www.youtube.com/watch?v=IJq0yyWug-Q',
@@ -42,7 +43,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
       order: 2, active: true
     },
     {
-      title: 'A Grand Bangalore Wedding',
+      title: 'Cinematic Wedding',
       coupleNames: 'Ananya & Karthik',
       location: 'Bengaluru, Karnataka',
       youtubeUrl: 'https://www.youtube.com/watch?v=XEbGRSWWDfI',
@@ -50,7 +51,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
       order: 3, active: true
     },
     {
-      title: 'Waves & Vows',
+      title: 'Beach Wedding',
       coupleNames: 'Shreya & Vikram',
       location: 'Goa',
       youtubeUrl: 'https://www.youtube.com/watch?v=yb6dABvHcU4',
@@ -61,8 +62,9 @@ export class FilmsComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FirebaseService,
-    private sanitizer: DomSanitizer
-  ) { }
+    private sanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.fb.getFilms().subscribe({
@@ -70,60 +72,51 @@ export class FilmsComponent implements OnInit, OnDestroy {
         const rawFilms = data.length ? data : this.fallback;
         this.films = this.mapFilms(rawFilms);
         this.loading = false;
+        this.cdr.detectChanges();
         this.startAutoPlay();
       },
       error: () => {
         this.films = this.mapFilms(this.fallback);
         this.loading = false;
+        this.cdr.detectChanges();
         this.startAutoPlay();
       }
     });
   }
 
+  private extractId(url: string): string {
+    const m = url.match(
+      /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=))([\w\-]{11})/
+    );
+    return m?.[1] ?? '';
+  }
+
   private mapFilms(rawFilms: Film[]): ViewFilm[] {
-    return rawFilms.map(f => {
-      let id = '';
-      if (f.youtubeUrl) {
-        const match = f.youtubeUrl.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*[a-z]\/))([\w\-]{11})/);
-        if (match && match[1]) id = match[1];
-      }
-      return {
-        ...f,
-        safeUrl: this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0&modestbranding=1&controls=1&showinfo=0&iv_load_policy=3&disablekb=1&enablejsapi=1`),
-        thumbImg: f.thumbnailUrl || (id ? `https://img.youtube.com/vi/${id}/maxresdefault.jpg` : '')
-      };
-    });
-  }
-
-  prev() {
-    this.stopAutoPlay();
-    this.playingIndex = null;
-    this.activeIndex = (this.activeIndex - 1 + this.films.length) % this.films.length;
-    this.startAutoPlay();
-  }
-
-  next() {
-    this.stopAutoPlay();
-    this.playingIndex = null;
-    this.activeIndex = (this.activeIndex + 1) % this.films.length;
-    this.startAutoPlay();
-  }
-
-  goTo(i: number) {
-    if (i === this.activeIndex && this.playingIndex === null) return;
-    this.stopAutoPlay();
-    this.playingIndex = null;
-    this.activeIndex = i;
-    this.startAutoPlay();
+    return rawFilms
+      .filter(f => f.active !== false)
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      .map(f => {
+        const id = f.youtubeUrl ? this.extractId(f.youtubeUrl) : '';
+        // Audio ON — no mute=1. Only active iframe is rendered so no audio clash.
+        const embedUrl =
+          `https://www.youtube-nocookie.com/embed/${id}` +
+          `?autoplay=1&controls=1&rel=0&showinfo=0` +
+          `&iv_load_policy=3&modestbranding=1&fs=1&start=2`;
+        return {
+          ...f,
+          videoId: id,
+          thumbImg: f.thumbnailUrl || (id ? `https://img.youtube.com/vi/${id}/maxresdefault.jpg` : ''),
+          safeUrl: this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl)
+        };
+      });
   }
 
   private startAutoPlay() {
     this.stopAutoPlay();
     this.autoTimer = setInterval(() => {
-      if (this.playingIndex === null && this.films.length > 0) {
-        this.activeIndex = (this.activeIndex + 1) % this.films.length;
-      }
-    }, 6000);
+      this.activeIndex = (this.activeIndex + 1) % this.films.length;
+      this.cdr.detectChanges();
+    }, this.INTERVAL);
   }
 
   private stopAutoPlay() {
@@ -132,20 +125,6 @@ export class FilmsComponent implements OnInit, OnDestroy {
       this.autoTimer = null;
     }
   }
-
-  playFilm(i: number) {
-    this.stopAutoPlay();
-    this.playingIndex = i;
-  }
-
-  stopFilm() {
-    this.playingIndex = null;
-    this.startAutoPlay();
-  }
-
-  isPlaying(i: number) { return this.playingIndex === i; }
-
-  get activeFilm(): ViewFilm { return this.films[this.activeIndex] ?? this.films[0]; }
 
   ngOnDestroy() { this.stopAutoPlay(); }
 }
